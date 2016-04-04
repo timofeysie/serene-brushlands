@@ -1,0 +1,36 @@
+<navbar></navbar>
+<div id="outer">
+  <div ng-controller="View1Ctrl as controller">
+    <div class="flex-container">
+      <div id="view1">
+        <span class="alert alert-warning" 
+          ng-show="controller.errorMessage.status">{{controller.errorMessage.message}}</span>
+        <a href="#/add"
+          ng-show="controller.errorMessage.status"
+          class="button button-3d button-pill">
+          Update
+        </a>
+        <div class="">
+          <div ng-repeat="painting in controller.paintings">
+            <div class="row">
+              <a href="#/view3/{{painting.assetRefNo}}"
+                ng-show="!smallWidth"
+                class="button button-3d button-pill">{{painting.assetRefNo}}</a>
+
+              <a href="#/view3/{{painting.assetRefNo}}"
+                id="title"
+                class="button button-3d-action button-pill">{{painting.title}}</a>
+
+              <a href="#/view2/{{painting.artist}}" 
+                id="artist"
+                class="button button-3d-highlight button-pill">{{painting.artist}}</a>
+                <button type="button" ng-show="painting.inspected"
+                  class="button button-3d-primary button-pill">Inspected
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

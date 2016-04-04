@@ -1,0 +1,81 @@
+<navbar></navbar>
+<div ng-controller="View2Ctrl as controller">
+  <div class="container">
+     <div class="lab text-center">
+      <div id="text">
+        <div class="row">
+          <span id="artist"
+            style="color: Moccasin;"
+            class="col-md-6 button button-pill button-highlight pull-left">
+            {{controller.name}}</span>
+          <span id="title"
+            style="color: Moccasin;"
+            class="col-md-6 pull-right button button-pill button-highlight">
+            {{controller.DOB}}</span>
+        </div>
+        <div class="row">
+          <div class="col-md-12">
+            <p ng-if="controller.skinName">
+              <span id="SkinNameSkinName"
+                class="button button-pill">Skin Name</span>
+              <span class="button-pill button-highlight"
+                id="skinName__text">{{controller.skinName}}</span>
+            </p>
+            <p ng-if="controller.language">
+              <span class="button button-pill">Language</span>
+                <span class="button button-pill button-highlight">{{controller.language}}</span>
+            </p>
+            <p ng-if="controller.region">
+              <span class="button button-pill">Region</span>
+              <span class="button button-pill button-highlight">{{controller.region}}</span>
+            </p>
+            <p ng-if="controller.dreaming">
+              <span class="button button-pill">Dreaming</span>
+              <span class="button button-pill button-highlight">{{controller.dreaming}}</span>
+            </p>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-12 text-center">
+            <p id="artist" style="margin:30px;" class="button-pill button-highlight">
+              <p style="padding: 25px; text-indent: 50px;" id="bio">
+              <span ng-hide="editModeEnabled">{{controller.bio.title}}</span>
+              <input ng-show="editModeEnabled" type="text" data-ng-model="controller.bio.title"/>
+              </p>
+              <p style="padding: 25px; text-indent: 50px;" id="bio">
+              <span ng-hide="editModeEnabled">{{controller.bio.body}}</span>
+              <textarea ng-show="editModeEnabled" data-ng-model="controller.bio.body" >{{controller.bio.body}}</textarea>
+              </p>
+			  <p style="padding: 25px; text-indent: 50px;" id="bio">
+              <span ng-hide="editModeEnabled">{{controller.bio.AASDLink}}</span>
+              <input ng-show="editModeEnabled" type="text" data-ng-model="controller.bio.AASDLink"/>
+              </p>
+			  <p style="padding: 25px; text-indent: 50px;" id="bio">
+              <span ng-hide="editModeEnabled">{{controller.bio.WikiLink}}</span>
+              <input ng-show="editModeEnabled" type="text" data-ng-model="controller.bio.WikiLink"/>
+              </p>
+              <button type="button" ng-hide="editModeEnabled" ng-click="editModeEnabled = true" class="button-pill button-highlight">
+                Click to edit
+              </button>
+              <button ng-show="editModeEnabled" type="button" ng-click="saveTitleAndBody(controller)" class="button-pill button-highlight">
+                Save
+              </button>
+              <button ng-show="editModeEnabled" type="button" ng-click="editModeEnabled = false" class="button-pill button-highlight">
+                Cancel
+              </button> 
+            </p> 
+          </div> 
+          <span ng-show="updatedMessage.status">{{updatedMessage.msg}}</span>
+        </div>
+		<div class="row">
+		  <div class="col-md-12 text-center">
+		    <p id="link">
+			<a href={{getAASDLink()}} target="_blank">AASD Link</a><br>
+			<a href={{getWikiLink()}} target="_blank">Wiki Link</a>
+		    </p>
+		  </div>
+		</div>
+      </div>
+    </div>
+  </div>
+</div>

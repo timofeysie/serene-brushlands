@@ -1,0 +1,37 @@
+<navbar></navbar>
+<div id="outer">
+  <div ng-controller="LocationsCtrl as controller">
+    <label> Filter by office location: </label>
+    <select ng-model="selectedLocation"
+      class="button button-3d button-pill">
+      <option ng-repeat="officelocation in officelocations" 
+        value="{{officelocation.value}}">{{officelocation.name}}</option>
+    </select>
+    <br/>
+    </br/>
+	<img ng-show="spinner" ng-src="images/spinner.gif" style="background:none">
+    <div class="flex-container">
+        <div ng-repeat="artwork in controller.artworks | orderBy:'officeLocation' | filter:selectedLocation:strict"
+          style="position: relative; left: 45px;">
+
+          <div id="productos"
+            class="col col-span-3">
+            <div class="container">
+              <a href="index.html#/product/?Item={{artwork.assetRefNo}}">
+                <img src="{{artwork.imageFile}}"
+                    alt="No image"
+                    width="100px"/>
+              </a>
+              <div><p1>{{artwork.count}}.</p1>{{artwork.title}}
+                <span ng-show="artwork.inspected"><i class="fa fa-check-circle"></i></span></div>
+              <div ng-show="artwork.artist">by {{artwork.artist}}</div>
+              <div ng-class="'' == selectedLocation ? 'all-locations-same' : ''" class="{{artwork.locationBg}} artwork__locationBg {{allArtWorksClass}}"
+                style="display: table-cell; vertical-align: bottom;">{{artwork.officeLocation}}</div>
+            </div>
+          </div>
+        </div><!-- end repeat -->
+    </div>
+  </div>
+</div>
+
+
