@@ -1,4 +1,5 @@
 node_modules
+.env
 **/.sass-cache/*
 **/.sass-cache
 **.sass-cache**
