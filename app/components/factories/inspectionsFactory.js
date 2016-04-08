@@ -4,8 +4,8 @@
   * @memberOf myApp
   * @description This is an angularjs factory to save and retrieve inpsection information from Firebase.
   */
-var app = angular.module('myApp');
-	app.factory('InspectionsFactory', ['$rootScope', '$http', '$q', '$firebaseObject', '$firebaseArray', 
+angular.module('myApp')
+	.factory('InspectionsFactory', ['$rootScope', '$http', '$q', '$firebaseObject', '$firebaseArray', 
 	function ($rootScope, $http, $q, $firebaseObject, $firebaseArray) {
 		var ref = new Firebase($rootScope.firebaseUri);
   		var inspections = $firebaseArray(new Firebase($rootScope.firebaseUri+'/inspections'));
