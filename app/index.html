@@ -1,75 +1,75 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<html lang="en" class="no-js">
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Collection</title>
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="home/home.css">
-    <link rel="stylesheet" type="text/css" href="login/login.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/buttons.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/timstyle.css">
-    <link rel="stylesheet" type="text/css" href="stylesheets/masonry.css">
-    <link rel="stylesheet" href="vendor/font-awesome-4.4.0/css/font-awesome.min.css">
-    <script src="../bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-</head>
-<body>
-
-  <!--[if lt IE 7]>
-      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-  <![endif]-->
-
-  <div ng-view></div>
-
-  <!-- jspm 
-  // <script src="jspm_packages/system.js"></script>
-  // <script src="config.js"></script>
-  // <script>
-  //   System.import('lib/main.js');
-  // </script>-->
-
-  <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="bower_components/angular/angular.js"></script>
-  <script src="bower_components/angular-route/angular-route.js"></script>
-  <script src="bower_components/ng-file-upload/ng-file-upload.min.js"></script>
-  <!-- We use client cookies to save the user credentials -->
-  <script src="//code.angularjs.org/1.2.16/angular-cookies.min.js"></script>
-  <!-- Auth0 Lock script and AngularJS module -->
-  <script src="//cdn.auth0.com/js/lock-7.9.min.js"></script>
-  <!-- angular-jwt and angular-storage -->
-  <script type="text/javascript" src="//cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js"></script>
-  <script type="text/javascript" src="//cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js"></script>
-  <script src="//cdn.auth0.com/w2/auth0-angular-4.js"> </script>
-  <!-- Setting the right viewport -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-  <!-- firebase online bd -->
-  <script src="https://cdn.firebase.com/js/client/2.3.2/firebase.js"></script>
-  <!-- AngularFire -->
-  <script src="https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js"></script>
-  <!-- app sources -->
-  <script src="app.js"></script>
-  <script src="view1/view1.js"></script>
-  <script src="view1/locations.js"></script>
-  <script src="view1/data.js"></script>
-  <script src="view2/view2.js"></script>
-  <script src="view3/view3.js"></script>
-  <script src="view3/add.js"></script>
-  <script src="view3/inspections.js"></script>
-  <script src="components/navbar/navbar.js"></script>
-  <script src="components/navbar/navbar.template.html"></script>
-  <script src="components/version/version.js"></script>
-  <script src="components/version/version-directive.js"></script>
-  <script src="components/version/interpolate-filter.js"></script>
-  <script src="components/factories/inspectionsFactory.js"></script>
-  <script src="components/directives/tableDots.js"></script>
-  <script type="text/javascript" src="home/home.js"></script>
-  <script type="text/javascript" src="login/login.js"></script>
+  <link rel="stylesheet" type="text/css" href="home/home.css">
+  <link rel="stylesheet" type="text/css" href="login/login.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/buttons.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/styles.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/timstyle.css">
+  <link rel="stylesheet" type="text/css" href="stylesheets/masonry.css">
+  <link rel="stylesheet" href="vendor/font-awesome-4.4.0/css/font-awesome.min.css">
+  <style>
+    [ng-cloak] {
+      display: none;
+    }
+  </style>
+  <script src="bower_components/angular/angular.js"></script>
+  <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+  <script>
+    !function(a,b,c){function t(a,c){var e=b.createElement("script"),f=j;e.onload=e.onerror=e[o]=function(){e[m]&&!/^c|loade/.test(e[m])||f||(e.onload=e[o]=null,f=1,c())},e.async=1,e.src=a,d.insertBefore(e,d.firstChild)}function q(a,b){p(a,function(a){return!b(a)})}var d=b.getElementsByTagName("head")[0],e={},f={},g={},h={},i="string",j=!1,k="push",l="DOMContentLoaded",m="readyState",n="addEventListener",o="onreadystatechange",p=function(a,b){for(var c=0,d=a.length;c<d;++c)if(!b(a[c]))return j;return 1};!b[m]&&b[n]&&(b[n](l,function r(){b.removeEventListener(l,r,j),b[m]="complete"},j),b[m]="loading");var s=function(a,b,d){function o(){if(!--m){e[l]=1,j&&j();for(var a in g)p(a.split("|"),n)&&!q(g[a],n)&&(g[a]=[])}}function n(a){return a.call?a():e[a]}a=a[k]?a:[a];var i=b&&b.call,j=i?b:d,l=i?a.join(""):b,m=a.length;c(function(){q(a,function(a){h[a]?(l&&(f[l]=1),o()):(h[a]=1,l&&(f[l]=1),t(s.path?s.path+a+".js":a,o))})},0);return s};s.get=t,s.ready=function(a,b,c){a=a[k]?a:[a];var d=[];!q(a,function(a){e[a]||d[k](a)})&&p(a,function(a){return e[a]})?b():!function(a){g[a]=g[a]||[],g[a][k](b),c&&c(d)}(a.join("|"));return s};var u=a.$script;s.noConflict=function(){a.$script=u;return this},typeof module!="undefined"&&module.exports?module.exports=s:a.$script=s}(this,document,setTimeout)
+
+    $script([
+      'bower_components/angular-route/angular-route.js',
+      'bower_components/ng-file-upload/ng-file-upload.min.js',
+      '//code.angularjs.org/1.2.16/angular-cookies.min.js',
+      '//cdn.auth0.com/js/lock-7.9.min.js',
+      '//cdn.rawgit.com/auth0/angular-storage/master/dist/angular-storage.js',
+      '//cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js',
+      '//cdn.auth0.com/w2/auth0-angular-4.js',
+      'https://cdn.firebase.com/js/client/2.3.2/firebase.js',
+      'https://cdn.firebase.com/libs/angularfire/1.1.3/angularfire.min.js',
+      'app.js',
+      'view1/view1.js',
+      'view1/locations.js',
+      'view1/data.js',
+      'view2/view2.js',
+      'view3/add.js',
+      'view3/view3.js',
+      'view3/inspections.js',
+      'home/home.js',
+      'login/login.js',
+      'components/navbar/navbar.template.html',
+      'components/factories/inspectionsFactory.js',
+      'components/directives/tableDots.js',
+      'components/navbar/navbar.js',
+      'components/version/version.js',
+      'components/version/version-directive.js',
+      'components/version/interpolate-filter.js'
+    ], function() {
+      // when all is done, execute bootstrap angular application
+      angular.bootstrap(document, ['myApp']);
+    });
+  </script>
+</head>
+<body ng-cloak>
+  <input type="hidden" id="env-values"/>
+  <div ng-view></div>
+  <!-- app sources --> 
+  <script type="text/javascript">
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(data) {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        var response  = xhttp.responseText;
+        document.getElementById('env-values').value = response;
+      }
+    };
+    xhttp.open("GET", "/env", true);
+    xhttp.send();
+  </script>
 </body>
 </html>

@@ -7,11 +7,11 @@
 angular.module('myApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
 
 .controller('View3Ctrl', ['$rootScope', '$scope', 'Upload', '$routeParams', '$http', 'InspectionsFactory', 
-  function($rootScope, $scope, Upload, $routeParams, $http, InspectionFactory) {
+  function($rootScope, $scope, Upload, $routeParams, $http, InspectionsFactory) {
   var viewModel = this;
   // this is the argument passed in by the ng-route as configured in the app.js
   var paintingNo = $routeParams.paintingNo;
-  InspectionFactory.getArtwork(paintingNo)
+  InspectionsFactory.getArtwork(paintingNo)
   .then(function(response){
     viewModel.artist = response.artist;
     viewModel.title = response.title;
@@ -21,7 +21,7 @@ angular.module('myApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
     viewModel.id = response.assetRefNo;
 
     if ($rootScope.inspectionOn) {
-      InspectionFactory.addInspection(paintingNo);
+      InspectionsFactory.addInspection(paintingNo);
     }
   });
   
