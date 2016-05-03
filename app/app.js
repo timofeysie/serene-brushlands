@@ -7,8 +7,8 @@
  */
 angular.module('myApp', [
   'ngRoute',
-  'auth0', 
-  'angular-storage', 
+  'auth0',
+  'angular-storage',
   'angular-jwt',
   'firebase',
   'myApp.navbar',
@@ -42,7 +42,7 @@ config(['$routeProvider', function($routeProvider, authProvider) {
     controller: 'View2Ctrl',
     requiresLogin: true
   })
-  .when('/view3/:paintingNo', { 
+  .when('/view3/:paintingNo', {
     templateUrl: 'view3/view3.html',
     requiresLogin: true
   })
@@ -77,17 +77,9 @@ config(['$routeProvider', function($routeProvider, authProvider) {
 })
 .run(function($http, auth, $window, $rootScope) {
   var envValues = document.getElementById('env-values').value;
-  var response = null;
-  $http.get('./env.json')
-       .then(function(res){
-          $rootScope.firebaseUri = res.data.FIREBASE_URI;
-          auth.init({
-            domain: res.data.AUTH0_DOMAIN,
-            clientID: res.data.AUTH0_CLIENT_ID,
-            loginUrl: '/login'
-          });
-        auth.hookEvents();              
-  });
+  var response = JSON.parse(envValues);
+  $rootScope.firebaseUri = response.FIREBASE_URI;
+  auth.hookEvents();
 
   // responsive size variables
   // the first time thru we need to initialize the sceen sizes

@@ -64,14 +64,15 @@ angular.module('myApp.add', ['ngRoute','ngFileUpload','firebase'])
       loopArray(uniqueArtistsArray);
 
       function saveOrDiscard(artistName,callback) {
-        var artistsRef =new Firebase($rootScope.firebaseUri+"/artists/"+artistName);
+        var formattedArtistName = artistName.replace(/[$#,.]/g, "");
+        var artistsRef =new Firebase($rootScope.firebaseUri+"/artists/"+formattedArtistName);
         
         artistsRef.once("value",function(data){
           if(data.val() === null)
           {
             artistsRef.set(
               {
-                "name":artistName,
+                "name":formattedArtistName,
                 "skinName":"",
                 "language":"",
                 "region":"",
