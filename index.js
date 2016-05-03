@@ -64,51 +64,109 @@ app.post('/upload', function (req, res) {
                 
         var html = "<div class='wrapper'>"+striptags(result.value, '<p><img>')+"</div>";
         var parsedHTML = $.load(html);
-       
         var allPagesArray = []
-
-       var elementsArray = parsedHTML('.wrapper').children().toArray();
-       var start=0;
-       var end = 9;
-
-       for(var i=0;i<(elementsArray.length/9);i++)
-       {
-        var onePageObject={};
-        var onePage = elementsArray.slice(start,end);
-        var referenceNo = onePage[0].firstChild.data.replace("Asset Reference No:", "").trim();
-        onePageObject["assetRefNo"] = referenceNo;
-        var artist = onePage[1].firstChild.data.replace("Artist:", "").trim();
-        onePageObject["artist"] = artist;
-        var title = onePage[2].firstChild.data.replace("Title:", "").trim();
-        onePageObject["title"] = title;
-        var size = onePage[3].firstChild.data.replace("Size:", "").trim();
-        onePageObject["size"] = size;
-        var amountPaid = onePage[4].firstChild.data.replace("Amount Paid:", "").trim();
-        onePageObject["amountPaid"] = amountPaid;
-        var insured = onePage[5].firstChild.data.replace("Insured:", "").trim();
-        onePageObject["insured"] = insured;
-        var provenance = onePage[6].firstChild.data.replace("Provenance:", "").trim();
-        onePageObject["provenance"] = provenance;
-        var officeLocation = onePage[7].firstChild.data.replace("Office Location:", "").trim();
-        onePageObject["officeLocation"] = officeLocation;  
-        var imageDataUrl = onePage[8].firstChild.attribs.src;
         
-        var base64Data = imageDataUrl.replace(/^data:image\/jpeg;base64,/, "");
+        function grabInfo(element,findString,replaceString,isImage)
+        {
+          if(typeof element == "undefined" || element == null)
+          {
+            var text="No Data";
+            return text;
+          }else {
+            if(isImage)
+            {
+              var value = element.replace(findString,replaceString);
+            }else {
+              var value = element.replace(findString,replaceString).trim();
+            }
+            return value;
+          }
+        }
         
-        fs.writeFile("uploads/images/image-"+onePageObject['assetRefNo']+".jpeg", base64Data, 'base64', function(err) {
-          if(err) {
-            res.status(400).send(err);
-            return;
-          }    
+        function checkIfNullOrEmpty(element)
+        {
+          if(typeof element == "undefined" || element == null || element=="")
+          {
+            var text="No Data";
+            return text;
+          }else {
+            return element;
+          }
+        }
+        
+        var elementsArray = [];
+                
+        parsedHTML('.wrapper').children('p').each(function () {
+          var element  = $(this);
+          var imgElement = element.find("img");
+            if(imgElement.length > 0) {
+              var elementText = element.text();
+              if(elementText.indexOf("Office Location") != -1)
+              {
+                elementsArray.push(elementText);
+                elementsArray.push(imgElement.attr('src'));
+              }else if (elementText.indexOf("Asset Reference No") != -1) {
+                elementsArray.push(imgElement.attr('src'));
+                elementsArray.push(elementText);
+              }else {
+                elementsArray.push(imgElement.attr('src'));
+              }
+            }else {
+              elementsArray.push(element.text());
+            }       
         });
-        onePageObject["imageFile"]=imageDataUrl;
-        onePageObject["imageFileName"] = "image-"+onePageObject['assetRefNo']+".jpeg";
-        onePageObject["inspected"] = false;
-        onePageObject["additionalImages"] = [];
-        onePageObject["text"] = "";
-        allPagesArray.push(onePageObject);
-        start=end;
-        end = end + 9;
+
+      //  var elementsArray = parsedHTML('.wrapper').children().toArray();
+       
+      //Log to file
+      //  var file = fs.createWriteStream('debug.json');
+      //  file.write(JSON.stringify(elementsArray));
+      //   file.end();
+      //   
+      // return false;
+      
+       var allPagesArray = [];
+
+       for(var i=0;i<elementsArray.length;i++)
+       {
+        if(elementsArray[i].indexOf("Asset Reference No") != -1)
+        {
+          var onePageObject={};
+          var referenceNo = grabInfo(elementsArray[i],"Asset Reference No:","",false);
+          onePageObject["assetRefNo"] = referenceNo;
+          var artist =grabInfo(elementsArray[i+1],"Artist:","",false);
+          onePageObject["artist"] = artist;
+          var title = grabInfo(elementsArray[i+2],"Title:","",false);
+          onePageObject["title"] = title;
+          var size = grabInfo(elementsArray[i+3],"Size:", "",false);
+          onePageObject["size"] = size;
+          var amountPaid = grabInfo(elementsArray[i+4],"Amount Paid:", "",false);
+          onePageObject["amountPaid"] = amountPaid;
+          var insured = grabInfo(elementsArray[i+5],"Insured:", "",false);
+          onePageObject["insured"] = insured;
+          var provenance = grabInfo(elementsArray[i+6],"Provenance:", "",false);
+          onePageObject["provenance"] = provenance;
+          var officeLocation = grabInfo(elementsArray[i+7],"Office Location:", "",false);
+          onePageObject["officeLocation"] = officeLocation;
+          var base64Data = grabInfo(elementsArray[i+8],/^data:image\/jpeg;base64,/,"",true);  
+          
+          if(base64Data !== "")
+          {
+            fs.writeFile("uploads/images/image-"+onePageObject['assetRefNo']+".jpeg", base64Data, 'base64', function(err) {
+              if(err) {
+                res.status(400).send(err);
+                return;
+              }    
+            });
+          }
+
+          onePageObject["imageFile"]= checkIfNullOrEmpty(elementsArray[i+8]);
+          onePageObject["imageFileName"] = "image-"+onePageObject['assetRefNo']+".jpeg";
+          onePageObject["inspected"] = false;
+          onePageObject["additionalImages"] = [];
+          onePageObject["text"] = "";
+          allPagesArray.push(onePageObject);
+        }
        }
         
         fs.writeFile("uploads/uploaded-artworks.json", JSON.stringify(allPagesArray), function(err) {

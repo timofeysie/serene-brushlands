@@ -63,6 +63,7 @@ config(['$routeProvider', function($routeProvider, authProvider) {
   .otherwise({redirectTo: '/login'});
 }])
 .config(function (authProvider) {
+  try {
   var envValues = document.getElementById('env-values').value;
   var response = JSON.parse(envValues);
       authProvider.init({
@@ -70,12 +71,23 @@ config(['$routeProvider', function($routeProvider, authProvider) {
         clientID: response.AUTH0_CLIENT_ID,
         loginUrl: '/login'
       });
+    } catch (error) {
+      console.log('local environment',error);
+    }
 })
-.run(function(auth, $window, $rootScope) {
+.run(function($http, auth, $window, $rootScope) {
   var envValues = document.getElementById('env-values').value;
-  var response = JSON.parse(envValues);
-  $rootScope.firebaseUri = response.FIREBASE_URI;
-  auth.hookEvents();
+  var response = null;
+  $http.get('./env.json')
+       .then(function(res){
+          $rootScope.firebaseUri = res.data.FIREBASE_URI;
+          auth.init({
+            domain: res.data.AUTH0_DOMAIN,
+            clientID: res.data.AUTH0_CLIENT_ID,
+            loginUrl: '/login'
+          });
+        auth.hookEvents();              
+  });
 
   // responsive size variables
   // the first time thru we need to initialize the sceen sizes
