@@ -18,12 +18,14 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
   var viewModel = this;
   // this is the argument passed in by the ng-route as configured in the app.js
   $scope.isBackupSuccess = false;
+  $scope.showBackupProcessing = false;
   viewModel.PhotoRefNo = $routeParams.PhotoRefNo;
   viewModel.paintings = [];
   $scope.fields = [];
 
   $scope.getFromFirebase = function()
   {
+    $scope.showBackupProcessing = true;
     var newJsonArray = [];
     var uploadedArtworksRef =new Firebase($rootScope.firebaseUri+"/uploaded-artworks");
     uploadedArtworksRef.once("value", function(data) {
@@ -40,6 +42,7 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
           transformRequest: angular.identity,
           headers: {'Content-Type': undefined}
       }).then(function(response){
+        $scope.showBackupProcessing = false;
         $scope.isBackupSuccess = true;
       },function(error){
         console.log(error);
@@ -94,6 +97,7 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
 
   $scope.uploadFiles = function(file, errFiles) {
     $scope.f = file;
+    $scope.showStartedToProcess = false;
     $scope.errFile = errFiles && errFiles[0];
     if (file) {
         file.upload = Upload.upload({
@@ -121,6 +125,7 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
                 saveArtistsToFireBase(uniqueArtistsArray);
 
                 file.result = response.data;
+                $scope.showStartedToProcess = false;
             });
         }, function (response) {
             if (response.status > 0)
@@ -128,6 +133,10 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
         }, function (evt) {
             file.progress = Math.min(100, parseInt(100.0 *
                                      evt.loaded / evt.total));
+                                     if(file.progress == 100)
+                                     {
+                                       $scope.showStartedToProcess = true;
+                                     }
         });
     }
 }
