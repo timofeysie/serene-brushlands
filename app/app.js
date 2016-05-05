@@ -5,65 +5,64 @@
  * @class myApp
  * @description Contains dependencies, routing, Firebase, Auth0 and responsive set up..
  */
-angular.module('myApp', [
+angular.module('artApp', [
   'ngRoute',
   'auth0', 
   'angular-storage', 
   'angular-jwt',
   'firebase',
-  'myApp.navbar',
-  'myApp.view1',
-  'myApp.view2',
-  'myApp.view3',
-  'myApp.add',
-  'myApp.version',
-  'myApp.home',
-  'myApp.login',
-  'myApp.locations',
-  'myApp.inspections',
-  'myApp.data',
-  'myApp.directives'
+  'artApp.navbar',
+  'artApp.view1',
+  'artApp.view2',
+  'artApp.view3',
+  'artApp.add',
+  'artApp.version',
+  'artApp.home',
+  'artApp.login',
+  'artApp.locations',
+  'artApp.inspections',
+  'artApp.data',
+  'artApp.directives'
 ]).
 config(['$routeProvider', function($routeProvider, authProvider) {
   $routeProvider.when('/view1', {
-    templateUrl: 'view1/view1.html',
+    templateUrl: 'views/view1/view1.html',
     requiresLogin: true
   })
   .when('/locations', {
-    templateUrl: 'view1/locations.html',
+    templateUrl: 'views/view1/locations.html',
     requiresLogin: true
   })
   .when('/data', {
-    templateUrl: 'view1/data.html',
+    templateUrl: 'views/view1/data.html',
     requiresLogin: true
   })
   .when('/view2/:artist', {
-    templateUrl: 'view2/view2.html',
+    templateUrl: 'views/view2/view2.html',
     controller: 'View2Ctrl',
     requiresLogin: true
   })
   .when('/view3/:paintingNo', { 
-    templateUrl: 'view3/view3.html',
+    templateUrl: 'views/view3/view3.html',
     requiresLogin: true
   })
   .when( '/login', {
-    templateUrl: 'login/login.html',
+    templateUrl: 'views/login/login.html',
     pageTitle: 'Login',
     controller: 'LoginCtrl'
   })
   .when( '/add', {
-    templateUrl: 'view3/add.html',
+    templateUrl: 'views/view3/add.html',
     pageTitle: 'Add',
     requiresLogin: true
   })
   .when( '/inspections', {
-    templateUrl: 'view3/inspections.html',
+    templateUrl: 'views/view3/inspections.html',
     requiresLogin: true
   })
   .otherwise({redirectTo: '/login'});
 }])
 .config(function (authProvider) {
-  try {
   var envValues = document.getElementById('env-values').value;
   var response = JSON.parse(envValues);
       authProvider.init({
@@ -71,26 +70,13 @@ config(['$routeProvider', function($routeProvider, authProvider) {
         clientID: response.AUTH0_CLIENT_ID,
         loginUrl: '/login'
       });
-    } catch (error) {
-      console.log('local environment',error);
-    }
 })
-.run(function($http, auth, $window, $rootScope) {
+.run(function(auth, $window, $rootScope) {
   var envValues = document.getElementById('env-values').value;
-  var response = null;
-  $http.get('./env.json')
-       .then(function(res){
-          $rootScope.firebaseUri = res.data.FIREBASE_URI;
-          auth.init({
-            domain: res.data.AUTH0_DOMAIN,
-            clientID: res.data.AUTH0_CLIENT_ID,
-            loginUrl: '/login'
-          });
-        auth.hookEvents();              
-  });
+  var response = JSON.parse(envValues);
+  $rootScope.firebaseUri = response.FIREBASE_URI;
+  auth.hookEvents();
 
-  // responsive size variables
-  // the first time thru we need to initialize the sceen sizes
   if ($window.innerWidth < 900) {
     $rootScope.smallWidth = true;
   }
@@ -98,7 +84,6 @@ config(['$routeProvider', function($routeProvider, authProvider) {
     $rootScope.mediumWidth = true;
   }
 
-  // now we can update those sizes when the screen size changes
   angular.element($window).bind('resize', function() {
     if ($window.innerWidth < 900) {
       $rootScope.smallWidth = true;
@@ -110,9 +95,6 @@ config(['$routeProvider', function($routeProvider, authProvider) {
     } else {
       $rootScope.mediumWidth = false;
     }
-    // manuall $digest required as resize event
-    // is outside of angular
     $rootScope.$digest();
-    //console.log('width '+$window.innerWidth);
   });
 });

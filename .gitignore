@@ -1,3 +1,7 @@
+logs/*
+!.gitkeep
+app/bower_components/
+tmp/
 node_modules
 .env
 **/.sass-cache/*
@@ -5,3 +9,4 @@ node_modules
 **.sass-cache**
 uploads/uploaded-artworks.json
 debug.html
+npm-debug.log

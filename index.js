@@ -20,7 +20,7 @@ $.prototype.eq = function(placement) {
 
     return $(eq);
 }
- 
+
 module.exports = {
   normalizeLocation: normalizeLocation
 }
@@ -48,24 +48,24 @@ var newFileName;
 
 app.post('/upload', function (req, res) {
   res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept"); 
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   if (req.method === 'POST') {
   var busboy = new Busboy({ headers: req.headers });
-  
+
   busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
     var datetimestamp = Date.now();
     newFileName = fieldname + '-' + datetimestamp + '.' + filename.split('.')[filename.split('.').length -1];
     var saveTo = path.join('./tmp/', newFileName);
     file.pipe(fs.createWriteStream(saveTo));
   });
-  busboy.on('finish', function() {                        
+  busboy.on('finish', function() {
     mammoth.convertToHtml({path: "tmp/"+newFileName})
     .then(function(result){
-                
+
         var html = "<div class='wrapper'>"+striptags(result.value, '<p><img>')+"</div>";
         var parsedHTML = $.load(html);
         var allPagesArray = []
-        
+
         function grabInfo(element,findString,replaceString,isImage)
         {
           if(typeof element == "undefined" || element == null)
@@ -82,7 +82,7 @@ app.post('/upload', function (req, res) {
             return value;
           }
         }
-        
+
         function checkIfNullOrEmpty(element)
         {
           if(typeof element == "undefined" || element == null || element=="")
@@ -93,9 +93,9 @@ app.post('/upload', function (req, res) {
             return element;
           }
         }
-        
+
         var elementsArray = [];
-                
+
         parsedHTML('.wrapper').children('p').each(function () {
           var element  = $(this);
           var imgElement = element.find("img");
@@ -113,18 +113,18 @@ app.post('/upload', function (req, res) {
               }
             }else {
               elementsArray.push(element.text());
-            }       
+            }
         });
 
       //  var elementsArray = parsedHTML('.wrapper').children().toArray();
-       
+
       //Log to file
       //  var file = fs.createWriteStream('debug.json');
       //  file.write(JSON.stringify(elementsArray));
       //   file.end();
-      //   
+      //
       // return false;
-      
+
        var allPagesArray = [];
 
        for(var i=0;i<elementsArray.length;i++)
@@ -148,15 +148,15 @@ app.post('/upload', function (req, res) {
           onePageObject["provenance"] = provenance;
           var officeLocation = grabInfo(elementsArray[i+7],"Office Location:", "",false);
           onePageObject["officeLocation"] = officeLocation;
-          var base64Data = grabInfo(elementsArray[i+8],/^data:image\/jpeg;base64,/,"",true);  
-          
+          var base64Data = grabInfo(elementsArray[i+8],/^data:image\/jpeg;base64,/,"",true);
+
           if(base64Data !== "")
           {
             fs.writeFile("uploads/images/image-"+onePageObject['assetRefNo']+".jpeg", base64Data, 'base64', function(err) {
               if(err) {
                 res.status(400).send(err);
                 return;
-              }    
+              }
             });
           }
 
@@ -168,7 +168,7 @@ app.post('/upload', function (req, res) {
           allPagesArray.push(onePageObject);
         }
        }
-        
+
         fs.writeFile("uploads/uploaded-artworks.json", JSON.stringify(allPagesArray), function(err) {
           if(err) {
               res.status(400).send(err);
@@ -176,15 +176,15 @@ app.post('/upload', function (req, res) {
           } else {
             fs.unlink("tmp/"+newFileName);
             res.status(200).json(allPagesArray);
-          }    
-        }); 
-        
+          }
+        });
+
         var messages = result.messages;
     })
     .done();
   });
   return req.pipe(busboy);
-  } 
+  }
 });
 
 
@@ -195,7 +195,7 @@ app.get('/artworks', function (req, res) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.setHeader('Content-Type', 'application/json');
-  
+
   try
    {
        fs.statSync('uploads/uploaded-artworks.json').isFile();
@@ -219,7 +219,7 @@ app.get('/artwork', function (req, res) {
   console.log('artworkId',artworkId);
   var artworks = fs.readFileSync('uploads/uploaded-artworks.json').toString();
   var artworksJson = JSON.parse(artworks);
-  
+
   for (var i = 0; i < artworksJson.length; i++) {
     var obj = artworksJson[i];
     if (obj.assetRefNo == artworkId) {
@@ -253,7 +253,7 @@ app.get('/sample', function (req, res) {
       if (artist.indexOf('Artist:') === -1) {
         //console.log(artist+' replaced with ');
         //
-        artist = nextElement.children().last().children('span').last().text();   
+        artist = nextElement.children().last().children('span').last().text();
         //console.log(artist);
       }
       nextElement = nextElement.next(); // next title
@@ -262,11 +262,11 @@ app.get('/sample', function (req, res) {
       var amountPaid     = nextElement.text(); nextElement = nextElement.next();
       var insured        = nextElement.text(); nextElement = nextElement.next();
       var supplier       = nextElement.text(); nextElement = nextElement.next();
-      var officeLocation = nextElement.text(); 
+      var officeLocation = nextElement.text();
       var dm = ["Artist: ","Title: ",
       "Size: ", "Amount Paid: ", "Insured: ","Supplier: ","Office Location: "];
       item.photoRefNo     = photoRefNo;
-      item.count          = count; 
+      item.count          = count;
       item.artist         = artist.substring(dm[0].length,artist.length).replace(newlines," ");
       item.title          = title.substring(dm[1].length,title.length).replace(newlines," ");
       item.size           = size.substring(dm[2].length,size.length);
@@ -299,7 +299,7 @@ app.get('/sample', function (req, res) {
         return console.log('err',err);
     }
     console.log("The file was saved~");
-  }); 
+  });
   // also save a copy for the app to use
   fs.writeFile("./app/data/word-doc.json", resultString, function(err) {
     if(err) {
@@ -307,7 +307,7 @@ app.get('/sample', function (req, res) {
     } else {
       console.log("The file was saved in ./app/data/word-doc.json");
     }
-  }); 
+  });
   res.send(resultString);
 });
 
@@ -427,10 +427,10 @@ app.get('/inspect', function (req, res) {
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
   res.setHeader('Content-Type', 'application/json');
   var artworkId = req.query.assetRefNo
-  
+
   var artworks = fs.readFileSync('uploads/uploaded-artworks.json').toString();
   var artworksJson = JSON.parse(artworks);
-  
+
   for (var i = 0; i < artworksJson.length; i++) {
     if (artworksJson[i].assetRefNo == artworkId) {
       if(artworksJson[i].inspected)
@@ -444,8 +444,8 @@ app.get('/inspect', function (req, res) {
               return;
           } else {
             res.status(200).json(artworksJson[i]);
-          }    
-        }); 
+          }
+        });
         break;
       }
     }
@@ -462,14 +462,14 @@ app.get('/get-inspected-artworks', function (req, res) {
   var file = fs.readFileSync('uploads/uploaded-artworks.json').toString();
   var uploadedFileJson = JSON.parse(file);
   var inspectedArtworks=[];
-    
+
     for (var i = 0; i < uploadedFileJson.length; i++) {
         if(uploadedFileJson[i].inspected)
         {
           inspectedArtworks.push(uploadedFileJson[i]);
         }
     }
-    res.status(200).json(uploadedFileJson);  
+    res.status(200).json(uploadedFileJson);
 });
 
 app.get('/artists', function (req, res) {
@@ -537,9 +537,9 @@ app.post('/save-from-firebase', function (req, res) {
          if(err) {
              res.status(400).send(err);
              return;
-         } 
+         }
        });
-    } 
+    }
   });
   busboy.on('finish', function() {
     res.send();
@@ -566,7 +566,7 @@ return req.pipe(busboy);
 }
 
 res.writeHead(404);
-res.end();              
+res.end();
 });
 
 app.get('/env', function (req, res) {

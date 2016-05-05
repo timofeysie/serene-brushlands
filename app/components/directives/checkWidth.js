@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('myApp.directives', [])
+angular.module('artApp.directives', [])
 .directive('checkWidth', function($window) {
   return {
   	restrict: 'E',
