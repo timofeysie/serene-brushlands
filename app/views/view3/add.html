@@ -2,12 +2,12 @@
 <div ng-controller="addCtrl as controller">
   <div class="container">
 <!--      <div class="lab text-center">
-      <ul class="nav nav-pills center-pills" 
+      <ul class="nav nav-pills center-pills"
         role="tablist">
-        <li role="presentation" 
+        <li role="presentation"
           class="active">
           <a href="#/view1">
-            Collection # 
+            Collection #
             <span class="badge">
             {{controller.id}}</span>
           </a>
@@ -27,11 +27,11 @@
           <div>&nbsp; &nbsp;</div>
 
     <!-- add form -->
-    <form name="signup_form" 
-      ng-controller="addCtrl" 
-      ng-submit="submitForm()" 
+    <form name="signup_form"
+      ng-controller="addCtrl"
+      ng-submit="submitForm()"
       novalidate>
-<!--       <div ng-repeat="field in fields" 
+<!--       <div ng-repeat="field in fields"
         ng-form="signup_form_input">
         <div ng-switch on="field.type">
           <!-- type: input -->
@@ -45,7 +45,7 @@
               ng-model="field.name"
               placeholder="&nbsp; &nbsp; {{field.placeholder}}" />
             <div ng-show="signup_form_input.dynamic_input.$dirty && signup_form_input.dynamic_input.$invalid">
-              <span class="error" 
+              <span class="error"
                 ng-show="signup_form_input.dynamic_input.$error.required">The field is required.</span>
             </div>
           </div> -->
@@ -53,7 +53,7 @@
 <!--           <div ng-switch-when="select">
             <select ng-model="field.city"
                     ng-options="field.city for name in city">
-              <option ng-repeat="field.name in city" 
+              <option ng-repeat="field.name in city"
                 value="">Choose {{field.city.name}}</option>
             </select>
           </div> -->
@@ -61,7 +61,7 @@
 <!--           <div ng-switch-when="checkbox">
             <div class="row">
               <div class="col-md-2">
-                {{$index+1}}. &nbsp; 
+                {{$index+1}}. &nbsp;
               </div>
             </div>
             <div class="row">
@@ -82,7 +82,7 @@
               </div>
             </div>
           </div>
-          
+
         </div>
       </div> -->
       <!-- <button type="submit" ng-disabled="signup_form.$invalid">Submit All</button> -->
@@ -98,11 +98,12 @@
         </button>
         <br>
         <br>
-        <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}        
+        <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
           <span class="progress" ng-show="f.progress >= 0">
                   <div style="width:100%" ng-bind="f.progress + '%'" class="ng-binding">100%</div>
           </span>
-          <span ng-show="f.result" class="">Upload Successful</span>
+          <span ng-show="showStartedToProcess">Please wait until the uploaded document is processed.</span>
+          <span ng-show="f.result" class="">Uploaded and Processed Successfully.</span>
         </div>
         {{errorMsg}}
         <br/>
@@ -111,7 +112,8 @@
         </button>
         <br/>
         <br/>
-        <span ng-show="isBackupSuccess">Backup Completed Successfully.</span>
+        <span ng-show="showBackupProcessing">Please wait until the data is backed up.</span>
+        <span ng-show="isBackupSuccess">Backed up Successfully.</span>
     </form>
 
   </div>
