@@ -25,8 +25,10 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
 
   $scope.getFromFirebase = function()
   {
+    $scope.isBackupSuccess=false;
     $scope.showBackupProcessing = true;
     var newJsonArray = [];
+
     var uploadedArtworksRef =new Firebase($rootScope.firebaseUri+"/uploaded-artworks");
     uploadedArtworksRef.once("value", function(data) {
       var retrivedData = data.val();
@@ -35,7 +37,6 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
       }
 
       var stringifiedArray = JSON.stringify(newJsonArray);
-
       var array = new FormData();
       array.append('fetched_data', stringifiedArray);
       $http.post('/save-from-firebase', array, {
@@ -143,7 +144,6 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
 
   // add a new item if there is no id passed in
   if (!viewModel.PhotoRefNo) {
-    console.log('no id passed in');
     var artistInput = {};
     artistInput.placeholder = 'artist';
     artistInput.isRequired = true;

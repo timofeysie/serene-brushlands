@@ -19,7 +19,7 @@
     }
   },
   "scripts": {
-    "postinstall": "bower install",
+    "postinstall": "bower install --force",
     "prestart": "npm install",
     "start": "node index.js",
     "pretest": "npm install",

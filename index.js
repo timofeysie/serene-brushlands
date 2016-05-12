@@ -56,11 +56,11 @@ app.post('/upload', function (req, res) {
   busboy.on('file', function(fieldname, file, filename, encoding, mimetype) {
     var datetimestamp = Date.now();
     newFileName = fieldname + '-' + datetimestamp + '.' + filename.split('.')[filename.split('.').length -1];
-    var saveTo = path.join('./tmp/', newFileName);
+    var saveTo = path.join('./uploads/', newFileName);
     file.pipe(fs.createWriteStream(saveTo));
   });
   busboy.on('finish', function() {
-    mammoth.convertToHtml({path: "tmp/"+newFileName})
+    mammoth.convertToHtml({path: "uploads/"+newFileName})
     .then(function(result){
 
         var html = "<div class='wrapper'>"+striptags(result.value, '<p><img>')+"</div>";
@@ -175,7 +175,7 @@ app.post('/upload', function (req, res) {
               res.status(400).send(err);
               return;
           } else {
-            fs.unlink("tmp/"+newFileName);
+            fs.unlink("uploads/"+newFileName);
             res.status(200).json(allPagesArray);
           }
         });
