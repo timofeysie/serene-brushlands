@@ -1,6 +1,12 @@
+logs/*
+!.gitkeep
+app/bower_components/
+tmp/
 node_modules
 .env
 **/.sass-cache/*
 **/.sass-cache
 **.sass-cache**
-app/env.json
+uploads/uploaded-artworks.json
+debug.html
+npm-debug.log
