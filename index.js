@@ -9,6 +9,7 @@ var striptags = require('striptags');
 var util = require('util');
 var Busboy = require('busboy');
 var busboy = require('connect-busboy');
+require('dotenv').config();
 
 $.prototype.eq = function(placement) {
     var eq = [];
