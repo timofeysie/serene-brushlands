@@ -1,0 +1,353 @@
+@charset "UTF-8";
+/**
+  * driveway.css - pure CSS masonry layouts aid.
+  By (jhey tompkins)[https://github.com/jh3y/driveway]
+  Because the classnames can become rather bloated, from here on, abbreviations are being used in code examples. 
+  For example; 
+  “masonry-layout” becomes “ml”, 
+  “masonry-layout-cluster” becomes “ml-clstr” etc.
+*/
+/* line 9, ../../scss/masonry.scss */
+.ml {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-column-count: 1;
+  -moz-column-count: 1;
+  column-count: 1;
+  -webkit-column-gap: 0;
+  -moz-column-gap: 0;
+  column-gap: 0;
+  position: relative;
+}
+
+/* line 20, ../../scss/masonry.scss */
+.ml--fcs .ml-pnl {
+  position: relative;
+}
+
+/* line 23, ../../scss/masonry.scss */
+.ml--fcs .ml-pnl:hover {
+  z-index: 3;
+}
+
+/* line 26, ../../scss/masonry.scss */
+.ml--fcs .ml-pnl:hover ~ .ml__fcs-crtn {
+  display: block;
+}
+
+/* line 29, ../../scss/masonry.scss */
+.ml__fcs-crtn {
+  background-color: #000;
+  bottom: 0;
+  display: none;
+  left: 0;
+  opacity: 0.75;
+  position: fixed;
+  right: 0;
+  top: 0;
+  z-index: 2;
+}
+
+/* line 40, ../../scss/masonry.scss */
+.ml * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* As our viewport increases in size, we want to increase the amount of columns in our layout. 
+As our viewport decreases in size, in addition the amount of columns decreasing, 
+we might want our nested clusters to collapse and allow the segments to take up full width of the layout. */
+@media (min-width: 768px) {
+  /* line 48, ../../scss/masonry.scss */
+  .ml {
+    -webkit-column-count: 2;
+    -moz-column-count: 2;
+    column-count: 2;
+  }
+}
+@media (min-width: 1200px) {
+  /* line 55, ../../scss/masonry.scss */
+  .ml {
+    -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+  }
+}
+/* line 61, ../../scss/masonry.scss */
+.ml-pnl {
+  margin: 0;
+  padding: 5px;
+}
+
+/* line 65, ../../scss/masonry.scss */
+.ml-pnl--fcs {
+  position: relative;
+}
+
+/* line 68, ../../scss/masonry.scss */
+.ml-pnl--fcs:hover {
+  z-index: 3;
+}
+
+/* line 71, ../../scss/masonry.scss */
+.ml-pnl--fcs:hover ~ .ml__fcs-crtn {
+  display: block;
+}
+
+/* line 74, ../../scss/masonry.scss */
+.ml-pnl--pls {
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-perspective: 1000;
+  perspective: 1000;
+  -webkit-transition: -webkit-transform 0.25s ease 0s;
+  transition: -webkit-transform 0.25s ease 0s;
+  transition: transform 0.25s ease 0s;
+  transition: transform 0.25s ease 0s, -webkit-transform 0.25s ease 0s;
+}
+
+/* line 84, ../../scss/masonry.scss */
+.ml-pnl--pls:hover {
+  -webkit-transform: scale(1.02);
+  -ms-transform: scale(1.02);
+  transform: scale(1.02);
+}
+
+@media (min-width: 768px) {
+  /* line 90, ../../scss/masonry.scss */
+  .ml-pnl {
+    -webkit-column-break-inside: avoid;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+}
+/* line 96, ../../scss/masonry.scss */
+.ml-pnl__cntnt {
+  border-radius: 25px;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* line 102, ../../scss/masonry.scss */
+.ml-pnl__cntnt-title {
+  border-radius: 25px;
+  overflow: hidden;
+  width: 100%;
+  height: 100;
+}
+
+/* line 108, ../../scss/masonry.scss */
+.ml-pnl__cntnt--img {
+  width: auto;
+  max-height: 250px;
+  padding: 0;
+}
+
+/* line 113, ../../scss/masonry.scss */
+.ml-flp {
+  -webkit-perspective: 1000;
+  perspective: 1000;
+}
+
+/* line 117, ../../scss/masonry.scss */
+.ml-flp:hover .ml-flp__cntnt {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+/* line 121, ../../scss/masonry.scss */
+.ml-flp--md {
+  height: 300px;
+}
+
+/* line 124, ../../scss/masonry.scss */
+.ml-flp__pnl {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 25px;
+  height: 100%;
+  left: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+/* line 135, ../../scss/masonry.scss */
+.ml-flp__pnl--frnt {
+  -webkit-transform: rotateY(0deg);
+  transform: rotateY(0deg);
+  z-index: 2;
+}
+
+/* line 140, ../../scss/masonry.scss */
+.ml-flp__pnl--bck {
+  -webkit-transform: rotateY(180deg);
+  transform: rotateY(180deg);
+}
+
+/* line 144, ../../scss/masonry.scss */
+.ml-flp__cntnt {
+  height: 100%;
+  overflow: visible;
+  position: relative;
+  -webkit-transform-style: preserve-3d;
+  transform-style: preserve-3d;
+  -webkit-transition: 0.25s;
+  transition: 0.25s;
+}
+
+/* line 153, ../../scss/masonry.scss */
+.ml-clstr {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  padding: 0;
+}
+
+/* line 160, ../../scss/masonry.scss */
+.ml-clstr--vrt {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+/* For nested clusters, we want to ignore things such as horizontal flow and flex-basis at lower viewports. 
+We want our clusters to collapse and segments take up full viewport width regardless of whether they are columns, rows, etc.
+*/
+@media (min-width: 768px) {
+  /* line 171, ../../scss/masonry.scss */
+  .ml-clstr--vrt {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+}
+/* line 179, ../../scss/masonry.scss */
+.ml-clstr--hrz {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+/* line 186, ../../scss/masonry.scss */
+.ml-clstr__sgmnt {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  overflow: hidden;
+  -webkit-box-flex: 1;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+/* line 197, ../../scss/masonry.scss */
+.ml-clstr__sgmnt--rw {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  /* line 209, ../../scss/masonry.scss */
+  .ml-clstr__sgmnt--rw {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+}
+/* line 217, ../../scss/masonry.scss */
+.ml-clstr__sgmnt--clmn {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+@media (min-width: 768px) {
+  /* line 225, ../../scss/masonry.scss */
+  .ml-clstr__sgmnt--hlf {
+    -webkit-flex-basis: 50%;
+    -ms-flex-preferred-size: 50%;
+    flex-basis: 50%;
+  }
+
+  /* line 230, ../../scss/masonry.scss */
+  .ml-clstr__sgmnt--qrt {
+    -webkit-flex-basis: 25%;
+    -ms-flex-preferred-size: 25%;
+    flex-basis: 25%;
+  }
+}
+/**
+  * Color styles
+*/
+/* line 240, ../../scss/masonry.scss */
+.tx--white {
+  color: #fff;
+}
+
+/* line 243, ../../scss/masonry.scss */
+.bg--red {
+  background-color: #d67465;
+}
+
+/* line 246, ../../scss/masonry.scss */
+.bg--green {
+  background-color: #9bbb52;
+}
+
+/* line 249, ../../scss/masonry.scss */
+.bg--purple {
+  background-color: #e1a85a;
+}
+
+/* line 252, ../../scss/masonry.scss */
+.bg--blue {
+  background-color: #79d4ec;
+}
+
+/* line 255, ../../scss/masonry.scss */
+img {
+  max-height: 300px;
+  background-color: #e1a85a;
+}
+
+/* Activities */
+/* line 261, ../../scss/masonry.scss */
+.spin {
+  cursor: pointer;
+  transform-style: preserve-3d;
+}
+
+/* line 265, ../../scss/masonry.scss */
+.spin:hover {
+  animation: spin 5s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotateY(0deg);
+  }
+  100% {
+    transform: rotateY(360deg);
+  }
+}

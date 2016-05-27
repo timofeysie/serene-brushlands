@@ -1,0 +1,366 @@
+
+.flex-container {
+  display: -webkit-flex; /* Safari */
+  display: flex; 
+  flex-direction: row; 
+  flex-wrap: wrap; 
+  justify-content:         
+  flex-start;
+  align-content:         
+  space-around;
+}
+
+.flex-item {
+  -webkit-order: 1; /* Safari */
+  order:         1;
+  flex-grow:     0;
+}
+
+#ryans-tree-logo {
+  margin-left: -10px;
+  margin-top: 20px;
+  border-radius: 25px;
+  box-shadow: 0px 10px 31px -10px rgba(0,0,0,0.75);
+/*            -webkit-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
+             -moz-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
+                  box-shadow: 0px 5px 18px rgba(0,0,0,.8);*/
+}
+
+#navbar__button {
+  position: relative; 
+  left: 15px;
+}
+
+#gooeyNav {
+  position: relative; 
+  top: -100; 
+  z-index:100; 
+  left: 25px;
+}
+input[type=checkbox] + label:before, input[type=radio] + label:before { 
+    content: none;
+}
+
+/* Basic flexbox grid (not used) */
+.Grid {
+  display: flex;
+}
+
+.Grid-cell {
+  flex: 1;
+}
+
+body:before {
+          content: "";
+          position: fixed;
+          top: -10px;
+          left: 0;
+          width: 100%;
+          height: 10px;
+
+          -webkit-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
+             -moz-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
+                  box-shadow: 0px 5px 18px rgba(0,0,0,.8);
+
+          z-index: 100;
+}
+
+body {
+    //background-image: url("assets/anangu_art_brought_to_book_image2.png");
+    background-color: none;
+        background-size:cover;
+        background-attachment: fixed;
+        margin: 20px;
+}
+
+.jumbotron{
+        margin-top: 50px;
+        margin-left: 100px;
+        margin-right: 100px;
+}
+
+#artworkContainer {
+        display:inline-block; 
+        position: relative;
+        border: 0.5px solid #d0d0d0;
+        border-radius: 20px;
+        padding: 20px 50px 50px 50px;
+        background-color: #f0f0f0;
+        opacity: 0.9;
+        top: 30px;
+        text-align: center;
+        min-height:200px;
+}
+
+#artworkContainer h2{
+    text-align: center;
+}
+#artworkContainer h3{
+    text-align:center;
+}
+
+#artworkContainer a {
+        font-size: 16px;
+}
+/*
+.navbar-nav li {
+        left: 120px;
+}
+
+.nav-tabs li{
+         float:none;
+         display:inline-block;
+         padding-right: 50px;
+         padding-left:50px;
+         background-color:#f0f0f0;
+} 
+
+.nav-tabs li a{
+        font-size:15px;
+}
+.nav-tabs {
+        display:inline-block;
+        text-align:center;
+        background-color:#f0f0f0;
+        opacity:0.8;
+        display:block;
+        margin-left: 20%;
+    margin-right: 20%;
+}*/
+
+nav {
+    display: inline-block;
+        position: relative;
+        /*margin-left: 36%;*/
+    
+}
+.nav .navtabs {
+    border-radius: 8px;
+}
+
+.nav-tabs {
+/*        display:inline-block;
+        text-align:center;
+        border-radius:4px;
+        background-color:#f0f0f0;
+        opacity:0.6;
+        padding-left: 20px;
+        padding-right: 20px;*/
+}
+
+.menu {
+  list-style: none;
+  border-bottom: 0.1em solid Aquamarine;
+  margin-bottom: 2em;
+  padding: 0 0 0.5em;
+}
+.nav-tabs li {
+   float:none;
+   display:inline-block;
+   padding-left: 20px;
+   padding-right: 20px;
+}
+
+.nav-tabs li a{
+  font-size:16px;
+  background-color: white;
+}
+
+.nav-tabs a:hover{
+   background-color: white;
+}
+.center-pills {
+    display: inline-block;
+    position: relative;
+    top:30px;
+}
+
+#view1 {
+  margin: auto;
+  width: 70%;
+  border: 0.5px 
+  solid #d0d0d0;
+  border-radius: 15px;
+  padding: 10%;
+  background-color: #f0f0f0;
+  opacity: 0.9;
+  margin-top: 20px;
+  min-height:200px;
+}
+
+/* Artwork & artist hover left right padding distance */
+@link__padding: 50px;
+#view1 a{
+    padding-top: -30px;
+}
+#title {
+        text-align: right;
+}
+#title:hover {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+#artist {
+        text-align: left;
+}
+#artist:hover {
+  padding-left: 50px;
+  padding-right: 50px;
+}
+
+.nav-tabs > li > a:hover {
+    color: black;
+    background-color: white;
+    opacity: 1.0;
+}
+
+#bottom {
+        display: inline-block;
+        position: relative;
+        text-align:center;
+        padding: 40px;
+        top: 80px;
+        left: 70px;
+        font: black;
+}
+
+#bottom p{
+    color: black;
+}
+
+#form__element {
+    padding-left: 30px;
+    padding-right: 30px;
+    height: 32px;
+    margin: 20px;
+}
+
+/* From intense sierra */
+#productos .container {
+    background-color: aliceblue;
+    height: 100%;
+    border-radius: 25px;
+    text-align: center;
+    height:100%;
+    width: 130px;
+    border:5px;
+    -webkit-box-shadow: 0px 15px 13px 0px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0px 15px 13px 0px rgba(0,0,0,0.35);
+    box-shadow: 0px 15px 13px 0px rgba(0,0,0,0.35);
+    border-radius: 25px;
+}
+
+#productos img {
+  border-radius: 15px;
+  height:120px;
+  margin: 15px;
+  border-top: solid black 1px;
+  border-left: solid black 1px;
+}
+
+.artwork__locationBg {
+  width: 130px;
+  border: solid 1px;
+  border-bottom-right-radius: 25px;
+  border-bottom-left-radius: 25px;
+  display: table-cell; vertical-align: bottom;
+}
+
+p1 {
+    font-size: 16px;
+    color:cornflowerblue;
+    text-shadow: none;
+}
+p2{
+    color:red;
+}
+
+/* I want the bottom of the location div to extend to match
+the bottom of the productos above.  Then, the corners must be
+rounded to like this:;
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+*/
+
+/* Location artwork bg styles */
+.locationAlign {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  bottom: 0;
+}
+.locationBg0 {
+  background: #d9ffb3;
+}
+.locationBg1 {
+  background: #b3ffd9;
+}
+.locationBg2 {
+  background: #ffe5ff;
+}
+.locationBg3 {
+  background: #e5e5ff;
+}
+.locationBg4 {
+  background: #e5f2ff;
+}
+
+/* Data table */
+a {
+  text-decoration: none;
+}
+
+/* Auth0 classes */
+.a0-mode {
+  border-radius: 25px;
+}
+
+
+/* view 2 artist bio page */
+#skinName__text {
+  color: Moccasin;
+}
+
+#bio::first-letter { 
+    font-size: 200%;
+    color: Moccasin;
+}
+
+/* Auth0 overridded styles */
+/* The Log In text*/
+#a0-lock.a0-theme-default .a0-panel .a0-header h1 {
+  position: relative;
+  left: 30px;
+}
+/* The bottom icon */
+#a0-lock.a0-theme-default .a0-icon-badge:before {
+  position: relative;
+  left: 130px;
+}
+/* the user icon prefix for the input/email address field*/
+#a0-lock.a0-theme-default .a0-zocial.a0-guest:before {
+  position: relative;
+  left: 10px;
+}
+/* The dialog itself */
+#a0-lock .a0-overlay .a0-panel.a0-active {
+  border-radius: 25px;
+}
+/* The user email input field*/
+#a0-lock.a0-theme-default .a0-zocial.a0-guest {
+  border-radius: 15px;
+}
+/* The social network logos */
+#a0-lock.a0-theme-default .a0-equal-viewport .a0-zocial:before, #a0-lock.a0-theme-default .a0-zocial.a0-icon:before {
+  padding: 10px;
+}
+
+#a0-lock.a0-theme-default .a0-equal-viewport .a0-zocial, #a0-lock.a0-theme-default .a0-zocial.a0-icon {
+  border-radius: 15px;
+}
+
+.a0-centrix {
+  text-align-last: center !important;
+}
