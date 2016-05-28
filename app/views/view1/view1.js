@@ -14,6 +14,7 @@ angular.module('artApp.view1', ['ngRoute'])
 }])
 
 .controller('View1Ctrl', ['$scope', '$http','$rootScope',function($scope, $http,$rootScope) {
+  $scope.test = 'testing';
 	var viewModel = this;
     viewModel.errorMessage = {status:false,message:""};
   	viewModel.paintings = [];

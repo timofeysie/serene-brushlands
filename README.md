@@ -9,13 +9,17 @@ It was created using the official angular-seed.
 Functionally it manages a collection of artwork uploaded from a Word document.
 It has an inspection mode which should be used in conjunction with NFC tags.
 
+
 ## Routes
 View 1 is a list of paintings.  It also handles a list of the locations of each work and a data table page.
 View 2 is an artist bio.
 View 3 is an artwork.  It also has the crud functions.
 
-## Current Work
-Currently we are implementing JSDoc documentation to the application.
+
+## Unit Tests
+
+Unit testing is carried out with Jasmine.
+Open the unit-tests/SpecRunner.html file in a browser to run the tests.
 
 
 ##JSDocs
