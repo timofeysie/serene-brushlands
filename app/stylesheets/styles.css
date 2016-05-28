@@ -383,52 +383,40 @@ a {
   color: Moccasin;
 }
 
-/* Auth0 overridded styles */
+/* Auth0 overridded styles (from the previous login modal)*/
 /* The Log In text*/
-/* line 333, ../../scss/styles.scss */
-#a0-lock.a0-theme-default .a0-panel .a0-header h1 {
+/*#a0-lock.a0-theme-default .a0-panel .a0-header h1 {
   position: relative;
   left: 30px;
 }
-
+*/
 /* The bottom icon */
-/* line 338, ../../scss/styles.scss */
-#a0-lock.a0-theme-default .a0-icon-badge:before {
+/*#a0-lock.a0-theme-default .a0-icon-badge:before {
   position: relative;
   left: 130px;
-}
-
+}*/
 /* the user icon prefix for the input/email address field*/
-/* line 343, ../../scss/styles.scss */
-#a0-lock.a0-theme-default .a0-zocial.a0-guest:before {
+/*#a0-lock.a0-theme-default .a0-zocial.a0-guest:before {
   position: relative;
   left: 10px;
-}
-
+}*/
 /* The dialog itself */
-/* line 348, ../../scss/styles.scss */
-#a0-lock .a0-overlay .a0-panel.a0-active {
+/*#a0-lock .a0-overlay .a0-panel.a0-active {
   border-radius: 25px;
-}
-
+}*/
 /* The user email input field*/
-/* line 352, ../../scss/styles.scss */
-#a0-lock.a0-theme-default .a0-zocial.a0-guest {
+/*#a0-lock.a0-theme-default .a0-zocial.a0-guest {
   border-radius: 15px;
-}
-
+}*/
 /* The social network logos */
-/* line 356, ../../scss/styles.scss */
-#a0-lock.a0-theme-default .a0-equal-viewport .a0-zocial:before, #a0-lock.a0-theme-default .a0-zocial.a0-icon:before {
+/*#a0-lock.a0-theme-default .a0-equal-viewport .a0-zocial:before, #a0-lock.a0-theme-default .a0-zocial.a0-icon:before {
   padding: 10px;
 }
 
-/* line 360, ../../scss/styles.scss */
 #a0-lock.a0-theme-default .a0-equal-viewport .a0-zocial, #a0-lock.a0-theme-default .a0-zocial.a0-icon {
   border-radius: 15px;
 }
 
-/* line 364, ../../scss/styles.scss */
 .a0-centrix {
   text-align-last: center !important;
-}
+}*/
