@@ -24,6 +24,7 @@ input[type=radio] + label:before {
   border-radius: 0.2em;
   margin-right: 0.3em;
   background-color: white;
+  visibility: hidden; /* added to make the checkbox in the gooey menu disappear */
 }
 input[type=radio] + label:before {
   border-radius: 50%;
