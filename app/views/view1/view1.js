@@ -17,9 +17,17 @@ angular.module('artApp.view1', ['ngRoute'])
 	var viewModel = this;
     viewModel.errorMessage = {status:false,message:""};
   	viewModel.paintings = [];
-  	$http.get('artworks').success(function(data) {
-      viewModel.paintings = data;
-  	}).error(function(err){
-    viewModel.errorMessage = {status:true,message:"Please upload Artworks Documentation."};
-    });
+    if (viewModel.paintings.length == 0) {
+      viewModel.spinner = true;
+    	$http.get('artworks').success(function(data) {
+        viewModel.paintings = data;
+        viewModel.spinner = false;
+    	}).error(function(err) {
+        viewModel.errorMessage = {status:true,message:"Please upload artwork data."};
+        viewModel.spinner = false;
+      });
+    } else {
+      console.log('viewModel.paintings already exist',viewModel.paintings.length);
+      viewModel.spinner = false;
+    }
 }]);

@@ -22,18 +22,19 @@
   margin-left: -10px;
   margin-top: 20px;
   border-radius: 25px;
+  box-shadow: 0px 10px 31px -10px rgba(0, 0, 0, 0.75);
   /*            -webkit-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
                -moz-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
                     box-shadow: 0px 5px 18px rgba(0,0,0,.8);*/
 }
 
-/* line 28, ../../scss/styles.scss */
+/* line 29, ../../scss/styles.scss */
 #navbar__button {
   position: relative;
   left: 15px;
 }
 
-/* line 33, ../../scss/styles.scss */
+/* line 34, ../../scss/styles.scss */
 #gooeyNav {
   position: relative;
   top: -100;
@@ -41,23 +42,23 @@
   left: 25px;
 }
 
-/* line 39, ../../scss/styles.scss */
+/* line 40, ../../scss/styles.scss */
 input[type=checkbox] + label:before, input[type=radio] + label:before {
   content: none;
 }
 
 /* Basic flexbox grid (not used) */
-/* line 44, ../../scss/styles.scss */
+/* line 45, ../../scss/styles.scss */
 .Grid {
   display: flex;
 }
 
-/* line 48, ../../scss/styles.scss */
+/* line 49, ../../scss/styles.scss */
 .Grid-cell {
   flex: 1;
 }
 
-/* line 52, ../../scss/styles.scss */
+/* line 53, ../../scss/styles.scss */
 body:before {
   content: "";
   position: fixed;
@@ -71,7 +72,7 @@ body:before {
   z-index: 100;
 }
 
-/* line 67, ../../scss/styles.scss */
+/* line 68, ../../scss/styles.scss */
 body {
   background-color: none;
   background-size: cover;
@@ -79,14 +80,14 @@ body {
   margin: 20px;
 }
 
-/* line 75, ../../scss/styles.scss */
+/* line 76, ../../scss/styles.scss */
 .jumbotron {
   margin-top: 50px;
   margin-left: 100px;
   margin-right: 100px;
 }
 
-/* line 81, ../../scss/styles.scss */
+/* line 82, ../../scss/styles.scss */
 #artworkContainer {
   display: inline-block;
   position: relative;
@@ -100,17 +101,17 @@ body {
   min-height: 200px;
 }
 
-/* line 94, ../../scss/styles.scss */
+/* line 95, ../../scss/styles.scss */
 #artworkContainer h2 {
   text-align: center;
 }
 
-/* line 97, ../../scss/styles.scss */
+/* line 98, ../../scss/styles.scss */
 #artworkContainer h3 {
   text-align: center;
 }
 
-/* line 101, ../../scss/styles.scss */
+/* line 102, ../../scss/styles.scss */
 #artworkContainer a {
   font-size: 16px;
 }
@@ -140,19 +141,19 @@ body {
         margin-left: 20%;
     margin-right: 20%;
 }*/
-/* line 130, ../../scss/styles.scss */
+/* line 131, ../../scss/styles.scss */
 nav {
   display: inline-block;
   position: relative;
   /*margin-left: 36%;*/
 }
 
-/* line 136, ../../scss/styles.scss */
+/* line 137, ../../scss/styles.scss */
 .nav .navtabs {
   border-radius: 8px;
 }
 
-/* line 140, ../../scss/styles.scss */
+/* line 141, ../../scss/styles.scss */
 .nav-tabs {
   /*        display:inline-block;
           text-align:center;
@@ -163,7 +164,7 @@ nav {
           padding-right: 20px;*/
 }
 
-/* line 150, ../../scss/styles.scss */
+/* line 151, ../../scss/styles.scss */
 .menu {
   list-style: none;
   border-bottom: 0.1em solid Aquamarine;
@@ -171,7 +172,7 @@ nav {
   padding: 0 0 0.5em;
 }
 
-/* line 156, ../../scss/styles.scss */
+/* line 157, ../../scss/styles.scss */
 .nav-tabs li {
   float: none;
   display: inline-block;
@@ -179,25 +180,25 @@ nav {
   padding-right: 20px;
 }
 
-/* line 163, ../../scss/styles.scss */
+/* line 164, ../../scss/styles.scss */
 .nav-tabs li a {
   font-size: 16px;
   background-color: white;
 }
 
-/* line 168, ../../scss/styles.scss */
+/* line 169, ../../scss/styles.scss */
 .nav-tabs a:hover {
   background-color: white;
 }
 
-/* line 171, ../../scss/styles.scss */
+/* line 172, ../../scss/styles.scss */
 .center-pills {
   display: inline-block;
   position: relative;
   top: 30px;
 }
 
-/* line 177, ../../scss/styles.scss */
+/* line 178, ../../scss/styles.scss */
 #view1 {
   margin: auto;
   width: 70%;
@@ -212,41 +213,41 @@ nav {
 
 /* Artwork & artist hover left right padding distance */
 @link__padding : 50px;
-/* line 192, ../../scss/styles.scss */
+/* line 193, ../../scss/styles.scss */
 #view1 a {
   padding-top: -30px;
 }
 
-/* line 195, ../../scss/styles.scss */
+/* line 196, ../../scss/styles.scss */
 #title {
   text-align: right;
 }
 
-/* line 198, ../../scss/styles.scss */
+/* line 199, ../../scss/styles.scss */
 #title:hover {
   padding-left: 50px;
   padding-right: 50px;
 }
 
-/* line 203, ../../scss/styles.scss */
+/* line 204, ../../scss/styles.scss */
 #artist {
   text-align: left;
 }
 
-/* line 206, ../../scss/styles.scss */
+/* line 207, ../../scss/styles.scss */
 #artist:hover {
   padding-left: 50px;
   padding-right: 50px;
 }
 
-/* line 211, ../../scss/styles.scss */
+/* line 212, ../../scss/styles.scss */
 .nav-tabs > li > a:hover {
   color: black;
   background-color: white;
   opacity: 1.0;
 }
 
-/* line 217, ../../scss/styles.scss */
+/* line 218, ../../scss/styles.scss */
 #bottom {
   display: inline-block;
   position: relative;
@@ -257,12 +258,12 @@ nav {
   font: black;
 }
 
-/* line 227, ../../scss/styles.scss */
+/* line 228, ../../scss/styles.scss */
 #bottom p {
   color: black;
 }
 
-/* line 231, ../../scss/styles.scss */
+/* line 232, ../../scss/styles.scss */
 #form__element {
   padding-left: 30px;
   padding-right: 30px;
@@ -271,7 +272,7 @@ nav {
 }
 
 /* From intense sierra */
-/* line 239, ../../scss/styles.scss */
+/* line 240, ../../scss/styles.scss */
 #productos .container {
   background-color: aliceblue;
   height: 100%;
@@ -286,7 +287,7 @@ nav {
   border-radius: 25px;
 }
 
-/* line 253, ../../scss/styles.scss */
+/* line 254, ../../scss/styles.scss */
 #productos img {
   border-radius: 15px;
   height: 120px;
@@ -295,7 +296,7 @@ nav {
   border-left: solid black 1px;
 }
 
-/* line 261, ../../scss/styles.scss */
+/* line 262, ../../scss/styles.scss */
 .artwork__locationBg {
   width: 130px;
   border: solid 1px;
@@ -305,14 +306,14 @@ nav {
   vertical-align: bottom;
 }
 
-/* line 269, ../../scss/styles.scss */
+/* line 270, ../../scss/styles.scss */
 p1 {
   font-size: 16px;
   color: cornflowerblue;
   text-shadow: none;
 }
 
-/* line 274, ../../scss/styles.scss */
+/* line 275, ../../scss/styles.scss */
 p2 {
   color: red;
 }
@@ -324,7 +325,7 @@ rounded to like this:;
     border-bottom-left-radius: 25px;
 */
 /* Location artwork bg styles */
-/* line 286, ../../scss/styles.scss */
+/* line 287, ../../scss/styles.scss */
 .locationAlign {
   position: absolute;
   bottom: 0;
@@ -333,101 +334,89 @@ rounded to like this:;
   bottom: 0;
 }
 
-/* line 293, ../../scss/styles.scss */
+/* line 294, ../../scss/styles.scss */
 .locationBg0 {
   background: #d9ffb3;
 }
 
-/* line 296, ../../scss/styles.scss */
+/* line 297, ../../scss/styles.scss */
 .locationBg1 {
   background: #b3ffd9;
 }
 
-/* line 299, ../../scss/styles.scss */
+/* line 300, ../../scss/styles.scss */
 .locationBg2 {
   background: #ffe5ff;
 }
 
-/* line 302, ../../scss/styles.scss */
+/* line 303, ../../scss/styles.scss */
 .locationBg3 {
   background: #e5e5ff;
 }
 
-/* line 305, ../../scss/styles.scss */
+/* line 306, ../../scss/styles.scss */
 .locationBg4 {
   background: #e5f2ff;
 }
 
 /* Data table */
-/* line 310, ../../scss/styles.scss */
+/* line 311, ../../scss/styles.scss */
 a {
   text-decoration: none;
 }
 
 /* Auth0 classes */
-/* line 315, ../../scss/styles.scss */
+/* line 316, ../../scss/styles.scss */
 .a0-mode {
   border-radius: 25px;
 }
 
 /* view 2 artist bio page */
-/* line 321, ../../scss/styles.scss */
+/* line 322, ../../scss/styles.scss */
 #skinName__text {
   color: Moccasin;
 }
 
-/* line 325, ../../scss/styles.scss */
+/* line 326, ../../scss/styles.scss */
 #bio::first-letter {
   font-size: 200%;
   color: Moccasin;
 }
 
-/* Auth0 overridded styles */
+/* Auth0 overridded styles (from the previous login modal)*/
 /* The Log In text*/
-/* line 332, ../../scss/styles.scss */
-#a0-lock.a0-theme-default .a0-panel .a0-header h1 {
+/*#a0-lock.a0-theme-default .a0-panel .a0-header h1 {
   position: relative;
   left: 30px;
 }
-
+*/
 /* The bottom icon */
-/* line 337, ../../scss/styles.scss */
-#a0-lock.a0-theme-default .a0-icon-badge:before {
+/*#a0-lock.a0-theme-default .a0-icon-badge:before {
   position: relative;
   left: 130px;
-}
-
+}*/
 /* the user icon prefix for the input/email address field*/
-/* line 342, ../../scss/styles.scss */
-#a0-lock.a0-theme-default .a0-zocial.a0-guest:before {
+/*#a0-lock.a0-theme-default .a0-zocial.a0-guest:before {
   position: relative;
   left: 10px;
-}
-
+}*/
 /* The dialog itself */
-/* line 347, ../../scss/styles.scss */
-#a0-lock .a0-overlay .a0-panel.a0-active {
+/*#a0-lock .a0-overlay .a0-panel.a0-active {
   border-radius: 25px;
-}
-
+}*/
 /* The user email input field*/
-/* line 351, ../../scss/styles.scss */
-#a0-lock.a0-theme-default .a0-zocial.a0-guest {
+/*#a0-lock.a0-theme-default .a0-zocial.a0-guest {
   border-radius: 15px;
-}
-
+}*/
 /* The social network logos */
-/* line 355, ../../scss/styles.scss */
-#a0-lock.a0-theme-default .a0-equal-viewport .a0-zocial:before, #a0-lock.a0-theme-default .a0-zocial.a0-icon:before {
+/*#a0-lock.a0-theme-default .a0-equal-viewport .a0-zocial:before, #a0-lock.a0-theme-default .a0-zocial.a0-icon:before {
   padding: 10px;
 }
 
-/* line 359, ../../scss/styles.scss */
 #a0-lock.a0-theme-default .a0-equal-viewport .a0-zocial, #a0-lock.a0-theme-default .a0-zocial.a0-icon {
   border-radius: 15px;
 }
 
-/* line 363, ../../scss/styles.scss */
 .a0-centrix {
   text-align-last: center !important;
-}
+}*/
