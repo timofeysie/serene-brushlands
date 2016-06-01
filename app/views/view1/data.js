@@ -32,20 +32,29 @@ angular.module('artApp.data', ['ngRoute'])
   });
 }])
 
-.controller('DataCtrl', ['$scope', '$http', function($scope, $http) {
-	var viewModel = this;
+.controller('DataCtrl', ['$scope', '$rootScope', '$http', function($scope, $rootScope, $http) {
+	$scope.viewModel = {};
   // table sorting
-  viewModel.sortType     = 'name'; // set the default sort type
-  viewModel.sortReverse  = false;  // set the default sort order
-  viewModel.officeLocation   = '';     // set the default search/filter term
+  $scope.viewModel.sortType     = 'name'; // set the default sort type
+  $scope.viewModel.sortReverse  = false;  // set the default sort order
+  $scope.viewModel.officeLocation   = '';     // set the default search/filter term
+  $scope.viewModel.artworks = [];
 
-  	$http.get('/artworks').success(function(data) {
-  		for (var i = 0;i<data.length;i++) {
-  			var item = data[i];
-        console.log(i+' - ',item);
-  		}
-      viewModel.artworks = data;
-  	});
+  	var uploadedArtworksRef =new Firebase($rootScope.firebaseUri+"/uploaded-artworks");
+        uploadedArtworksRef.on("value", function(data){
+            var retriveData = data.val();
+            
+            for (var key in retriveData) {
+                $scope.viewModel.artworks.push(retriveData[key]);
+            }
+            
+            if(!$scope.$$phase) {
+                $scope.$apply($scope.viewModel);
+            }
+            
+        }, function(errorObject){
+            console.log("read failed" + errorObject.code);
+        });
 
     // var sample = {
     //   'amountPaid': '$111,000',

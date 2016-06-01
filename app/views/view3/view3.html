@@ -8,19 +8,19 @@
         <div class="col-md-6 col-md-offset-3">
           <div id="artworkContainer">
             <img id="artwork" 
-              src="{{controller.imageFile}}"
+              src="{{viewModel.imageFile}}"
               alt="No image"
               width="100px"/></a></p>
             <a href="#/view1"
               class="button button-3d button-pill">
-              No. {{controller.id}}
+              No. {{viewModel.id}}
             </a>
-            <h5>{{controller.title}} <span ng-show="inspectionOn">
+            <h5>{{viewModel.title}} <span ng-show="inspectionOn">
             <i class="fa fa-check-circle"></i></span></h5>
-            <p><a href="#/view2/{{controller.artist}}"
+            <p><a href="#/view2/{{viewModel.artist}}"
               class="button button-3d-action button-pill">
-              {{controller.artist}}</a></p>
-            <p>{{controller.size}}</p>
+              {{viewModel.artist}}</a></p>
+            <p>{{viewModel.size}}</p>
             <span>Add Additional Images</span>
             <br/>
             <br/>
