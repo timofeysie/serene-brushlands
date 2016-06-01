@@ -4,15 +4,15 @@
     <div class="flex-container">
       <div id="view1">
         <span class="alert alert-warning" 
-          ng-show="controller.errorMessage.status">{{controller.errorMessage.message}}</span>
+          ng-show="viewModel.errorMessage.status">{{viewModel.errorMessage.message}}</span>
         <a href="#/add"
-          ng-show="controller.errorMessage.status"
+          ng-show="viewModel.errorMessage.status"
           class="button button-3d button-pill">
           Update
         </a>
-        <img ng-show="controller.spinner" ng-src="assets/images/spinner.gif" style="background:none">
+        <img ng-show="viewModel.spinner" ng-src="assets/images/spinner.gif" style="background:none">
         <div class="">
-          <div ng-repeat="painting in controller.paintings">
+          <div ng-repeat="painting in viewModel.paintings">
             <div class="row">
               <a href="#/view3/{{painting.assetRefNo}}"
                 ng-show="!smallWidth"
