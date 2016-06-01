@@ -1,7 +1,7 @@
 'use strict';
 /**
- * @memberof myApp
- * @class view1.View1Ctrl
+ * @memberof artApp
+ * @class artApp.View1
  * @description Controller for view 1.
  */
 angular.module('artApp.view1', ['ngRoute'])

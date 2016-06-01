@@ -1,7 +1,7 @@
 'use strict';
 /**
   * @function InspectionsFactory
-  * @memberOf myApp
+  * @memberOf artApp
   * @description This is an angularjs factory to save and retrieve inpsection information from Firebase.
   */
 angular.module('artApp')

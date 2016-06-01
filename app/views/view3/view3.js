@@ -1,7 +1,7 @@
 'use strict';
 /**
- * @memberof myApp
- * @class view3.View3Ctrl
+ * @memberof artApp
+ * @class artApp.view3
  * @description Controller for view 3.
  */
 angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])

@@ -1,7 +1,7 @@
 'use strict';
 /**
- * @memberof myApp
- * @class view2.View2Ctrl
+ * @memberof artApp
+ * @class artApp.View2
  * @description Controller for view 2.
  */
 angular.module('artApp.view2', ['ngRoute','firebase'])

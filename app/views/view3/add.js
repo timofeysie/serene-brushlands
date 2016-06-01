@@ -1,7 +1,7 @@
 'use strict';
 /**
- * @memberof myApp
- * @class add.addCtrl
+ * @memberof artApp
+ * @class artApp.add
  * @description Controller for add.
  */
 angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])

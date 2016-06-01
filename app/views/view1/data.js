@@ -1,6 +1,6 @@
 'use strict';
 /**
- * @memberof myApp
+ * @memberof artApp
  * @class data.DataCtrl
  * @description Controller for data.
  */
