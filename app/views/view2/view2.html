@@ -7,31 +7,31 @@
           <span id="artist"
             style="color: Moccasin;"
             class="col-md-6 button button-pill button-highlight pull-left">
-            {{controller.name}}</span>
+            {{viewModel.name}}</span>
           <span id="title"
             style="color: Moccasin;"
             class="col-md-6 pull-right button button-pill button-highlight">
-            {{controller.DOB}}</span>
+            {{viewModel.DOB}}</span>
         </div>
         <div class="row">
           <div class="col-md-12">
-            <p ng-if="controller.skinName">
+            <p ng-if="viewModel.skinName">
               <span id="SkinNameSkinName"
                 class="button button-pill">Skin Name</span>
               <span class="button-pill button-highlight"
-                id="skinName__text">{{controller.skinName}}</span>
+                id="skinName__text">{{viewModel.skinName}}</span>
             </p>
-            <p ng-if="controller.language">
+            <p ng-if="viewModel.language">
               <span class="button button-pill">Language</span>
-                <span class="button button-pill button-highlight">{{controller.language}}</span>
+                <span class="button button-pill button-highlight">{{viewModel.language}}</span>
             </p>
-            <p ng-if="controller.region">
+            <p ng-if="viewModel.region">
               <span class="button button-pill">Region</span>
-              <span class="button button-pill button-highlight">{{controller.region}}</span>
+              <span class="button button-pill button-highlight">{{viewModel.region}}</span>
             </p>
-            <p ng-if="controller.dreaming">
+            <p ng-if="viewModel.dreaming">
               <span class="button button-pill">Dreaming</span>
-              <span class="button button-pill button-highlight">{{controller.dreaming}}</span>
+              <span class="button button-pill button-highlight">{{viewModel.dreaming}}</span>
             </p>
           </div>
         </div>
@@ -39,25 +39,25 @@
           <div class="col-md-12 text-center">
             <p id="artist" style="margin:30px;" class="button-pill button-highlight">
               <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{controller.bio.title}}</span>
-              <input ng-show="editModeEnabled" type="text" data-ng-model="controller.bio.title"/>
+              <span ng-hide="editModeEnabled">{{viewModel.bio.title}}</span>
+              <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.title"/>
               </p>
               <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{controller.bio.body}}</span>
-              <textarea ng-show="editModeEnabled" data-ng-model="controller.bio.body" >{{controller.bio.body}}</textarea>
+              <span ng-hide="editModeEnabled">{{viewModel.bio.body}}</span>
+              <textarea ng-show="editModeEnabled" data-ng-model="editModel.bio.body" >{{editModel.bio.body}}</textarea>
               </p>
 			  <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{controller.bio.AASDLink}}</span>
-              <input ng-show="editModeEnabled" type="text" data-ng-model="controller.bio.AASDLink"/>
+              <span ng-hide="editModeEnabled">{{viewModel.bio.AASDLink}}</span>
+              <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.AASDLink"/>
               </p>
 			  <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{controller.bio.WikiLink}}</span>
-              <input ng-show="editModeEnabled" type="text" data-ng-model="controller.bio.WikiLink"/>
+              <span ng-hide="editModeEnabled">{{viewModel.bio.WikiLink}}</span>
+              <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.WikiLink"/>
               </p>
               <button type="button" ng-hide="editModeEnabled" ng-click="editModeEnabled = true" class="button-pill button-highlight">
                 Click to edit
               </button>
-              <button ng-show="editModeEnabled" type="button" ng-click="saveTitleAndBody(controller)" class="button-pill button-highlight">
+              <button ng-show="editModeEnabled" type="button" ng-click="saveTitleAndBody(editModel)" class="button-pill button-highlight">
                 Save
               </button>
               <button ng-show="editModeEnabled" type="button" ng-click="editModeEnabled = false" class="button-pill button-highlight">
@@ -70,8 +70,8 @@
 		<div class="row">
 		  <div class="col-md-12 text-center">
 		    <p id="link">
-			<a href={{getAASDLink()}} target="_blank">AASD Link</a><br>
-			<a href={{getWikiLink()}} target="_blank">Wiki Link</a>
+			<a href={{viewModel.AASDLink}} target="_blank">AASD Link</a><br>
+			<a href={{viewModel.wikiLink}} target="_blank">Wiki Link</a>
 		    </p>
 		  </div>
 		</div>

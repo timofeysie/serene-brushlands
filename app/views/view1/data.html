@@ -6,64 +6,64 @@
         <tr>
           <td style="text-align:left">
             <a href="javascript:;" 
-              ng-click="controller.sortType = 'count'; controller.sortReverse = !controller.sortReverse">
+              ng-click="viewModel.sortType = 'count'; viewModel.sortReverse = !viewModel.sortReverse">
               No.
-              <span ng-show="controller.sortType == 'count' && !controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'count' && !viewModel.sortReverse" 
                 class="fa fa-caret-down"></span>
-              <span ng-show="controller.sortType == 'count' && controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'count' && viewModel.sortReverse" 
                 class="fa fa-caret-up"></span>
             </a>
             <table-dots></table-dots>
           </td>
           <td style="text-align:left">
             <a href="javascript:;" 
-              ng-click="controller.sortType = 'title'; controller.sortReverse = !controller.sortReverse">
+              ng-click="viewModel.sortType = 'title'; viewModel.sortReverse = !viewModel.sortReverse">
               Title
-              <span ng-show="controller.sortType == 'title' && !controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'title' && !viewModel.sortReverse" 
                 class="fa fa-caret-down"></span>
-              <span ng-show="controller.sortType == 'title' && controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'title' && viewModel.sortReverse" 
                 class="fa fa-caret-up"></span>
             </a>
             <table-dots></table-dots>
           </td>
           <td style="text-align:left">
             <a href="javascript:;" 
-              ng-click="controller.sortType = 'artist'; controller.sortReverse = !controller.sortReverse">
+              ng-click="viewModel.sortType = 'artist'; viewModel.sortReverse = !viewModel.sortReverse">
               Artist
-              <span ng-show="controller.sortType == 'artist' && !controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'artist' && !viewModel.sortReverse" 
                 class="fa fa-caret-down"></span>
-              <span ng-show="controller.sortType == 'artist' && controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'artist' && viewModel.sortReverse" 
                 class="fa fa-caret-up"></span>
             </a>
             <table-dots></table-dots>
           </td>
           <td style="text-align:left">
             <a href="javascript:;" 
-              ng-click="controller.sortType = 'officeLocation'; controller.sortReverse = !controller.sortReverse">
+              ng-click="viewModel.sortType = 'officeLocation'; viewModel.sortReverse = !viewModel.sortReverse">
               Location
-              <span ng-show="controller.sortType == 'officeLocation' && !controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'officeLocation' && !viewModel.sortReverse" 
                 class="fa fa-caret-down"></span>
-              <span ng-show="controller.sortType == 'officeLocation' && controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'officeLocation' && viewModel.sortReverse" 
                 class="fa fa-caret-up"></span>
             </a>
             <table-dots></table-dots>
           </td>
           <td style="text-align:left"><a href="javascript:;" 
-              ng-click="controller.sortType = 'src'; controller.sortReverse = !controller.sortReverse">
+              ng-click="viewModel.sortType = 'src'; viewModel.sortReverse = !viewModel.sortReverse">
               Image
-              <span ng-show="controller.sortType == 'src' && !controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
                 class="fa fa-caret-down"></span>
-              <span ng-show="controller.sortType == 'src' && controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
                 class="fa fa-caret-up"></span>
             </a>
             <table-dots></table-dots>
           </td>
           <td style="text-align:left"><a href="javascript:;" 
-              ng-click="controller.sortType = 'size'; controller.sortReverse = !controller.sortReverse">
+              ng-click="viewModel.sortType = 'size'; viewModel.sortReverse = !viewModel.sortReverse">
               Size
-              <span ng-show="controller.sortType == 'src' && !controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
                 class="fa fa-caret-down"></span>
-              <span ng-show="controller.sortType == 'src' && controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
                 class="fa fa-caret-up"></span>
             </a>
             <table-dots></table-dots>
@@ -81,27 +81,27 @@
             <table-dots></table-dots>
           </td> -->
           <td style="text-align:left"><a href="javascript:;" 
-              ng-click="controller.sortType = 'insured'; controller.sortReverse = !controller.sortReverse">
+              ng-click="viewModel.sortType = 'insured'; viewModel.sortReverse = !viewModel.sortReverse">
               Insured
-              <span ng-show="controller.sortType == 'src' && !controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
                 class="fa fa-caret-down"></span>
-              <span ng-show="controller.sortType == 'src' && controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
                 class="fa fa-caret-up"></span>
             </a>
             <table-dots></table-dots>
           </td>
           <td style="text-align:left"><a href="javascript:;" 
-              ng-click="controller.sortType = 'provenance'; controller.sortReverse = !controller.sortReverse">
+              ng-click="viewModel.sortType = 'provenance'; viewModel.sortReverse = !viewModel.sortReverse">
               Provenance
-              <span ng-show="controller.sortType == 'src' && !controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
                 class="fa fa-caret-down"></span>
-              <span ng-show="controller.sortType == 'src' && controller.sortReverse" 
+              <span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
                 class="fa fa-caret-up"></span>
             </a>
             <table-dots></table-dots>
           </td>
         </tr>
-        <tr ng-repeat="artwork in controller.artworks | orderBy:controller.sortType:controller.sortReverse">
+        <tr ng-repeat="artwork in viewModel.artworks | orderBy:viewModel.sortType:viewModel.sortReverse">
           <td style="text-align:left">
             {{artwork.assetRefNo}}.</td>
           <td style="text-align:left" >
