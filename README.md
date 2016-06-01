@@ -58,12 +58,34 @@ $ node index.js
 ```
 The app will then be running at http://localhost:5000/
 
-To commite changes and push:
+To commit changes and push:
 ```
 $ git add .
 $ git commit -a -m "Message about what you changed"
 $ git push heroku master
 ```
+Note, we have moved from Heroku to Digital Ocean.  For the time being, see the below section for deployment instructions.
+
+## Deploy Application into DigitalOcene
+Push all local change to origin
+```
+$ git push
+```
+Log into DigitalOcene droplet using ssh
+```
+$ ssh root@45.55.52.23
+```
+Insert your droplet password when asked.
+
+Go into the folder serene-brushlands/
+```
+$  cd serene-brushlands/
+```
+Checkout master branch
+```
+$ git checkout master
+```
+Pull the changes from the origin
 
 
 # Getting started notes
