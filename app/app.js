@@ -71,7 +71,7 @@ config(['$routeProvider', function($routeProvider, authProvider) {
         loginUrl: '/login'
       });
 })
-.run(function(auth, $window, $rootScope) {
+.run(function(auth, $window, $rootScope, store, jwtHelper, $location) {
   var envValues = document.getElementById('env-values').value;
   var response = JSON.parse(envValues);
   $rootScope.firebaseUri = response.FIREBASE_URI;
@@ -83,6 +83,22 @@ config(['$routeProvider', function($routeProvider, authProvider) {
   if ($window.innerWidth < 1200 && $window.innerWidth > 900) {
     $rootScope.mediumWidth = true;
   }
+  
+  $rootScope.$on('$locationChangeStart', function() {
+
+    var token = store.get('token');
+    if (token) {
+      if (!jwtHelper.isTokenExpired(token)) {
+        if (!auth.isAuthenticated) {
+          //Re-authenticate user if token is valid
+          auth.authenticate(store.get('profile'), token);
+        }
+      } else {
+        // Either show the login page or use the refresh token to get a new idToken
+        $location.path('/');
+      }
+    }
+  });
 
   angular.element($window).bind('resize', function() {
     if ($window.innerWidth < 900) {
