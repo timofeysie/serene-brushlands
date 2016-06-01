@@ -1,7 +1,7 @@
 'use strict';
 /**
- * @memberof myApp
- * @class inspections.InspectionsCtrl
+ * @memberof artApp
+ * @class artApp.inspections
  * @description Controller for inspections.
  */
 angular.module('artApp.inspections', ['ngRoute', 'firebase'])

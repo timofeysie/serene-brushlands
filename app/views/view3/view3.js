@@ -1,30 +1,40 @@
 'use strict';
 /**
- * @memberof myApp
- * @class view3.View3Ctrl
+ * @memberof artApp
+ * @class artApp.view3
  * @description Controller for view 3.
  */
 angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
 
-.controller('View3Ctrl', ['$rootScope', '$scope', 'Upload', '$routeParams', '$http', 'InspectionsFactory', 
-  function($rootScope, $scope, Upload, $routeParams, $http, InspectionsFactory) {
-  var viewModel = this;
-  // this is the argument passed in by the ng-route as configured in the app.js
-  var paintingNo = $routeParams.paintingNo;
-  InspectionsFactory.getArtwork(paintingNo)
-  .then(function(response){
-    viewModel.artist = response.artist;
-    viewModel.title = response.title;
-    viewModel.size = response.size;
-    viewModel.imageFileName = response.imageFileName;
-	viewModel.imageFile = response.imageFile;
-    viewModel.id = response.assetRefNo;
+.controller('View3Ctrl', ['$rootScope', '$scope', 'Upload', '$routeParams', '$http', 'InspectionsFactory', '$firebaseObject', 
+  function($rootScope, $scope, Upload, $routeParams, $http, InspectionsFactory, $firebaseObject) {
+      
+    $scope.viewModel = {};
+    var paintingNo = $routeParams.paintingNo;
+    var uploadedArtworksRef =new Firebase($rootScope.firebaseUri+"/uploaded-artworks/" + paintingNo);
+    
+    uploadedArtworksRef.on("value", function(data){
 
-    if ($rootScope.inspectionOn) {
-      InspectionsFactory.addInspection(paintingNo);
-    }
-  });
-  
+        var retriveData = data.val();
+        $scope.viewModel.artist = retriveData.artist;
+        $scope.viewModel.title = retriveData.title;
+        $scope.viewModel.size = retriveData.size;
+        $scope.viewModel.imageFileName = retriveData.imageFileName;
+        $scope.viewModel.imageFile = retriveData.imageFile;
+        $scope.viewModel.id = retriveData.assetRefNo;
+        
+        if ($rootScope.inspectionOn) {
+            InspectionsFactory.addInspection(paintingNo);
+        }
+
+        if(!$scope.$$phase) {
+            $scope.$apply($scope.viewModel);
+        }
+            
+    }, function(errorObject){
+        console.log("read failed" + errorObject.code);
+    });
+            
   $scope.uploadAdditionalImages = function(files) {
     $scope.f = files;
     
@@ -32,7 +42,7 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
         files.upload = Upload.upload({
             url: '/add-additional-artwork-data',
             arrayKey:'',
-            data: {text:$scope.text,asset_ref_no:viewModel.id,files: files}
+            data: {text:$scope.text,asset_ref_no:$scope.viewModel.id,files: files}
         });
 
         files.upload.then(function (response) {

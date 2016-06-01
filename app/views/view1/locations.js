@@ -1,6 +1,6 @@
 'use strict';
 /**
- * @memberof myApp
+ * @memberof artApp.locations
  * @class locations.LocationsCtrl
  * @description Controller for locations.
  */
