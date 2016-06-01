@@ -19,6 +19,9 @@ angular.module( 'artApp.login', [
   }
   $scope.signout = function () {
     $scope.auth = null;
+    store.remove('profile');
+    store.remove('token');
+    $location.path('/login');
     console.log('logout');
   }
 
