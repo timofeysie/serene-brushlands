@@ -86,6 +86,9 @@ Checkout master branch
 $ git checkout master
 ```
 Pull the changes from the origin
+```
+$ git pull
+```
 
 
 # Getting started notes
