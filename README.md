@@ -81,11 +81,14 @@ Go into the folder serene-brushlands/
 ```
 $  cd serene-brushlands/
 ```
+Pull the changes from the origin
+```
+$ git pull
+```
 Checkout master branch
 ```
 $ git checkout master
 ```
-Pull the changes from the origin
 
 
 # Getting started notes
