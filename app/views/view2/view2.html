@@ -2,7 +2,8 @@
 <div ng-controller="View2Ctrl as controller">
   <div class="container">
      <div class="lab text-center">
-      <div id="text">
+      <img ng-show="viewModel.spinner" ng-src="assets/images/spinner.gif" style="background:none">
+      <div id="text" ng-hide="viewModel.spinner">
         <div class="row">
           <span id="artist"
             style="color: Moccasin;"

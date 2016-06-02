@@ -8,7 +8,7 @@
         value="{{officelocation.value}}">{{officelocation.name}}</option>
     </select>
     <br/>
-    </br/>
+    <br/>
 	<img ng-show="spinner" ng-src="assets/images/spinner.gif" style="background:none">
     <div class="flex-container">
         <div ng-repeat="artwork in controller.artworks | orderBy:'officeLocation' | filter:selectedLocation:strict"
@@ -18,9 +18,7 @@
             class="col col-span-3">
             <div class="container">
               <a href="index.html#/product/?Item={{artwork.assetRefNo}}">
-                <img src="{{artwork.imageFile}}"
-                    alt="No image"
-                    width="100px"/>
+                <img ng-src="{{artwork.imageFile}}" alt="No image" style="width:100px"/>
               </a>
               <div><p1>{{artwork.count}}.</p1>{{artwork.title}}
                 <span ng-show="artwork.inspected"><i class="fa fa-check-circle"></i></span></div>
