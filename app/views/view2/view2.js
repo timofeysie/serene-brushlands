@@ -15,9 +15,33 @@ angular.module('artApp.view2', ['ngRoute','firebase'])
 
 .controller('View2Ctrl', ['$scope','$rootScope' ,'$routeParams', '$http',
   function($scope, $rootScope, $routeParams, $http) {
+    $scope.getAASDLink = function (obj)
+    {
+        if (obj.bio.AASDLink != "") {
+            return "http://www.aasd.com.au/index.cfm/artist/?concat=" + obj.bio.AASDLink;
+        } else if (obj.name != "") {
+            var full_name = obj.name.split(" ");
+            return "http://www.aasd.com.au/index.cfm/artist/?concat=" + full_name[0] + "+" + full_name[1];
+        } else {
+            return "";
+        }
+    }; 
+
+    $scope.getWikiLink = function (obj)
+    {
+        if (obj.bio.WikiLink != "" || $scope.viewModel.bio.WikiLink == undefined) {
+            return "https://en.wikipedia.org/wiki/" + $scope.viewModel.bio.WikiLink;
+        } else if (obj.name != "") {
+            var full_name = obj.name.split(" ");
+            return "https://en.wikipedia.org/wiki/" + full_name[0] + "_" + full_name[1];
+        } else {
+            return "";
+        }
+    };
     
     var artistsRef = new Firebase($rootScope.firebaseUri + "/artists/" + $routeParams.artist);
     $scope.viewModel = {};
+    $scope.viewModel.spinner = true;
     $scope.updatedMessage = {"status":false,"msg":""};
     $scope.editModeEnabled = false;
     artistsRef.on("value", function(data) {
@@ -31,14 +55,21 @@ angular.module('artApp.view2', ['ngRoute','firebase'])
             $scope.viewModel.region = retrivedArtistData.region;
             $scope.viewModel.dreaming = retrivedArtistData.dreaming;
             $scope.viewModel.DOB = retrivedArtistData.DOB;
-            $scope.viewModel.AASDLink = $scope.getAASDLink();
-            $scope.viewModel.wikiLink = $scope.getWikiLink();
+            $scope.viewModel.AASDLink = $scope.getAASDLink($scope.viewModel);
+            $scope.viewModel.wikiLink = $scope.getWikiLink($scope.viewModel);
             
             $scope.editModel = angular.copy($scope.viewModel);
-        }  
+        } else {
+            $scope.updatedMessage = {status:true, msg:"No data available"};
+        }
+        $scope.viewModel.spinner = false;
         if(!$scope.$$phase) {
             $scope.$apply($scope.viewModel);
         }
+    }, function(errObj){
+        console.log("error occurd " + errObj);
+        $scope.updatedMessage.status = true;
+        $scope.updatedMessage.msg = "Something went wrong. Cannot load data";
     });
     
     $scope.saveTitleAndBody = function (obj)
@@ -65,26 +96,6 @@ angular.module('artApp.view2', ['ngRoute','firebase'])
         updateArtistsBioRef.child('WikiLink').set(obj.bio.WikiLink, onComplete);
     };
 
-
-    $scope.getAASDLink = function ()
-    {
-        if ($scope.viewModel.bio.AASDLink != "") {
-            return "http://www.aasd.com.au/index.cfm/artist/?concat=" + $scope.viewModel.bio.AASDLink;
-        } else {
-            var full_name = $scope.viewModel.name.split(" ");
-            return "http://www.aasd.com.au/index.cfm/artist/?concat=" + full_name[0] + "+" + full_name[1];
-        }
-    }; 
-
-    $scope.getWikiLink = function ()
-    {
-        if ($scope.viewModel.bio.WikiLink != "") {
-            return "https://en.wikipedia.org/wiki/" + $scope.viewModel.bio.WikiLink;
-        } else {
-            var full_name = $scope.viewModel.name.split(" ");
-            return "https://en.wikipedia.org/wiki/" + full_name[0] + "_" + full_name[1];
-        }
-    };
  /* data available:
   "SkinName":"Mbitjana / Mpetyane",
     "Language":"Anmatyerre",
