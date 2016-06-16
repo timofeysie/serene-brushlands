@@ -21,7 +21,7 @@ angular.module('artApp.view2', ['ngRoute','firebase'])
             return "http://www.aasd.com.au/index.cfm/artist/?concat=" + obj.bio.AASDLink;
         } else if (obj.name != "") {
             var full_name = obj.name.split(" ");
-            return "http://www.aasd.com.au/index.cfm/artist/?concat=" + full_name[0] + "+" + full_name[1];
+            return "http://www.aasd.com.au/index.cfm/artist/?concat=" + full_name[1] + full_name[0];
         } else {
             return "";
         }
