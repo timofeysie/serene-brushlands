@@ -6,13 +6,20 @@
 angular.module( 'artApp.login', [
   'auth0'
 ])
-.controller( 'LoginCtrl', function ($scope, auth, $location, store) {
+.controller( 'LoginCtrl',[
+  '$scope',
+  '$window',
+  'auth',
+  '$location',
+  'store',
+   function ($scope, $window, auth, $location, store) {
   $scope.auth = auth;
+
   $scope.login = function() {
     auth.signin({}, function(profile, token) {
       store.set('profile', profile);
       store.set('token', token);
-      $location.path("/");
+      $window.location.reload();
     }, function(error) {
       console.log("There was an error logging in", error);
     });
@@ -22,7 +29,7 @@ angular.module( 'artApp.login', [
     store.remove('profile');
     store.remove('token');
     $location.path('/login');
-    console.log('logout');
+    $window.location.reload();
   }
 
-});
+}]);
