@@ -548,6 +548,27 @@ app.post('/save-from-firebase', function (req, res) {
   return req.pipe(busboy);
 });
 
+app.post('/save-user-roles', function (req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  var busboy = new Busboy({ headers: req.headers });
+  busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated) {
+    if(fieldname == "fetched_data")
+    {
+      fs.writeFile(".roles.json", val, function(err) {
+         if(err) {
+             res.status(400).send(err);
+             return;
+         }
+       });
+    }
+  });
+  busboy.on('finish', function() {
+    res.send();
+  });
+  return req.pipe(busboy);
+});
+
 app.post('/add-additional-artwork-data', function (req, res) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -576,4 +597,13 @@ app.get('/env', function (req, res) {
   res.setHeader('Content-Type', 'application/json');
   var env = process.env;
   res.send(env);
+});
+
+app.get('/auth-roles', function (req, res) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader('Content-Type', 'application/json');
+  var file = fs.readFileSync('.roles.json').toString();
+  var rolesFileJson = JSON.parse(file);
+  res.send(rolesFileJson);
 });

@@ -1,0 +1,6 @@
+{
+  "work@thesanmark.com": ["admin"],
+  "developer@thesanmark.com": ["developer"],
+  "user@thesanmark.com": ["user"],
+  "userRoles":["admin","developer","user"]
+}
