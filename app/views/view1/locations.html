@@ -1,7 +1,8 @@
 <navbar></navbar>
 <div id="outer">
   <div ng-controller="LocationsCtrl as controller">
-    <label> Filter by office location: </label>
+    <br/>
+    <label>Filter by office location: </label>
     <select ng-model="selectedLocation"
       class="button button-3d button-pill">
       <option ng-repeat="officelocation in officelocations"
@@ -17,10 +18,10 @@
           <div id="productos"
             class="col col-span-3">
             <div class="container">
-              <a href="index.html#/product/?Item={{artwork.assetRefNo}}">
+              <a href="#/view3/{{artwork.assetRefNo}}">
                 <img ng-src="{{artwork.imageFile}}" alt="No image" style="width:100px"/>
               </a>
-              <div><p1>{{artwork.count}}.</p1>{{artwork.title}}
+              <div><p1>{{artwork.assetRefNo}}.</p1>{{artwork.title}}
                 <span ng-show="artwork.inspected"><i class="fa fa-check-circle"></i></span></div>
               <div ng-show="artwork.artist">by {{artwork.artist}}</div>
               <div ng-class="'' == selectedLocation ? 'all-locations-same' : ''" class="{{artwork.locationBg}} artwork__locationBg {{allArtWorksClass}}"
