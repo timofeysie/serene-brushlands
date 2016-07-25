@@ -1,7 +1,7 @@
 <div class="container">
 
   <!-- large screen width menu -->
-  <div class="row" 
+  <div class="row"
     ng-show="!smallWidth && !mediumWidth">
     <div class="col-md-12 col-xs-12">
       <ul class="nav nav-tabs no-stack">
@@ -12,7 +12,7 @@
             Artworks
           </a>
         </li>
-        <li role="presentation">
+        <li role="presentation" ng-show="isAllowed">
           <a href="#/locations"
             class="button button-3d button-pill"
             id="navbar__button">
@@ -40,6 +40,13 @@
             Inspections
           </a>
         </li>
+        <li role="presentation" ng-show="isAllowed">
+          <a href="#/user-permissions"
+            class="button button-3d button-pill"
+            id="navbar__button">
+            User Permissions
+          </a>
+        </li>
         <li role="presentation">
           <a href="#/about"
             class="button button-3d button-pill"
@@ -52,7 +59,7 @@
   </div>
 
   <!-- medium screen width menu -->
-  <div class="row" 
+  <div class="row"
     ng-show="mediumWidth">
     <div class="col-md-12 col-xs-12">
       <div class="button-group">
@@ -61,7 +68,7 @@
             id="navbar__button">
             Artworks
         </a>
-          <a href="#/locations"
+          <a href="#/locations" ng-show="isAllowed"
             class="button button-3d button-pill"
             id="navbar__button">
             Locations
@@ -96,13 +103,13 @@
     id="gooeyNav"
     ng-show="smallWidth">
     <nav>
-      <input type="checkbox" 
-        href="#" 
-        class="menu-open" 
-        name="menu-open" 
-        id="menu-open" 
+      <input type="checkbox"
+        href="#"
+        class="menu-open"
+        name="menu-open"
+        id="menu-open"
         style="content: none"/>
-      <label class="menu-open-button" 
+      <label class="menu-open-button"
         for="menu-open">
         <span class="hamburger hamburger-1"></span>
         <span class="hamburger hamburger-2"></span>
@@ -112,40 +119,40 @@
       <a href="#/data" class="menu-item">Data</a>
       <a href="#/add" class="menu-item">Update</i> </a>
       <a href="#/inspections" class="menu-item">Inspect</a>
-      <a href="#/locations" class="menu-item">Loc.</a>
+      <a href="#/locations" class="menu-item" ng-if="isAllowed">Loc.</a>
       <a href="#/view1" class="menu-item">Artwork</a>
     </nav>
 
     <!-- filters -->
     <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
         <defs>
-          <filter id="shadowed-goo">      
-              <feGaussianBlur in="SourceGraphic" 
-                result="blur" 
+          <filter id="shadowed-goo">
+              <feGaussianBlur in="SourceGraphic"
+                result="blur"
                 stdDeviation="10" />
-              <feColorMatrix in="blur" 
-                mode="matrix" 
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" 
+              <feColorMatrix in="blur"
+                mode="matrix"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
                 result="goo" />
-              <feGaussianBlur in="goo" 
-                stdDeviation="3" 
+              <feGaussianBlur in="goo"
+                stdDeviation="3"
                 result="shadow" />
-              <feColorMatrix in="shadow" 
-                mode="matrix" 
-                values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2" 
+              <feColorMatrix in="shadow"
+                mode="matrix"
+                values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2"
                 result="shadow" />
               <feOffset in="shadow" dx="1" dy="1" result="shadow" />
               <feBlend in2="shadow" in="goo" result="goo" />
               <feBlend in2="goo" in="SourceGraphic" result="mix" />
           </filter>
           <filter id="goo">
-              <feGaussianBlur in="SourceGraphic" 
+              <feGaussianBlur in="SourceGraphic"
                 result="blur" stdDeviation="10" />
-              <feColorMatrix in="blur" 
-                mode="matrix" 
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 10 -7" 
+              <feColorMatrix in="blur"
+                mode="matrix"
+                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 10 -7"
                 result="goo" />
-              <feBlend in2="goo" in="SourceGraphic" 
+              <feBlend in2="goo" in="SourceGraphic"
                 result="mix" />
           </filter>
         </defs>
