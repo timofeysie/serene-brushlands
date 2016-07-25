@@ -9,8 +9,11 @@ angular.module('artApp.locations', ['ngRoute'])
 .controller('LocationsCtrl', ['$scope', '$http','$rootScope',
   function($scope, $http, $rootScope) { 
 	var viewModel = this;
-  $scope.officelocations = [{"name":"All","value":""}];
-  $scope.selectedLocation = $scope.officelocations[0].value;
+  $scope.officelocations = [];
+  $scope.selectedLocation = "";
+    $scope.artists = [];
+    $scope.selectedArtist = "";
+  
   var newJsonArray = [];
   $scope.spinner = true;
   var uploadedArtworksRef =new Firebase($rootScope.firebaseUri+"/uploaded-artworks");
@@ -40,7 +43,13 @@ angular.module('artApp.locations', ['ngRoute'])
       } catch (error) {
         //console.log('no location');
       }
-      $scope.officelocations.push({"name":item.officeLocation,"value":item.officeLocation});
+        if ($scope.officelocations.indexOf(item.officeLocation) == -1) {
+            $scope.officelocations.push(item.officeLocation);
+        }
+        if ($scope.artists.indexOf(item.artist) == -1 && item.artist !== "") {
+            $scope.artists.push(item.artist);
+        }
+
       newData.push(item);
 		}
     viewModel.artworks = newData;

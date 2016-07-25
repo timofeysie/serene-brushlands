@@ -5,14 +5,24 @@
     <label>Filter by office location: </label>
     <select ng-model="selectedLocation"
       class="button button-3d button-pill">
+        <option value="">All</option>
       <option ng-repeat="officelocation in officelocations"
-        value="{{officelocation.value}}">{{officelocation.name}}</option>
+        value="{{officelocation}}">{{officelocation}}</option>
+    </select>
+    <br />
+    <br />
+    <label> Filter by artist: </label>
+    <select ng-model="selectedArtist"
+      class="button button-3d button-pill">
+        <option value="">All</option>
+      <option ng-repeat="artist in artists"
+        value="{{artist}}">{{artist }}</option>
     </select>
     <br/>
     <br/>
 	<img ng-show="spinner" ng-src="assets/images/spinner.gif" style="background:none">
     <div class="flex-container">
-        <div ng-repeat="artwork in controller.artworks | orderBy:'officeLocation' | filter:selectedLocation:strict"
+        <div ng-repeat="artwork in controller.artworks | orderBy:'officeLocation' | filter:{officeLocation:selectedLocation, artist:selectedArtist}:strict"
           style="position: relative; left: 45px;">
 
           <div id="productos"
