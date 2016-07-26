@@ -71,8 +71,26 @@
 		<div class="row">
 		  <div class="col-md-12 text-center">
 		    <p id="link">
-			<a href={{viewModel.AASDLink}} target="_blank">AASD Link</a><br>
-			<a href={{viewModel.wikiLink}} target="_blank">Wiki Link</a>
+                <a href={{viewModel.AASDLink}} target="_blank">
+                    <span id="AASDLink"
+                          style="color: Moccasin;"
+                          class="button button-pill button-highlight">
+                        AASD Link</span>
+                </a>
+                <br>
+                <a href={{viewModel.wikiLink}} target="_blank">
+                    <span id="wikiLinks"
+                          style="color: Moccasin;"
+                          class="button button-pill button-highlight">
+                        Wiki Link</span>
+                </a>
+                <br/>
+                <a href="#/locations/{{viewModel.name}}">
+                    <span id="wikiLinks"
+                          style="color: Moccasin;"
+                          class="button button-pill button-highlight">
+                        Artist's Work</span>
+                </a>
 		    </p>
 		  </div>
 		</div>
