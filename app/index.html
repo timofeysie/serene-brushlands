@@ -11,7 +11,7 @@
   <link rel="stylesheet" type="text/css" href="stylesheets/timstyle.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/masonry.css">
   <link rel="stylesheet" type="text/css" href="stylesheets/home.css">
-  
+
   <link rel="stylesheet" type="text/css" href="bower_components/font-awesome/css/font-awesome.min.css">
   <style>
     [ng-cloak] {
@@ -29,6 +29,7 @@
       'bower_components/angular-cookies/angular-cookies.min.js',
       'bower_components/auth0-lock/build/auth0-lock.min.js',
       'bower_components/a0-angular-storage/dist/angular-storage.min.js',
+      'bower_components/angular-acl/angular-acl.js',
       '//cdn.rawgit.com/auth0/angular-jwt/master/dist/angular-jwt.js',
       '//cdn.auth0.com/w2/auth0-angular-4.js',
       'https://cdn.firebase.com/js/client/2.3.2/firebase.js',
@@ -43,6 +44,7 @@
       'views/view3/inspections.js',
       'views/home/home.js',
       'views/login/login.js',
+      'views/userPermissions/userPermissions.js',
       'components/navbar/navbar.template.html',
       'components/factories/inspectionsFactory.js',
       'components/directives/tableDots.js',
@@ -57,8 +59,11 @@
 </head>
 <body ng-cloak>
   <input type="hidden" id="env-values"/>
+  <input type="hidden" id="role-permissions"/>
   <div ng-view></div>
   <script type="text/javascript">
+  function getEnvValues()
+  {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function(data) {
       if (xhttp.readyState == 4 && xhttp.status == 200) {
@@ -68,6 +73,23 @@
     };
     xhttp.open("GET", "/env", true);
     xhttp.send();
+  }
+
+  function getRolePermissions()
+  {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function(data) {
+      if (xhttp.readyState == 4 && xhttp.status == 200) {
+        var response  = xhttp.responseText;
+        document.getElementById('role-permissions').value = response;
+      }
+    };
+    xhttp.open("GET", "/auth-roles", true);
+    xhttp.send();
+  }
+
+  getEnvValues();
+  getRolePermissions();
   </script>
 </body>
 </html>

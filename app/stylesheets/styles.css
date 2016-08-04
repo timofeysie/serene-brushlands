@@ -1,4 +1,4 @@
-/* line 2, ../../scss/styles.scss */
+/* line 4, ../../scss/styles.scss */
 .flex-container {
   display: -webkit-flex;
   /* Safari */
@@ -9,7 +9,7 @@
   align-content: space-around;
 }
 
-/* line 13, ../../scss/styles.scss */
+/* line 15, ../../scss/styles.scss */
 .flex-item {
   -webkit-order: 1;
   /* Safari */
@@ -17,7 +17,7 @@
   flex-grow: 0;
 }
 
-/* line 19, ../../scss/styles.scss */
+/* line 21, ../../scss/styles.scss */
 #ryans-tree-logo {
   margin-left: -10px;
   margin-top: 20px;
@@ -28,13 +28,13 @@
                     box-shadow: 0px 5px 18px rgba(0,0,0,.8);*/
 }
 
-/* line 29, ../../scss/styles.scss */
+/* line 31, ../../scss/styles.scss */
 #navbar__button {
   position: relative;
   left: 15px;
 }
 
-/* line 34, ../../scss/styles.scss */
+/* line 36, ../../scss/styles.scss */
 #gooeyNav {
   position: relative;
   top: -100;
@@ -42,23 +42,23 @@
   left: 25px;
 }
 
-/* line 40, ../../scss/styles.scss */
+/* line 42, ../../scss/styles.scss */
 input[type=checkbox] + label:before, input[type=radio] + label:before {
   content: none;
 }
 
 /* Basic flexbox grid (not used) */
-/* line 45, ../../scss/styles.scss */
+/* line 47, ../../scss/styles.scss */
 .Grid {
   display: flex;
 }
 
-/* line 49, ../../scss/styles.scss */
+/* line 51, ../../scss/styles.scss */
 .Grid-cell {
   flex: 1;
 }
 
-/* line 53, ../../scss/styles.scss */
+/* line 55, ../../scss/styles.scss */
 body:before {
   content: "";
   position: fixed;
@@ -72,7 +72,7 @@ body:before {
   z-index: 100;
 }
 
-/* line 68, ../../scss/styles.scss */
+/* line 70, ../../scss/styles.scss */
 body {
   background-color: none;
   background-size: cover;
@@ -80,19 +80,19 @@ body {
   margin: 20px;
 }
 
-/* line 76, ../../scss/styles.scss */
+/* line 78, ../../scss/styles.scss */
 .jumbotron {
   margin-top: 50px;
   margin-left: 100px;
   margin-right: 100px;
 }
 
-/* line 82, ../../scss/styles.scss */
+/* line 84, ../../scss/styles.scss */
 #artworkContainer {
   display: inline-block;
   position: relative;
   border: 0.5px solid #d0d0d0;
-  border-radius: 20px;
+  border-radius: 7px;
   padding: 20px 50px 50px 50px;
   background-color: #f0f0f0;
   opacity: 0.9;
@@ -101,17 +101,17 @@ body {
   min-height: 200px;
 }
 
-/* line 95, ../../scss/styles.scss */
+/* line 97, ../../scss/styles.scss */
 #artworkContainer h2 {
   text-align: center;
 }
 
-/* line 98, ../../scss/styles.scss */
+/* line 100, ../../scss/styles.scss */
 #artworkContainer h3 {
   text-align: center;
 }
 
-/* line 102, ../../scss/styles.scss */
+/* line 104, ../../scss/styles.scss */
 #artworkContainer a {
   font-size: 16px;
 }
@@ -127,7 +127,7 @@ body {
          padding-right: 50px;
          padding-left:50px;
          background-color:#f0f0f0;
-} 
+}
 
 .nav-tabs li a{
         font-size:15px;
@@ -141,19 +141,19 @@ body {
         margin-left: 20%;
     margin-right: 20%;
 }*/
-/* line 131, ../../scss/styles.scss */
+/* line 133, ../../scss/styles.scss */
 nav {
   display: inline-block;
   position: relative;
   /*margin-left: 36%;*/
 }
 
-/* line 137, ../../scss/styles.scss */
+/* line 139, ../../scss/styles.scss */
 .nav .navtabs {
   border-radius: 8px;
 }
 
-/* line 141, ../../scss/styles.scss */
+/* line 143, ../../scss/styles.scss */
 .nav-tabs {
   /*        display:inline-block;
           text-align:center;
@@ -164,7 +164,7 @@ nav {
           padding-right: 20px;*/
 }
 
-/* line 151, ../../scss/styles.scss */
+/* line 153, ../../scss/styles.scss */
 .menu {
   list-style: none;
   border-bottom: 0.1em solid Aquamarine;
@@ -172,33 +172,33 @@ nav {
   padding: 0 0 0.5em;
 }
 
-/* line 157, ../../scss/styles.scss */
+/* line 159, ../../scss/styles.scss */
 .nav-tabs li {
   float: none;
   display: inline-block;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
-/* line 164, ../../scss/styles.scss */
+/* line 166, ../../scss/styles.scss */
 .nav-tabs li a {
   font-size: 16px;
   background-color: white;
 }
 
-/* line 169, ../../scss/styles.scss */
+/* line 171, ../../scss/styles.scss */
 .nav-tabs a:hover {
   background-color: white;
 }
 
-/* line 172, ../../scss/styles.scss */
+/* line 174, ../../scss/styles.scss */
 .center-pills {
   display: inline-block;
   position: relative;
   top: 30px;
 }
 
-/* line 178, ../../scss/styles.scss */
+/* line 180, ../../scss/styles.scss */
 #view1 {
   margin: auto;
   width: 70%;
@@ -213,41 +213,41 @@ nav {
 
 /* Artwork & artist hover left right padding distance */
 @link__padding : 50px;
-/* line 193, ../../scss/styles.scss */
+/* line 195, ../../scss/styles.scss */
 #view1 a {
   padding-top: -30px;
 }
 
-/* line 196, ../../scss/styles.scss */
+/* line 198, ../../scss/styles.scss */
 #title {
   text-align: right;
 }
 
-/* line 199, ../../scss/styles.scss */
+/* line 201, ../../scss/styles.scss */
 #title:hover {
   padding-left: 50px;
   padding-right: 50px;
 }
 
-/* line 204, ../../scss/styles.scss */
+/* line 206, ../../scss/styles.scss */
 #artist {
   text-align: left;
 }
 
-/* line 207, ../../scss/styles.scss */
+/* line 209, ../../scss/styles.scss */
 #artist:hover {
   padding-left: 50px;
   padding-right: 50px;
 }
 
-/* line 212, ../../scss/styles.scss */
+/* line 214, ../../scss/styles.scss */
 .nav-tabs > li > a:hover {
   color: black;
   background-color: white;
   opacity: 1.0;
 }
 
-/* line 218, ../../scss/styles.scss */
+/* line 220, ../../scss/styles.scss */
 #bottom {
   display: inline-block;
   position: relative;
@@ -258,12 +258,12 @@ nav {
   font: black;
 }
 
-/* line 228, ../../scss/styles.scss */
+/* line 230, ../../scss/styles.scss */
 #bottom p {
   color: black;
 }
 
-/* line 232, ../../scss/styles.scss */
+/* line 234, ../../scss/styles.scss */
 #form__element {
   padding-left: 30px;
   padding-right: 30px;
@@ -272,11 +272,11 @@ nav {
 }
 
 /* From intense sierra */
-/* line 240, ../../scss/styles.scss */
+/* line 242, ../../scss/styles.scss */
 #productos .container {
   background-color: aliceblue;
   height: 100%;
-  border-radius: 25px;
+  border-radius: 7px;
   text-align: center;
   height: 100%;
   width: 130px;
@@ -284,36 +284,35 @@ nav {
   -webkit-box-shadow: 0px 15px 13px 0px rgba(0, 0, 0, 0.35);
   -moz-box-shadow: 0px 15px 13px 0px rgba(0, 0, 0, 0.35);
   box-shadow: 0px 15px 13px 0px rgba(0, 0, 0, 0.35);
-  border-radius: 25px;
 }
 
-/* line 254, ../../scss/styles.scss */
+/* line 255, ../../scss/styles.scss */
 #productos img {
-  border-radius: 15px;
+  border-radius: 5px;
   height: 120px;
   margin: 15px;
   border-top: solid black 1px;
   border-left: solid black 1px;
 }
 
-/* line 262, ../../scss/styles.scss */
+/* line 263, ../../scss/styles.scss */
 .artwork__locationBg {
   width: 130px;
   border: solid 1px;
-  border-bottom-right-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: 7px;
+  border-bottom-left-radius: 7px;
   display: table-cell;
   vertical-align: bottom;
 }
 
-/* line 270, ../../scss/styles.scss */
+/* line 271, ../../scss/styles.scss */
 p1 {
   font-size: 16px;
   color: cornflowerblue;
   text-shadow: none;
 }
 
-/* line 275, ../../scss/styles.scss */
+/* line 276, ../../scss/styles.scss */
 p2 {
   color: red;
 }
@@ -325,7 +324,7 @@ rounded to like this:;
     border-bottom-left-radius: 25px;
 */
 /* Location artwork bg styles */
-/* line 287, ../../scss/styles.scss */
+/* line 288, ../../scss/styles.scss */
 .locationAlign {
   position: absolute;
   bottom: 0;
@@ -334,50 +333,50 @@ rounded to like this:;
   bottom: 0;
 }
 
-/* line 294, ../../scss/styles.scss */
+/* line 295, ../../scss/styles.scss */
 .locationBg0 {
   background: #d9ffb3;
 }
 
-/* line 297, ../../scss/styles.scss */
+/* line 298, ../../scss/styles.scss */
 .locationBg1 {
   background: #b3ffd9;
 }
 
-/* line 300, ../../scss/styles.scss */
+/* line 301, ../../scss/styles.scss */
 .locationBg2 {
   background: #ffe5ff;
 }
 
-/* line 303, ../../scss/styles.scss */
+/* line 304, ../../scss/styles.scss */
 .locationBg3 {
   background: #e5e5ff;
 }
 
-/* line 306, ../../scss/styles.scss */
+/* line 307, ../../scss/styles.scss */
 .locationBg4 {
   background: #e5f2ff;
 }
 
 /* Data table */
-/* line 311, ../../scss/styles.scss */
+/* line 312, ../../scss/styles.scss */
 a {
   text-decoration: none;
 }
 
 /* Auth0 classes */
-/* line 316, ../../scss/styles.scss */
+/* line 317, ../../scss/styles.scss */
 .a0-mode {
   border-radius: 25px;
 }
 
 /* view 2 artist bio page */
-/* line 322, ../../scss/styles.scss */
+/* line 323, ../../scss/styles.scss */
 #skinName__text {
   color: Moccasin;
 }
 
-/* line 326, ../../scss/styles.scss */
+/* line 327, ../../scss/styles.scss */
 #bio::first-letter {
   font-size: 200%;
   color: Moccasin;
@@ -420,3 +419,18 @@ a {
 .a0-centrix {
   text-align-last: center !important;
 }*/
+.user-permissions-radio{
+  position: static !important;
+  opacity: 1 !important;
+}
+
+.user-permissions-table
+{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.user-permissions-table  ul
+{
+  text-align: left !important;
+}

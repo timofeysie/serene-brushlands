@@ -1,3 +1,5 @@
+$card-radius: 7px;
+$card-radius__img: 5px;
 
 .flex-container {
   display: -webkit-flex; /* Safari */
@@ -83,7 +85,7 @@ body {
         display:inline-block; 
         position: relative;
         border: 0.5px solid #d0d0d0;
-        border-radius: 20px;
+        border-radius: $card-radius;
         padding: 20px 50px 50px 50px;
         background-color: #f0f0f0;
         opacity: 0.9;
@@ -240,7 +242,7 @@ nav {
 #productos .container {
     background-color: aliceblue;
     height: 100%;
-    border-radius: 25px;
+    border-radius: $card-radius;
     text-align: center;
     height:100%;
     width: 130px;
@@ -248,11 +250,10 @@ nav {
     -webkit-box-shadow: 0px 15px 13px 0px rgba(0,0,0,0.35);
     -moz-box-shadow: 0px 15px 13px 0px rgba(0,0,0,0.35);
     box-shadow: 0px 15px 13px 0px rgba(0,0,0,0.35);
-    border-radius: 25px;
 }
 
 #productos img {
-  border-radius: 15px;
+  border-radius: $card-radius__img;
   height:120px;
   margin: 15px;
   border-top: solid black 1px;
@@ -262,8 +263,8 @@ nav {
 .artwork__locationBg {
   width: 130px;
   border: solid 1px;
-  border-bottom-right-radius: 25px;
-  border-bottom-left-radius: 25px;
+  border-bottom-right-radius: $card-radius;
+  border-bottom-left-radius: $card-radius;
   display: table-cell; vertical-align: bottom;
 }
 

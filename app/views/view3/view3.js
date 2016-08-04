@@ -11,6 +11,7 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
       
     $scope.viewModel = {};
     var paintingNo = $routeParams.paintingNo;
+    $scope.viewModel.imageFile = 'assets/images/spinner.gif';
     var uploadedArtworksRef =new Firebase($rootScope.firebaseUri+"/uploaded-artworks/" + paintingNo);
     
     uploadedArtworksRef.on("value", function(data){

@@ -15,7 +15,8 @@
     "angular-cookies": "^1.5.5",
     "auth0-lock": "^9.0.3",
     "a0-angular-storage": "^0.0.15",
-    "font-awesome": "^4.6.1"
+    "font-awesome": "^4.6.1",
+    "angular-acl": "~0.1.5"
   },
   "resolutions": {
     "angular": "~1.4.0"
