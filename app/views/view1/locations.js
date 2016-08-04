@@ -6,15 +6,18 @@
  */
 angular.module('artApp.locations', ['ngRoute'])
 
-.controller('LocationsCtrl', ['$scope', '$http','$rootScope',
-  function($scope, $http, $rootScope) { 
+.controller('LocationsCtrl', ['$scope', '$http','$rootScope', '$routeParams', '$location',
+  function($scope, $http, $rootScope, $routeParams, $location) { 
 	var viewModel = this;
   $scope.officelocations = [];
   $scope.selectedLocation = "";
     $scope.artists = [];
     $scope.selectedArtist = "";
-  
-  var newJsonArray = [];
+    if ($routeParams.artist) {
+        $scope.selectedArtist = $routeParams.artist;
+    }
+
+      var newJsonArray = [];
   $scope.spinner = true;
   var uploadedArtworksRef =new Firebase($rootScope.firebaseUri+"/uploaded-artworks");
   //$http.get('/artworks').success(function(data) {
