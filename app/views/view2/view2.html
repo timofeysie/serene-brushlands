@@ -4,18 +4,22 @@
      <div class="lab text-center">
       <img ng-show="viewModel.spinner" ng-src="assets/images/spinner.gif" style="background:none">
       <div id="text" ng-hide="viewModel.spinner">
+          <div class="row">
+              <div class="col-md-12 text-center">
+                  <span id="artist"
+                        style="color: Moccasin;"
+                        class="button button-pill button-highlight">
+                      {{viewModel.name}}</span>
+                  <br/>
+                  <span id="title"
+                        ng-if ="viewModel.DOB"
+                        style="color: Moccasin;"
+                        class="button button-pill button-highlight">
+                      {{viewModel.DOB}}</span>
+              </div>
+          </div>
         <div class="row">
-          <span id="artist"
-            style="color: Moccasin;"
-            class="col-md-6 button button-pill button-highlight pull-left">
-            {{viewModel.name}}</span>
-          <span id="title"
-            style="color: Moccasin;"
-            class="col-md-6 pull-right button button-pill button-highlight">
-            {{viewModel.DOB}}</span>
-        </div>
-        <div class="row">
-          <div class="col-md-12">
+          <div class="col-md-12 text-center">
             <p ng-if="viewModel.skinName">
               <span id="SkinNameSkinName"
                 class="button button-pill">Skin Name</span>
