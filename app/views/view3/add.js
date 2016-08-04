@@ -13,8 +13,8 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
   });
 }])
 
-.controller('addCtrl', ['$scope','$rootScope','Upload', '$routeParams', '$http','$timeout','$firebaseObject',
-  function($scope,$rootScope, Upload, $routeParams, $http, $timeout,$firebaseObject) {
+.controller('addCtrl', ['$scope','$rootScope','Upload', '$routeParams', '$http', '$q', '$timeout','$firebaseObject',
+  function($scope,$rootScope, Upload, $routeParams, $http, $q, $timeout,$firebaseObject) {
   var viewModel = this;
   // this is the argument passed in by the ng-route as configured in the app.js
   $scope.isBackupSuccess = false;
@@ -53,6 +53,7 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
 
   function saveArtistsToFireBase(uniqueArtistsArray)
   {
+      var d = $q.defer();
       var x = 0;
 
       var loopArray = function(uniqueArtistsArray) {
@@ -87,13 +88,29 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
 				  "AASDLink":"",
 				  "WikiLink":""
                 }
+              },
+              function(data){
+                  d.resolve(data);
               }
             );
           }
         });
         callback();
+        return d.promise;
     }
   }
+  
+    function saveSingleArtwork(data) {
+
+        var d = $q.defer();
+        var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks/" + data.assetRefNo);
+
+        uploadedArtworksRef.set(data, function(){
+            d.resolve();
+        });
+        
+        return d.promise;
+    }
 
   $scope.uploadFiles = function(file, errFiles) {
     $scope.f = file;
@@ -107,25 +124,31 @@ angular.module('artApp.add', ['ngRoute','ngFileUpload','firebase'])
 
         file.upload.then(function (response) {
             $timeout(function () {
+                
+                var promises = []
                 var uniqueArtistsArray = [];
 
                 for(var i=0;i<response.data.length;i++)
                 {
-                  var uploadedArtworksRef =new Firebase($rootScope.firebaseUri+"/uploaded-artworks/"+response.data[i].assetRefNo);
 
                   if(uniqueArtistsArray.indexOf(response.data[i].artist) == -1)
                   {
                     uniqueArtistsArray.push(response.data[i].artist);
                   }
-                  uploadedArtworksRef.set(response.data[i]);
+                  
+                  promises.push(saveSingleArtwork(response.data[i]));
+                  
                 }
 
-                $scope.isBackupSuccess = false;
+                promises.push(saveArtistsToFireBase(uniqueArtistsArray));
+                
+                $q.all(promises)
+                        .then(function (data) {
+                            $scope.isBackupSuccess = false;
+                            file.result = response.data;
+                            $scope.showStartedToProcess = false;
+                        });
 
-                saveArtistsToFireBase(uniqueArtistsArray);
-
-                file.result = response.data;
-                $scope.showStartedToProcess = false;
             });
         }, function (response) {
             if (response.status > 0)
