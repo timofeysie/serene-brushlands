@@ -41,34 +41,10 @@ AclServiceProvider.config(myConfig);
   .when('/locations', {
     templateUrl: 'views/view1/locations.html',
     requiresLogin: true,
-    resolve : {
-        'acl' : ['$q', 'AclService', function($q, AclService){
-          if(AclService.can('admin')){
-            // Has proper permissions
-            return true;
-          } else {
-            // Does not have permission
-            alert("Does not have permissions");
-            return $q.reject('Unauthorized');
-          }
-        }]
-      }
   })
   .when('/locations/:artist', {
     templateUrl: 'views/view1/locations.html',
     requiresLogin: true,
-    resolve : {
-        'acl' : ['$q', 'AclService', function($q, AclService){
-          if(AclService.can('admin')){
-            // Has proper permissions
-            return true;
-          } else {
-            // Does not have permission
-            alert("Does not have permissions");
-            return $q.reject('Unauthorized');
-          }
-        }]
-      }
   })
   .when('/data', {
     templateUrl: 'views/view1/data.html',
