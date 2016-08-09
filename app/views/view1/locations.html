@@ -2,8 +2,8 @@
 <div id="outer">
   <div ng-controller="LocationsCtrl as controller">
     <br/>
-    <label>Filter by office location: </label>
-    <select ng-model="selectedLocation"
+    <label ng-show="isAdmin">Filter by office location: </label>
+    <select ng-show="isAdmin" ng-model="selectedLocation"
       class="button button-3d button-pill">
         <option value="">All</option>
       <option ng-repeat="officelocation in officelocations"
@@ -34,7 +34,7 @@
               <div><p1>{{artwork.assetRefNo}}.</p1>{{artwork.title}}
                 <span ng-show="artwork.inspected"><i class="fa fa-check-circle"></i></span></div>
               <div ng-show="artwork.artist">by {{artwork.artist}}</div>
-              <div ng-class="'' == selectedLocation ? 'all-locations-same' : ''" class="{{artwork.locationBg}} artwork__locationBg {{allArtWorksClass}}"
+              <div ng-show="true" ng-class="'' == selectedLocation ? 'all-locations-same' : ''" class="{{artwork.locationBg}} artwork__locationBg {{allArtWorksClass}}"
                 style="display: table-cell; vertical-align: bottom;">{{artwork.officeLocation}}</div>
             </div>
           </div>
