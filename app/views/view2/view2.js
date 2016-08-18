@@ -57,8 +57,28 @@ angular.module('artApp.view2', ['ngRoute','firebase'])
             $scope.viewModel.DOB = retrivedArtistData.DOB;
             $scope.viewModel.AASDLink = $scope.getAASDLink($scope.viewModel);
             $scope.viewModel.wikiLink = $scope.getWikiLink($scope.viewModel);
+            $scope.viewModel.AASDLinkFound = false;
+            $scope.viewModel.wikiLinkFound = false;
             
             $scope.editModel = angular.copy($scope.viewModel);
+
+            $http({method:"GET", url:"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22"+$scope.viewModel.AASDLink+"%22&format=json"})
+            .then(function(response){
+                if(response.data.query.results)
+                {
+                    $scope.viewModel.AASDLinkFound = true;
+                }
+            });
+
+            $http({method:"GET", url:"http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22"+$scope.viewModel.wikiLink+"%22&format=json"})
+            .then(function(response){
+               if(response.data.query.results)
+                {
+                    $scope.viewModel.wikiLinkFound = true;
+                }
+            });
+
+            
         } else {
             $scope.updatedMessage = {status:true, msg:"No data available"};
         }
