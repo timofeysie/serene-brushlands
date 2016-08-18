@@ -4,62 +4,106 @@
      <div class="lab text-center">
       <img ng-show="viewModel.spinner" ng-src="assets/images/spinner.gif" style="background:none">
       <div id="text" ng-hide="viewModel.spinner">
-          <div class="row">
-              <div class="col-md-12 text-center">
-                  <span id="artist"
-                        style="color: Moccasin;"
-                        class="button button-pill button-highlight">
-                      {{viewModel.name}}</span>
-                  <br/>
-                  <span id="title"
-                        ng-if ="viewModel.DOB"
-                        style="color: Moccasin;"
-                        class="button button-pill button-highlight">
-                      {{viewModel.DOB}}</span>
-              </div>
-          </div>
         <div class="row">
-          <div class="col-md-12 text-center">
-            <p ng-if="viewModel.skinName">
-              <span id="SkinNameSkinName"
-                class="button button-pill">Skin Name</span>
-              <span class="button-pill button-highlight"
-                id="skinName__text">{{viewModel.skinName}}</span>
-            </p>
-            <p ng-if="viewModel.language">
-              <span class="button button-pill">Language</span>
-                <span class="button button-pill button-highlight">{{viewModel.language}}</span>
-            </p>
-            <p ng-if="viewModel.region">
-              <span class="button button-pill">Region</span>
-              <span class="button button-pill button-highlight">{{viewModel.region}}</span>
-            </p>
-            <p ng-if="viewModel.dreaming">
-              <span class="button button-pill">Dreaming</span>
-              <span class="button button-pill button-highlight">{{viewModel.dreaming}}</span>
-            </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p id="artist" style="margin:30px;" class="button-pill button-highlight">
-              <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{viewModel.bio.title}}</span>
+          <div class="col-md-12">
+            <table class="artists-info-table">
+              <tr>
+                <td>Name</td>
+                <td>
+                  <p style="text-indent: 50px;" id="bio">
+              <span>{{viewModel.name}}</span>
+                  </p>
+              </td>
+              </tr>
+              <tr ng-if ="viewModel.DOB">
+                <td>DOB</td>
+                <td>
+                  <p style="text-indent: 50px;" id="bio">
+              <span>{{viewModel.DOB}}</span>
+                  </p>
+              </td>
+              </tr>
+              <tr ng-if="viewModel.skinName">
+                <td>Skin Name</td>
+                <td>
+                  <p style="text-indent: 50px;" id="bio">
+              <span>{{viewModel.skinName}}</span>
+                  </p>
+              </td>
+              </tr>
+              <tr ng-if="viewModel.language">
+                <td>Language</td>
+                <td>
+                 <p style="text-indent: 50px;" id="bio">
+              <span>{{viewModel.language}}</span>
+                  </p>
+              </td>
+              </tr>
+              <tr ng-if="viewModel.region">
+                <td>Region</td>
+                <td>
+                  <p style="text-indent: 50px;" id="bio">
+              <span>{{viewModel.region}}</span>
+                  </p>
+              </td>
+              </tr>
+              <tr ng-if="viewModel.dreaming">
+                <td>Dreaming</td>
+                <td>
+                  <p style="text-indent: 50px;" id="bio">
+              <span>{{viewModel.dreaming}}</span>
+                  </p>
+              </td>
+              </tr>
+              <tr>
+                <td>Bio Title</td>
+                <td>
+                  <p style="text-indent: 50px;" id="bio">
+              <span ng-hide="editModeEnabled">{{viewModel.bio.title === "" ? "No Data" : viewModel.bio.title}}</span>
               <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.title"/>
               </p>
-              <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{viewModel.bio.body}}</span>
+              </td>
+              </tr>
+              <tr>
+                <td>Bio Body</td>
+                <td>
+                  <p style="text-indent: 50px;" id="bio">
+              <span ng-hide="editModeEnabled">{{viewModel.bio.body === "" ? "No Data" : viewModel.bio.body}}</span>
               <textarea ng-show="editModeEnabled" data-ng-model="editModel.bio.body" >{{editModel.bio.body}}</textarea>
               </p>
-			  <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{viewModel.bio.AASDLink}}</span>
+              </td>
+              </tr>
+               <tr>
+                <td>AASD Link</td>
+                <td>
+                  <p style="text-indent: 50px;" id="bio">
+              <a href={{viewModel.AASDLink}} target="_blank" ng-hide="editModeEnabled">
+                <span>{{viewModel.bio.AASDLink === "" ? "AASD Link Empty" : viewModel.bio.AASDLink}}</span>
+              </a>
               <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.AASDLink"/>
               </p>
-			  <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{viewModel.bio.WikiLink}}</span>
+              </td>
+              </tr>
+              <tr>
+                <td>Wiki Link</td>
+                <td>
+                  			  <p style="text-indent: 50px;" id="bio">
+               <a href={{viewModel.wikiLink}} target="_blank" ng-hide="editModeEnabled">
+                 <span>{{viewModel.bio.WikiLink === "" ? "WiKi Link Empty" : viewModel.bio.WikiLink}}</span>
+               </a>
               <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.WikiLink"/>
               </p>
-              <button type="button" ng-hide="editModeEnabled" ng-click="editModeEnabled = true" class="button-pill button-highlight">
+              </td>
+              </tr>
+              <tr>
+                <td colspan="2" id="action-bar">
+                  
+                    <a href="#/locations/{{viewModel.name}}">
+                    <button type="button" class="button-pill button-highlight">
+                       View Artist's Works
+                  </button>
+                </a>
+                  <button type="button" ng-hide="editModeEnabled" ng-click="editModeEnabled = true" class="button-pill button-highlight">
                 Click to edit
               </button>
               <button ng-show="editModeEnabled" type="button" ng-click="saveTitleAndBody(editModel)" class="button-pill button-highlight">
@@ -68,36 +112,12 @@
               <button ng-show="editModeEnabled" type="button" ng-click="editModeEnabled = false" class="button-pill button-highlight">
                 Cancel
               </button> 
-            </p> 
+                </td>
+              </tr>
+            </table>
           </div> 
           <span ng-show="updatedMessage.status">{{updatedMessage.msg}}</span>
         </div>
-		<div class="row">
-		  <div class="col-md-12 text-center">
-		    <p id="link">
-                <a href={{viewModel.AASDLink}} target="_blank">
-                    <span id="AASDLink"
-                          style="color: Moccasin;"
-                          class="button button-pill button-highlight">
-                        AASD Link</span>
-                </a>
-                <br>
-                <a href={{viewModel.wikiLink}} target="_blank">
-                    <span id="wikiLinks"
-                          style="color: Moccasin;"
-                          class="button button-pill button-highlight">
-                        Wiki Link</span>
-                </a>
-                <br/>
-                <a href="#/locations/{{viewModel.name}}">
-                    <span id="wikiLinks"
-                          style="color: Moccasin;"
-                          class="button button-pill button-highlight">
-                        Artist's Work</span>
-                </a>
-		    </p>
-		  </div>
-		</div>
       </div>
     </div>
   </div>
