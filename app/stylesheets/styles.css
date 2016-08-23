@@ -434,3 +434,17 @@ a {
 {
   text-align: left !important;
 }
+
+.artists-info-table
+{
+  margin-left:auto; 
+  margin-right:auto;
+  text-align: left;
+  border: 1px solid #000000;
+}
+
+.artists-info-table #action-bar
+{
+  padding: 10px 0px;
+  background-color: aliceblue;
+}
