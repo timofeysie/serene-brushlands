@@ -1,28 +1,28 @@
 <navbar></navbar>
 <div class="user-permissions-view">
-  <h2>User Permissions</h2>
-  <table class="user-permissions-table">
-    <thead>
-      <tr>
-        <th>Email</th>
-        <th>Role</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr data-ng-repeat="(key,values) in roleBasedPermissions" ng-if="key!='userRoles'">
-        <td>{{key}}</td>
-        <td>
-          <ul>
-            <li data-ng-repeat="role in roles">
-              <input type="radio" name="{{key}}" data-ng-model="userRoles[key]" data-ng-checked="setDefaultCheck(role,values[0])" value="{{role}}" class="user-permissions-radio">
-            {{role}}
-            </li>
-          </ul>
-      </td>
-      </tr>
-    </tbody>
-  </table>
-  <button type="button" class="button button-3d-primary button-pill" ng-click="saveUserRoles()">
-          Save Changes
-  </button>
+	<h2>User Permissions</h2>
+	<table class="user-permissions-table">
+		<thead>
+			<tr>
+				<th>Email</th>
+				<th>Role</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr data-ng-repeat="(key, values) in roleBasedPermissions" ng-if="key != 'userRoles'">
+				<td>{{key}}</td>
+				<td>
+					<ul>
+						<li data-ng-repeat="role in roles">
+							<input type="radio" name="{{key}}" data-ng-model="userRoles[key]" data-ng-checked="setDefaultCheck(role, values[0])" value="{{role}}" class="user-permissions-radio">
+							{{role}}
+						</li>
+					</ul>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<button type="button" class="button button-3d-primary button-pill" ng-click="saveUserRoles()">
+		Save Changes
+	</button>
 </div>

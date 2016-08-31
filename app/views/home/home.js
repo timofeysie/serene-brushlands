@@ -3,32 +3,31 @@
  * @class home.HomeCtrl
  * @description Controller for home.
  */
-angular.module( 'artApp.home', [
-'auth0'
+angular.module('artApp.home', [
+	'auth0'
 ])
-.controller( 'HomeCtrl', function HomeController( $scope, auth, $http, $location, store ) {
+	.controller('HomeCtrl', function HomeController($scope, auth, $http, $location, store) {
 
-  $scope.auth = auth;
+		$scope.auth = auth;
 
-  $scope.callApi = function() {
-    // Just call the API as you'd do using $http
-    $http({
-      url: 'http://localhost:3001/secured/ping',
-      method: 'GET'
-    }).then(function() {
-      alert("We got the secured data successfully");
-    }, function(response) {
-      if (response.status == 0) {
-        alert("Please download the API seed so that you can call it.");
-      }
-      else {
-        alert(response.data);
-      }
-    });
-  }
+		$scope.callApi = function () {
+			// Just call the API as you'd do using $http
+			$http({
+				url: 'http://localhost:3001/secured/ping',
+				method: 'GET'
+			}).then(function () {
+				alert("We got the secured data successfully");
+			}, function (response) {
+				if (response.status == 0) {
+					alert("Please download the API seed so that you can call it.");
+				} else {
+					alert(response.data);
+				}
+			});
+		}
 
-  $scope.logout = function() {
-    auth.signout();
-  }
+		$scope.logout = function () {
+			auth.signout();
+		}
 
-});
+	});

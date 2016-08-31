@@ -11,3 +11,4 @@ node_modules
 uploads/uploaded-artworks.json
 debug.html
 npm-debug.log
+/nbproject/private/

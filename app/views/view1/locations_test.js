@@ -1,10 +1,10 @@
 'use strict';
-describe('LocationsCtrl.locations', function(){
+describe('LocationsCtrl.locations', function () {
 	beforeEach(module('artApp.locations'));
-	describe('get /sample result', function(){
-		it('should be added to scope', inject(function($rootScope, 
-				$controller, 
-				$httpBackend) {
+	describe('get /sample result', function () {
+		it('should be added to scope', inject(function ($rootScope,
+			$controller,
+			$httpBackend) {
 			var scope = $rootScope;
 			$httpBackend
 				.when('GET', '/sample')
