@@ -2,42 +2,42 @@ $card-radius: 7px;
 $card-radius__img: 5px;
 
 .flex-container {
-  display: -webkit-flex; /* Safari */
-  display: flex; 
-  flex-direction: row; 
-  flex-wrap: wrap; 
-  justify-content:         
-  flex-start;
-  align-content:         
-  space-around;
+	display: -webkit-flex; /* Safari */
+	display: flex; 
+	flex-direction: row; 
+	flex-wrap: wrap; 
+	justify-content:         
+		flex-start;
+	align-content:         
+		space-around;
 }
 
 .flex-item {
-  -webkit-order: 1; /* Safari */
-  order:         1;
-  flex-grow:     0;
+	-webkit-order: 1; /* Safari */
+	order:         1;
+	flex-grow:     0;
 }
 
 #ryans-tree-logo {
-  margin-left: -10px;
-  margin-top: 20px;
-  border-radius: 25px;
-  box-shadow: 0px 10px 31px -10px rgba(0,0,0,0.75);
-/*            -webkit-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
-             -moz-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
-                  box-shadow: 0px 5px 18px rgba(0,0,0,.8);*/
+	margin-left: -10px;
+	margin-top: 20px;
+	border-radius: 25px;
+	box-shadow: 0px 10px 31px -10px rgba(0,0,0,0.75);
+	/*            -webkit-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
+				 -moz-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
+					  box-shadow: 0px 5px 18px rgba(0,0,0,.8);*/
 }
 
 #navbar__button {
-  position: relative; 
-  left: 15px;
+	position: relative; 
+	left: 15px;
 }
 
 #gooeyNav {
-  position: relative; 
-  top: -100; 
-  z-index:100; 
-  left: 25px;
+	position: relative; 
+	top: -100; 
+	z-index:100; 
+	left: 25px;
 }
 input[type=checkbox] + label:before, input[type=radio] + label:before { 
     content: none;
@@ -45,53 +45,53 @@ input[type=checkbox] + label:before, input[type=radio] + label:before {
 
 /* Basic flexbox grid (not used) */
 .Grid {
-  display: flex;
+	display: flex;
 }
 
 .Grid-cell {
-  flex: 1;
+	flex: 1;
 }
 
 body:before {
-          content: "";
-          position: fixed;
-          top: -10px;
-          left: 0;
-          width: 100%;
-          height: 10px;
+	content: "";
+	position: fixed;
+	top: -10px;
+	left: 0;
+	width: 100%;
+	height: 10px;
 
-          -webkit-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
-             -moz-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
-                  box-shadow: 0px 5px 18px rgba(0,0,0,.8);
+	-webkit-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
+	-moz-box-shadow: 0px 5px 18px rgba(0,0,0,.8);
+	box-shadow: 0px 5px 18px rgba(0,0,0,.8);
 
-          z-index: 100;
+	z-index: 100;
 }
 
 body {
     //background-image: url("assets/anangu_art_brought_to_book_image2.png");
     background-color: none;
-        background-size:cover;
-        background-attachment: fixed;
-        margin: 20px;
+	background-size:cover;
+	background-attachment: fixed;
+	margin: 20px;
 }
 
 .jumbotron{
-        margin-top: 50px;
-        margin-left: 100px;
-        margin-right: 100px;
+	margin-top: 50px;
+	margin-left: 100px;
+	margin-right: 100px;
 }
 
 #artworkContainer {
-        display:inline-block; 
-        position: relative;
-        border: 0.5px solid #d0d0d0;
-        border-radius: $card-radius;
-        padding: 20px 50px 50px 50px;
-        background-color: #f0f0f0;
-        opacity: 0.9;
-        top: 30px;
-        text-align: center;
-        min-height:200px;
+	display:inline-block; 
+	position: relative;
+	border: 0.5px solid #d0d0d0;
+	border-radius: $card-radius;
+	padding: 20px 50px 50px 50px;
+	background-color: #f0f0f0;
+	opacity: 0.9;
+	top: 30px;
+	text-align: center;
+	min-height:200px;
 }
 
 #artworkContainer h2{
@@ -102,7 +102,7 @@ body {
 }
 
 #artworkContainer a {
-        font-size: 16px;
+	font-size: 16px;
 }
 /*
 .navbar-nav li {
@@ -132,44 +132,44 @@ body {
 
 nav {
     display: inline-block;
-        position: relative;
-        /*margin-left: 36%;*/
-    
+	position: relative;
+	/*margin-left: 36%;*/
+
 }
 .nav .navtabs {
     border-radius: 8px;
 }
 
 .nav-tabs {
-/*        display:inline-block;
-        text-align:center;
-        border-radius:4px;
-        background-color:#f0f0f0;
-        opacity:0.6;
-        padding-left: 20px;
-        padding-right: 20px;*/
+	/*        display:inline-block;
+			text-align:center;
+			border-radius:4px;
+			background-color:#f0f0f0;
+			opacity:0.6;
+			padding-left: 20px;
+			padding-right: 20px;*/
 }
 
 .menu {
-  list-style: none;
-  border-bottom: 0.1em solid Aquamarine;
-  margin-bottom: 2em;
-  padding: 0 0 0.5em;
+	list-style: none;
+	border-bottom: 0.1em solid Aquamarine;
+	margin-bottom: 2em;
+	padding: 0 0 0.5em;
 }
 .nav-tabs li {
-   float:none;
-   display:inline-block;
-   padding-left: 20px;
-   padding-right: 20px;
+	float:none;
+	display:inline-block;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
 .nav-tabs li a{
-  font-size:16px;
-  background-color: white;
+	font-size:16px;
+	background-color: white;
 }
 
 .nav-tabs a:hover{
-   background-color: white;
+	background-color: white;
 }
 .center-pills {
     display: inline-block;
@@ -178,16 +178,16 @@ nav {
 }
 
 #view1 {
-  margin: auto;
-  width: 70%;
-  border: 0.5px 
-  solid #d0d0d0;
-  border-radius: 15px;
-  padding: 10%;
-  background-color: #f0f0f0;
-  opacity: 0.9;
-  margin-top: 20px;
-  min-height:200px;
+	margin: auto;
+	width: 70%;
+	border: 0.5px 
+		solid #d0d0d0;
+	border-radius: 15px;
+	padding: 10%;
+	background-color: #f0f0f0;
+	opacity: 0.9;
+	margin-top: 20px;
+	min-height:200px;
 }
 
 /* Artwork & artist hover left right padding distance */
@@ -196,19 +196,19 @@ nav {
     padding-top: -30px;
 }
 #title {
-        text-align: right;
+	text-align: right;
 }
 #title:hover {
-  padding-left: 50px;
-  padding-right: 50px;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 
 #artist {
-        text-align: left;
+	text-align: left;
 }
 #artist:hover {
-  padding-left: 50px;
-  padding-right: 50px;
+	padding-left: 50px;
+	padding-right: 50px;
 }
 
 .nav-tabs > li > a:hover {
@@ -218,13 +218,13 @@ nav {
 }
 
 #bottom {
-        display: inline-block;
-        position: relative;
-        text-align:center;
-        padding: 40px;
-        top: 80px;
-        left: 70px;
-        font: black;
+	display: inline-block;
+	position: relative;
+	text-align:center;
+	padding: 40px;
+	top: 80px;
+	left: 70px;
+	font: black;
 }
 
 #bottom p{
@@ -253,19 +253,19 @@ nav {
 }
 
 #productos img {
-  border-radius: $card-radius__img;
-  height:120px;
-  margin: 15px;
-  border-top: solid black 1px;
-  border-left: solid black 1px;
+	border-radius: $card-radius__img;
+	height:120px;
+	margin: 15px;
+	border-top: solid black 1px;
+	border-left: solid black 1px;
 }
 
 .artwork__locationBg {
-  width: 130px;
-  border: solid 1px;
-  border-bottom-right-radius: $card-radius;
-  border-bottom-left-radius: $card-radius;
-  display: table-cell; vertical-align: bottom;
+	width: 130px;
+	border: solid 1px;
+	border-bottom-right-radius: $card-radius;
+	border-bottom-left-radius: $card-radius;
+	display: table-cell; vertical-align: bottom;
 }
 
 p1 {
@@ -286,42 +286,42 @@ rounded to like this:;
 
 /* Location artwork bg styles */
 .locationAlign {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  position: absolute;
-  bottom: 0;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	position: absolute;
+	bottom: 0;
 }
 .locationBg0 {
-  background: #d9ffb3;
+	background: #d9ffb3;
 }
 .locationBg1 {
-  background: #b3ffd9;
+	background: #b3ffd9;
 }
 .locationBg2 {
-  background: #ffe5ff;
+	background: #ffe5ff;
 }
 .locationBg3 {
-  background: #e5e5ff;
+	background: #e5e5ff;
 }
 .locationBg4 {
-  background: #e5f2ff;
+	background: #e5f2ff;
 }
 
 /* Data table */
 a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 /* Auth0 classes */
 .a0-mode {
-  border-radius: 25px;
+	border-radius: 25px;
 }
 
 
 /* view 2 artist bio page */
 #skinName__text {
-  color: Moccasin;
+	color: Moccasin;
 }
 
 #bio::first-letter { 

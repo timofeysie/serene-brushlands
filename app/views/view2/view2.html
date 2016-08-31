@@ -1,124 +1,124 @@
 <navbar></navbar>
 <div ng-controller="View2Ctrl as controller">
-  <div class="container">
-     <div class="lab text-center">
-      <img ng-show="viewModel.spinner" ng-src="assets/images/spinner.gif" style="background:none">
-      <div id="text" ng-hide="viewModel.spinner">
-        <div class="row">
-          <div class="col-md-12">
-            <table class="artists-info-table">
-              <tr>
-                <td>Name</td>
-                <td>
-                  <p style="text-indent: 50px;" id="bio">
-              <span>{{viewModel.name}}</span>
-                  </p>
-              </td>
-              </tr>
-              <tr ng-if ="viewModel.DOB">
-                <td>DOB</td>
-                <td>
-                  <p style="text-indent: 50px;" id="bio">
-              <span>{{viewModel.DOB}}</span>
-                  </p>
-              </td>
-              </tr>
-              <tr ng-if="viewModel.skinName">
-                <td>Skin Name</td>
-                <td>
-                  <p style="text-indent: 50px;" id="bio">
-              <span>{{viewModel.skinName}}</span>
-                  </p>
-              </td>
-              </tr>
-              <tr ng-if="viewModel.language">
-                <td>Language</td>
-                <td>
-                 <p style="text-indent: 50px;" id="bio">
-              <span>{{viewModel.language}}</span>
-                  </p>
-              </td>
-              </tr>
-              <tr ng-if="viewModel.region">
-                <td>Region</td>
-                <td>
-                  <p style="text-indent: 50px;" id="bio">
-              <span>{{viewModel.region}}</span>
-                  </p>
-              </td>
-              </tr>
-              <tr ng-if="viewModel.dreaming">
-                <td>Dreaming</td>
-                <td>
-                  <p style="text-indent: 50px;" id="bio">
-              <span>{{viewModel.dreaming}}</span>
-                  </p>
-              </td>
-              </tr>
-              <tr>
-                <td>Bio Title</td>
-                <td>
-                  <p style="text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{viewModel.bio.title === "" ? "No Data" : viewModel.bio.title}}</span>
-              <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.title"/>
-              </p>
-              </td>
-              </tr>
-              <tr>
-                <td>Bio Body</td>
-                <td>
-                  <p style="text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{viewModel.bio.body === "" ? "No Data" : viewModel.bio.body}}</span>
-              <textarea ng-show="editModeEnabled" data-ng-model="editModel.bio.body" >{{editModel.bio.body}}</textarea>
-              </p>
-              </td>
-              </tr>
-               <tr>
-                <td>AASD Link</td>
-                <td>
-                  <p style="text-indent: 50px;" id="bio">
-              <a href={{viewModel.AASDLink}} target="_blank" ng-hide="editModeEnabled">
-                <span>{{viewModel.bio.AASDLink === "" ? "AASD Link Empty" : viewModel.bio.AASDLink}}</span>
-              </a>
-              <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.AASDLink"/>
-              </p>
-              </td>
-              </tr>
-              <tr>
-                <td>Wiki Link</td>
-                <td>
-                  			  <p style="text-indent: 50px;" id="bio">
-               <a href={{viewModel.wikiLink}} target="_blank" ng-hide="editModeEnabled">
-                 <span>{{viewModel.bio.WikiLink === "" ? "WiKi Link Empty" : viewModel.bio.WikiLink}}</span>
-               </a>
-              <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.WikiLink"/>
-              </p>
-              </td>
-              </tr>
-              <tr>
-                <td colspan="2" id="action-bar">
-                  
-                    <a href="#/locations/{{viewModel.name}}">
-                    <button type="button" class="button-pill button-highlight">
-                       View Artist's Works
-                  </button>
-                </a>
-                  <button type="button" ng-hide="editModeEnabled" ng-click="editModeEnabled = true" class="button-pill button-highlight">
-                Click to edit
-              </button>
-              <button ng-show="editModeEnabled" type="button" ng-click="saveTitleAndBody(editModel)" class="button-pill button-highlight">
-                Save
-              </button>
-              <button ng-show="editModeEnabled" type="button" ng-click="editModeEnabled = false" class="button-pill button-highlight">
-                Cancel
-              </button> 
-                </td>
-              </tr>
-            </table>
-          </div> 
-          <span ng-show="updatedMessage.status">{{updatedMessage.msg}}</span>
-        </div>
-      </div>
-    </div>
-  </div>
+	<div class="container">
+		<div class="lab text-center">
+			<img ng-show="viewModel.spinner" ng-src="assets/images/spinner.gif" style="background:none">
+			<div id="text" ng-hide="viewModel.spinner">
+				<div class="row">
+					<div class="col-md-12">
+						<table class="artists-info-table">
+							<tr>
+								<td>Name</td>
+								<td>
+									<p style="text-indent: 50px;" id="bio">
+										<span>{{viewModel.name}}</span>
+									</p>
+								</td>
+							</tr>
+							<tr ng-if ="viewModel.DOB">
+								<td>DOB</td>
+								<td>
+									<p style="text-indent: 50px;" id="bio">
+										<span>{{viewModel.DOB}}</span>
+									</p>
+								</td>
+							</tr>
+							<tr ng-if="viewModel.skinName">
+								<td>Skin Name</td>
+								<td>
+									<p style="text-indent: 50px;" id="bio">
+										<span>{{viewModel.skinName}}</span>
+									</p>
+								</td>
+							</tr>
+							<tr ng-if="viewModel.language">
+								<td>Language</td>
+								<td>
+									<p style="text-indent: 50px;" id="bio">
+										<span>{{viewModel.language}}</span>
+									</p>
+								</td>
+							</tr>
+							<tr ng-if="viewModel.region">
+								<td>Region</td>
+								<td>
+									<p style="text-indent: 50px;" id="bio">
+										<span>{{viewModel.region}}</span>
+									</p>
+								</td>
+							</tr>
+							<tr ng-if="viewModel.dreaming">
+								<td>Dreaming</td>
+								<td>
+									<p style="text-indent: 50px;" id="bio">
+										<span>{{viewModel.dreaming}}</span>
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td>Bio Title</td>
+								<td>
+									<p style="text-indent: 50px;" id="bio">
+										<span ng-hide="editModeEnabled">{{viewModel.bio.title === "" ? "No Data" : viewModel.bio.title}}</span>
+										<input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.title"/>
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td>Bio Body</td>
+								<td>
+									<p style="text-indent: 50px;" id="bio">
+										<span ng-hide="editModeEnabled">{{viewModel.bio.body === "" ? "No Data" : viewModel.bio.body}}</span>
+										<textarea ng-show="editModeEnabled" data-ng-model="editModel.bio.body" >{{editModel.bio.body}}</textarea>
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td>AASD Link</td>
+								<td>
+									<p style="text-indent: 50px;" id="bio">
+										<a href={{viewModel.AASDLink}} target="_blank" ng-hide="editModeEnabled">
+											<span>{{viewModel.bio.AASDLink === "" ? "AASD Link Empty" : viewModel.bio.AASDLink}}</span>
+										</a>
+										<input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.AASDLink"/>
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td>Wiki Link</td>
+								<td>
+									<p style="text-indent: 50px;" id="bio">
+										<a href={{viewModel.wikiLink}} target="_blank" ng-hide="editModeEnabled">
+											<span>{{viewModel.bio.WikiLink === "" ? "WiKi Link Empty" : viewModel.bio.WikiLink}}</span>
+										</a>
+										<input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.WikiLink"/>
+									</p>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" id="action-bar">
+
+									<a href="#/locations/{{viewModel.name}}">
+										<button type="button" class="button-pill button-highlight">
+											View Artist's Works
+										</button>
+									</a>
+									<button type="button" ng-hide="editModeEnabled" ng-click="editModeEnabled = true" class="button-pill button-highlight">
+										Click to edit
+									</button>
+									<button ng-show="editModeEnabled" type="button" ng-click="saveTitleAndBody(editModel)" class="button-pill button-highlight">
+										Save
+									</button>
+									<button ng-show="editModeEnabled" type="button" ng-click="editModeEnabled = false" class="button-pill button-highlight">
+										Cancel
+									</button> 
+								</td>
+							</tr>
+						</table>
+					</div> 
+					<span ng-show="updatedMessage.status">{{updatedMessage.msg}}</span>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

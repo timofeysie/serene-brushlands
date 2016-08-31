@@ -1,134 +1,134 @@
 <navbar></navbar>
 <div id="outer">
-  <div ng-controller="DataCtrl as controller">
-    <div class="flex-container">
-     <table>
-        <tr>
-          <td style="text-align:left">
-            <a href="javascript:;" 
-              ng-click="viewModel.sortType = 'count'; viewModel.sortReverse = !viewModel.sortReverse">
-              No.
-              <span ng-show="viewModel.sortType == 'count' && !viewModel.sortReverse" 
-                class="fa fa-caret-down"></span>
-              <span ng-show="viewModel.sortType == 'count' && viewModel.sortReverse" 
-                class="fa fa-caret-up"></span>
-            </a>
-            <table-dots></table-dots>
-          </td>
-          <td style="text-align:left">
-            <a href="javascript:;" 
-              ng-click="viewModel.sortType = 'title'; viewModel.sortReverse = !viewModel.sortReverse">
-              Title
-              <span ng-show="viewModel.sortType == 'title' && !viewModel.sortReverse" 
-                class="fa fa-caret-down"></span>
-              <span ng-show="viewModel.sortType == 'title' && viewModel.sortReverse" 
-                class="fa fa-caret-up"></span>
-            </a>
-            <table-dots></table-dots>
-          </td>
-          <td style="text-align:left">
-            <a href="javascript:;" 
-              ng-click="viewModel.sortType = 'artist'; viewModel.sortReverse = !viewModel.sortReverse">
-              Artist
-              <span ng-show="viewModel.sortType == 'artist' && !viewModel.sortReverse" 
-                class="fa fa-caret-down"></span>
-              <span ng-show="viewModel.sortType == 'artist' && viewModel.sortReverse" 
-                class="fa fa-caret-up"></span>
-            </a>
-            <table-dots></table-dots>
-          </td>
-          <td style="text-align:left">
-            <a href="javascript:;" 
-              ng-click="viewModel.sortType = 'officeLocation'; viewModel.sortReverse = !viewModel.sortReverse">
-              Location
-              <span ng-show="viewModel.sortType == 'officeLocation' && !viewModel.sortReverse" 
-                class="fa fa-caret-down"></span>
-              <span ng-show="viewModel.sortType == 'officeLocation' && viewModel.sortReverse" 
-                class="fa fa-caret-up"></span>
-            </a>
-            <table-dots></table-dots>
-          </td>
-          <td style="text-align:left"><a href="javascript:;" 
-              ng-click="viewModel.sortType = 'src'; viewModel.sortReverse = !viewModel.sortReverse">
-              Image
-              <span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
-                class="fa fa-caret-down"></span>
-              <span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
-                class="fa fa-caret-up"></span>
-            </a>
-            <table-dots></table-dots>
-          </td>
-          <td style="text-align:left"><a href="javascript:;" 
-              ng-click="viewModel.sortType = 'size'; viewModel.sortReverse = !viewModel.sortReverse">
-              Size
-              <span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
-                class="fa fa-caret-down"></span>
-              <span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
-                class="fa fa-caret-up"></span>
-            </a>
-            <table-dots></table-dots>
-          </td>
-          <!-- key should contain no space:
-          amount Paid: "$3,230" -->
-<!--           <td style="text-align:left"><a href="javascript:;" 
-              ng-click="controller.sortType = 'paid'; controller.sortReverse = !controller.sortReverse">
-              Amount Paid
-              <span ng-show="controller.sortType == 'src' && !controller.sortReverse" 
-                class="fa fa-caret-down"></span>
-              <span ng-show="controller.sortType == 'src' && controller.sortReverse" 
-                class="fa fa-caret-up"></span>
-            </a>
-            <table-dots></table-dots>
-          </td> -->
-          <td style="text-align:left"><a href="javascript:;" 
-              ng-click="viewModel.sortType = 'insured'; viewModel.sortReverse = !viewModel.sortReverse">
-              Insured
-              <span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
-                class="fa fa-caret-down"></span>
-              <span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
-                class="fa fa-caret-up"></span>
-            </a>
-            <table-dots></table-dots>
-          </td>
-          <td style="text-align:left"><a href="javascript:;" 
-              ng-click="viewModel.sortType = 'provenance'; viewModel.sortReverse = !viewModel.sortReverse">
-              Provenance
-              <span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
-                class="fa fa-caret-down"></span>
-              <span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
-                class="fa fa-caret-up"></span>
-            </a>
-            <table-dots></table-dots>
-          </td>
-        </tr>
-        <tr ng-repeat="artwork in viewModel.artworks | orderBy:viewModel.sortType:viewModel.sortReverse">
-          <td style="text-align:left">
-            {{artwork.assetRefNo}}.</td>
-          <td style="text-align:left" >
-              {{artwork.title}}</td>
-          <td style="text-align:left" >
-            {{artwork.artist}}</td>
-          <td style="text-align:left" >
-            {{artwork.officeLocation}}</td>
-          <td ni-if="{artwork.src !== ''}"
-            style="text-align:left" >
-            {{artwork.imageFileName}}</td>
-            <td ni-if="{artwork.src !== ''}"
-            style="text-align:left" >
-            {{artwork.size}}</td>
-<!--             <td ni-if="{artwork.src !== ''}"
-            style="text-align:left" >
-            {{artwork.amountPaid}}</td> -->
-            <td ni-if="{artwork.src !== ''}"
-            style="text-align:left" >
-            {{artwork.insured}}</td>
-            <td ni-if="{artwork.src !== ''}"
-            style="text-align:left" >
-            {{artwork.provenance}}</td>
-        </tr>
-      </table>
-    </div>
-  </div>
+	<div ng-controller="DataCtrl as controller">
+		<div class="flex-container">
+			<table>
+				<tr>
+					<td style="text-align:left">
+						<a href="javascript:;" 
+						   ng-click="viewModel.sortType = 'count'; viewModel.sortReverse = !viewModel.sortReverse">
+							No.
+							<span ng-show="viewModel.sortType == 'count' && !viewModel.sortReverse" 
+								  class="fa fa-caret-down"></span>
+							<span ng-show="viewModel.sortType == 'count' && viewModel.sortReverse" 
+								  class="fa fa-caret-up"></span>
+						</a>
+				<table-dots></table-dots>
+				</td>
+				<td style="text-align:left">
+					<a href="javascript:;" 
+					   ng-click="viewModel.sortType = 'title'; viewModel.sortReverse = !viewModel.sortReverse">
+						Title
+						<span ng-show="viewModel.sortType == 'title' && !viewModel.sortReverse" 
+							  class="fa fa-caret-down"></span>
+						<span ng-show="viewModel.sortType == 'title' && viewModel.sortReverse" 
+							  class="fa fa-caret-up"></span>
+					</a>
+				<table-dots></table-dots>
+				</td>
+				<td style="text-align:left">
+					<a href="javascript:;" 
+					   ng-click="viewModel.sortType = 'artist'; viewModel.sortReverse = !viewModel.sortReverse">
+						Artist
+						<span ng-show="viewModel.sortType == 'artist' && !viewModel.sortReverse" 
+							  class="fa fa-caret-down"></span>
+						<span ng-show="viewModel.sortType == 'artist' && viewModel.sortReverse" 
+							  class="fa fa-caret-up"></span>
+					</a>
+				<table-dots></table-dots>
+				</td>
+				<td style="text-align:left">
+					<a href="javascript:;" 
+					   ng-click="viewModel.sortType = 'officeLocation'; viewModel.sortReverse = !viewModel.sortReverse">
+						Location
+						<span ng-show="viewModel.sortType == 'officeLocation' && !viewModel.sortReverse" 
+							  class="fa fa-caret-down"></span>
+						<span ng-show="viewModel.sortType == 'officeLocation' && viewModel.sortReverse" 
+							  class="fa fa-caret-up"></span>
+					</a>
+				<table-dots></table-dots>
+				</td>
+				<td style="text-align:left"><a href="javascript:;" 
+											   ng-click="viewModel.sortType = 'src'; viewModel.sortReverse = !viewModel.sortReverse">
+						Image
+						<span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
+							  class="fa fa-caret-down"></span>
+						<span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
+							  class="fa fa-caret-up"></span>
+					</a>
+				<table-dots></table-dots>
+				</td>
+				<td style="text-align:left"><a href="javascript:;" 
+											   ng-click="viewModel.sortType = 'size'; viewModel.sortReverse = !viewModel.sortReverse">
+						Size
+						<span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
+							  class="fa fa-caret-down"></span>
+						<span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
+							  class="fa fa-caret-up"></span>
+					</a>
+				<table-dots></table-dots>
+				</td>
+				<!-- key should contain no space:
+				amount Paid: "$3,230" -->
+				<!--           <td style="text-align:left"><a href="javascript:;" 
+							  ng-click="controller.sortType = 'paid'; controller.sortReverse = !controller.sortReverse">
+							  Amount Paid
+							  <span ng-show="controller.sortType == 'src' && !controller.sortReverse" 
+								class="fa fa-caret-down"></span>
+							  <span ng-show="controller.sortType == 'src' && controller.sortReverse" 
+								class="fa fa-caret-up"></span>
+							</a>
+							<table-dots></table-dots>
+						  </td> -->
+				<td style="text-align:left"><a href="javascript:;" 
+											   ng-click="viewModel.sortType = 'insured'; viewModel.sortReverse = !viewModel.sortReverse">
+						Insured
+						<span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
+							  class="fa fa-caret-down"></span>
+						<span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
+							  class="fa fa-caret-up"></span>
+					</a>
+				<table-dots></table-dots>
+				</td>
+				<td style="text-align:left"><a href="javascript:;" 
+											   ng-click="viewModel.sortType = 'provenance'; viewModel.sortReverse = !viewModel.sortReverse">
+						Provenance
+						<span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
+							  class="fa fa-caret-down"></span>
+						<span ng-show="viewModel.sortType == 'src' && viewModel.sortReverse" 
+							  class="fa fa-caret-up"></span>
+					</a>
+				<table-dots></table-dots>
+				</td>
+				</tr>
+				<tr ng-repeat="artwork in viewModel.artworks| orderBy:viewModel.sortType:viewModel.sortReverse">
+					<td style="text-align:left">
+						{{artwork.assetRefNo}}.</td>
+					<td style="text-align:left" >
+						{{artwork.title}}</td>
+					<td style="text-align:left" >
+						{{artwork.artist}}</td>
+					<td style="text-align:left" >
+						{{artwork.officeLocation}}</td>
+					<td ni-if="{artwork.src !== ''}"
+						style="text-align:left" >
+						{{artwork.imageFileName}}</td>
+					<td ni-if="{artwork.src !== ''}"
+						style="text-align:left" >
+						{{artwork.size}}</td>
+					<!--             <td ni-if="{artwork.src !== ''}"
+								style="text-align:left" >
+								{{artwork.amountPaid}}</td> -->
+					<td ni-if="{artwork.src !== ''}"
+						style="text-align:left" >
+						{{artwork.insured}}</td>
+					<td ni-if="{artwork.src !== ''}"
+						style="text-align:left" >
+						{{artwork.provenance}}</td>
+				</tr>
+			</table>
+		</div>
+	</div>
 </div>
 
 

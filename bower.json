@@ -1,24 +1,24 @@
 {
-  "name": "angular-seed",
-  "description": "A starter project for AngularJS",
-  "version": "0.0.0",
-  "homepage": "https://github.com/angular/angular-seed",
-  "license": "MIT",
-  "private": true,
-  "dependencies": {
-    "angular": "~1.4.0",
-    "angular-route": "~1.4.0",
-    "angular-loader": "~1.4.0",
-    "angular-mocks": "~1.4.0",
-    "html5-boilerplate": "~5.2.0",
-    "ng-file-upload": "^12.0.4",
-    "angular-cookies": "^1.5.5",
-    "auth0-lock": "^9.0.3",
-    "a0-angular-storage": "^0.0.15",
-    "font-awesome": "^4.6.1",
-    "angular-acl": "~0.1.5"
-  },
-  "resolutions": {
-    "angular": "~1.4.0"
-  }
+	"name": "angular-seed",
+	"description": "A starter project for AngularJS",
+	"version": "0.0.0",
+	"homepage": "https://github.com/angular/angular-seed",
+	"license": "MIT",
+	"private": true,
+	"dependencies": {
+		"angular": "~1.4.0",
+		"angular-route": "~1.4.0",
+		"angular-loader": "~1.4.0",
+		"angular-mocks": "~1.4.0",
+		"html5-boilerplate": "~5.2.0",
+		"ng-file-upload": "^12.0.4",
+		"angular-cookies": "^1.5.5",
+		"auth0-lock": "^9.0.3",
+		"a0-angular-storage": "^0.0.15",
+		"font-awesome": "^4.6.1",
+		"angular-acl": "~0.1.5"
+	},
+	"resolutions": {
+		"angular": "~1.4.0"
+	}
 }

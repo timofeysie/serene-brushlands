@@ -1,57 +1,57 @@
 <navbar></navbar>
 <div ng-controller="View3Ctrl as controller">
 
-<!-- Original view --> 
+	<!-- Original view --> 
     <div class="">
-     <div class="text-center">
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <div id="artworkContainer">
-            <img id="artwork" 
-              src="{{viewModel.imageFile}}"
-              alt="No image"
-              width="100px"/></a></p>
-            <a href="#/view1"
-              class="button button-3d button-pill">
-              No. {{viewModel.id}}
-            </a>
-            <h5>{{viewModel.title}} <span ng-show="inspectionOn">
-            <i class="fa fa-check-circle"></i></span></h5>
-            <p><a href="#/view2/{{viewModel.artist}}"
-              class="button button-3d-action button-pill">
-              {{viewModel.artist}}</a></p>
-            <p>{{viewModel.size}}</p>
-            <span>Add Additional Images</span>
-            <br/>
-            <br/>
-            <input type="file" name="files" 
-              ng-model="additionalImages" 
-              class="form-control" 
-              ngf-select multiple accept="image/*" />
-            <br>
-            <div style="font:smaller">       
-              <span class="progress" ng-show="f.progress >= 0">
-                      <div style="width:100%" ng-bind="f.progress + '%'" 
-                      class="ng-binding">100%</div>
-              </span>
-              <span ng-show="f.result" class="">All images uploaded successfully.</span>
-            </div>
-            {{errorMsg}}
-            <br/>
-            <br/>
-            <textarea placeholder="Add additional text" data-ng-model="text"></textarea>
-            <br/>
-            <br/>
-            <button type="button" class="button button-3d-primary button-pill" 
-              ng-click="uploadAdditionalImages(additionalImages)">
-              Submit New Data
-            </button>
-          </div>
-        </div>
-      </div>
-    </div> 
-  </div>
-    
+		<div class="text-center">
+			<div class="row">
+				<div class="col-md-6 col-md-offset-3">
+					<div id="artworkContainer">
+						<img id="artwork" 
+							 src="{{viewModel.imageFile}}"
+							 alt="No image"
+							 width="100px"/></a></p>
+						<a href="#/view1"
+						   class="button button-3d button-pill">
+							No. {{viewModel.id}}
+						</a>
+						<h5>{{viewModel.title}} <span ng-show="inspectionOn">
+								<i class="fa fa-check-circle"></i></span></h5>
+						<p><a href="#/view2/{{viewModel.artist}}"
+							  class="button button-3d-action button-pill">
+								{{viewModel.artist}}</a></p>
+						<p>{{viewModel.size}}</p>
+						<span>Add Additional Images</span>
+						<br/>
+						<br/>
+						<input type="file" name="files" 
+							   ng-model="additionalImages" 
+							   class="form-control" 
+							   ngf-select multiple accept="image/*" />
+						<br>
+						<div style="font:smaller">       
+							<span class="progress" ng-show="f.progress >= 0">
+								<div style="width:100%" ng-bind="f.progress + '%'" 
+									 class="ng-binding">100%</div>
+							</span>
+							<span ng-show="f.result" class="">All images uploaded successfully.</span>
+						</div>
+						{{errorMsg}}
+						<br/>
+						<br/>
+						<textarea placeholder="Add additional text" data-ng-model="text"></textarea>
+						<br/>
+						<br/>
+						<button type="button" class="button button-3d-primary button-pill" 
+								ng-click="uploadAdditionalImages(additionalImages)">
+							Submit New Data
+						</button>
+					</div>
+				</div>
+			</div>
+		</div> 
+	</div>
+
     <!--  Masonry view -->
     <!-- http://naltatis.github.io/jade-syntax-docs/ 
     “masonry-layout” becomes “ml”, 
@@ -62,105 +62,105 @@ button-highlight
 button-caution    - red
 button-royal -->
 
-<!-- 
-ml = masonry layout
-flp = flip
-cntnt = content
-pnl = panel
-frnt = front
-bck = back
--->
+	<!-- 
+	ml = masonry layout
+	flp = flip
+	cntnt = content
+	pnl = panel
+	frnt = front
+	bck = back
+	-->
     <!-- Flip card masonry-layout__panel-content -->
-<!--   <div class="ml">
-
-    <div class="ml-pnl ml-flp--md ml-flp">
-      <div class="ml-pnl__cntnt ml-flp__cntnt">
-
-        <a href="#/view2/{{controller.artist}}"
-          class="ml-flp__pnl ml-flp__pnl--frnt button button-3d-action button-pill"
-          style="padding: 15px 20px;">
-            <img src="./images/{{controller.src}}" 
-              class="ml-pnl__cntnt ml-pnl__cntnt--img"/></a>
-
-        <div class="ml-flp__pnl ml-flp__pnl--bck button button-3d-action button-pill">
-          <p>{{controller.title}}</p>
-        </div>
-      </div>
-    </div> -->
+	<!--   <div class="ml">
+	
+		<div class="ml-pnl ml-flp--md ml-flp">
+		  <div class="ml-pnl__cntnt ml-flp__cntnt">
+	
+			<a href="#/view2/{{controller.artist}}"
+			  class="ml-flp__pnl ml-flp__pnl--frnt button button-3d-action button-pill"
+			  style="padding: 15px 20px;">
+				<img src="./images/{{controller.src}}" 
+				  class="ml-pnl__cntnt ml-pnl__cntnt--img"/></a>
+	
+			<div class="ml-flp__pnl ml-flp__pnl--bck button button-3d-action button-pill">
+			  <p>{{controller.title}}</p>
+			</div>
+		  </div>
+		</div> -->
 
     <!-- large card name -->
-<!--     <div class="ml-pnl">
-      <div class="ml-pnl__cntnt-title button button-3d-highlight button-pill">
-       <span style="padding-bottom: 25px;">{{controller.title}}</span>
-      </div>
-    </div> -->
+	<!--     <div class="ml-pnl">
+		  <div class="ml-pnl__cntnt-title button button-3d-highlight button-pill">
+		   <span style="padding-bottom: 25px;">{{controller.title}}</span>
+		  </div>
+		</div> -->
 
     <!-- large card title -->
-<!--     <div class="ml-pnl">
-      <div class="ml-pnl__cntnt-title button button-3d-caution button-pill">
-       <span style="padding-bottom: 25px;">{{controller.artist}}</span>
-      </div>
-    </div> -->
+	<!--     <div class="ml-pnl">
+		  <div class="ml-pnl__cntnt-title button button-3d-caution button-pill">
+		   <span style="padding-bottom: 25px;">{{controller.artist}}</span>
+		  </div>
+		</div> -->
 
     <!-- masonry-layout-cluster horizontal -->
-<!--     <div class="ml-pnl ml-clstr ml-clstr--hrz">
-      <div class="ml-clstr__sgmnt ml-clstr__sgmnt--rw"> -->
-        <!-- id -->
-<!--         <div class="ml-pnl ml-clstr__sgmnt">
-          <div class="ml-pnl__cntnt button button-3d-primary button-pill"
-            style="height:100%;"/>
-            <p>No. {{controller.id}}</p>
-          </div>
-        </div>
-        
-        <div class="ml-clstr__sgmnt ml-clstr__sgmnt--rw">
-          <div class="ml-pnl ml-clstr__sgmnt ml-clstr__sgmnt--hlf">
-            <p class="button button-3d-caution button-pill">Howdy</p>
-          </div>
-          <div class="ml-pnl ml-clstr__sgmnt">
-            <div class="ml-pnl__cntnt bg--red tx--white">
-              <p class=" button button-3d-caution button-pill">3 Some cool pics.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
+	<!--     <div class="ml-pnl ml-clstr ml-clstr--hrz">
+		  <div class="ml-clstr__sgmnt ml-clstr__sgmnt--rw"> -->
+	<!-- id -->
+	<!--         <div class="ml-pnl ml-clstr__sgmnt">
+			  <div class="ml-pnl__cntnt button button-3d-primary button-pill"
+				style="height:100%;"/>
+				<p>No. {{controller.id}}</p>
+			  </div>
+			</div>
+			
+			<div class="ml-clstr__sgmnt ml-clstr__sgmnt--rw">
+			  <div class="ml-pnl ml-clstr__sgmnt ml-clstr__sgmnt--hlf">
+				<p class="button button-3d-caution button-pill">Howdy</p>
+			  </div>
+			  <div class="ml-pnl ml-clstr__sgmnt">
+				<div class="ml-pnl__cntnt bg--red tx--white">
+				  <p class=" button button-3d-caution button-pill">3 Some cool pics.</p>
+				</div>
+			  </div>
+			</div>
+		  </div>
+		</div> -->
 
     <!-- More -->
-<!--     <div class="ml-pnl">
-      <div class="ml-pnl__cntnt tx--white">
-        <h3 class="button button-3d-royal button-pill">Add a new document</h3>
-      </div>
-    </div> -->
+	<!--     <div class="ml-pnl">
+		  <div class="ml-pnl__cntnt tx--white">
+			<h3 class="button button-3d-royal button-pill">Add a new document</h3>
+		  </div>
+		</div> -->
 
     <!-- vertical cluster -->
-<!--     <div class="ml-pnl ml-clstr ml-clstr--vrt">
-      <div class="ml-clstr__sgmnt ml-clstr__sgmnt--clmn ml-clstr__sgmnt--hlf">
-        <div class="ml-pnl ml-clstr__sgmnt">
-          <p class="button button-3d-primary button-pill">Add a new image</p>
-        </div>
-        <div class="ml-clstr__sgmnt ml-clstr__sgmnt--clmn">
-          <div class="ml-pnl ml-clstr__sgmnt">
-            <div class="ml-pnl__cntnt tx--white">
-              <p class="button button-3d-primary button-pill">
-              5 This is an image, it's quite nice.</p>
-            </div>
-          </div>
-          <div class="ml-pnl ml-clstr__sgmnt">
-            <div class="ml-pnl__cntnt button button-3d-primary button-pill tx--white">
-              <a>6 Click here to find out more.</a></div>
-          </div>
-        </div>
-      </div>
-      <div class="ml-pnl ml-pnl--fcs">
-        <div class="ml-pnl__cntnt tx--white button button-3d-action button-pill">
-          <p>7 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu justo ex. Praesent mollis augue sagittis eros pharetra feugiat. Phasellus dignissim est lacus. Sed nec imperdiet dolor, sit amet mattis ex.</p>
-        </div>
-      </div>
-    </div> -->
+	<!--     <div class="ml-pnl ml-clstr ml-clstr--vrt">
+		  <div class="ml-clstr__sgmnt ml-clstr__sgmnt--clmn ml-clstr__sgmnt--hlf">
+			<div class="ml-pnl ml-clstr__sgmnt">
+			  <p class="button button-3d-primary button-pill">Add a new image</p>
+			</div>
+			<div class="ml-clstr__sgmnt ml-clstr__sgmnt--clmn">
+			  <div class="ml-pnl ml-clstr__sgmnt">
+				<div class="ml-pnl__cntnt tx--white">
+				  <p class="button button-3d-primary button-pill">
+				  5 This is an image, it's quite nice.</p>
+				</div>
+			  </div>
+			  <div class="ml-pnl ml-clstr__sgmnt">
+				<div class="ml-pnl__cntnt button button-3d-primary button-pill tx--white">
+				  <a>6 Click here to find out more.</a></div>
+			  </div>
+			</div>
+		  </div>
+		  <div class="ml-pnl ml-pnl--fcs">
+			<div class="ml-pnl__cntnt tx--white button button-3d-action button-pill">
+			  <p>7 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis eu justo ex. Praesent mollis augue sagittis eros pharetra feugiat. Phasellus dignissim est lacus. Sed nec imperdiet dolor, sit amet mattis ex.</p>
+			</div>
+		  </div>
+		</div> -->
 
-  </div>
-  <!-- end of ml panel -->
+</div>
+<!-- end of ml panel -->
 
 </div>
 

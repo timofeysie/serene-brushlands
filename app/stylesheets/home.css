@@ -1,130 +1,130 @@
 /* line 1, ../../scss/home.scss */
 body {
-  font-family: "proxima-nova",sans-serif;
-  text-align: center;
-  font-weight: 100;
+	font-family: "proxima-nova",sans-serif;
+	text-align: center;
+	font-weight: 100;
 }
 
 /* line 7, ../../scss/home.scss */
 input[type=checkbox],
 input[type=radio] {
-  position: absolute;
-  opacity: 0;
+	position: absolute;
+	opacity: 0;
 }
 
 /* line 12, ../../scss/home.scss */
 input[type=checkbox] + label,
 input[type=radio] + label {
-  display: inline-block;
+	display: inline-block;
 }
 
 /* line 16, ../../scss/home.scss */
 input[type=checkbox] + label:before,
 input[type=radio] + label:before {
-  content: "";
-  display: inline-block;
-  vertical-align: -0.2em;
-  width: 1em;
-  height: 1em;
-  border: 0.15em solid #0074d9;
-  border-radius: 0.2em;
-  margin-right: 0.3em;
-  background-color: white;
-  visibility: hidden;
-  /* added to make the checkbox in the gooey menu disappear */
+	content: "";
+	display: inline-block;
+	vertical-align: -0.2em;
+	width: 1em;
+	height: 1em;
+	border: 0.15em solid #0074d9;
+	border-radius: 0.2em;
+	margin-right: 0.3em;
+	background-color: white;
+	visibility: hidden;
+	/* added to make the checkbox in the gooey menu disappear */
 }
 
 /* line 29, ../../scss/home.scss */
 input[type=radio] + label:before {
-  border-radius: 50%;
+	border-radius: 50%;
 }
 
 /* line 32, ../../scss/home.scss */
 input[type=radio]:checked + label:before,
 input[type=checkbox]:checked + label:before {
-  background-color: #0074d9;
-  box-shadow: inset 0 0 0 0.15em white;
+	background-color: #0074d9;
+	box-shadow: inset 0 0 0 0.15em white;
 }
 
 /* line 37, ../../scss/home.scss */
 input[type=radio]:focus + label:before,
 input[type=checkbox]:focus + label:before {
-  outline: 0;
+	outline: 0;
 }
 
 /* line 42, ../../scss/home.scss */
 .btn {
-  font-size: 140%;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 0;
-  background-color: #16214D;
-  color: white;
+	font-size: 140%;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	border: 0;
+	background-color: #16214D;
+	color: white;
 }
 /* line 50, ../../scss/home.scss */
 .btn:hover {
-  background-color: #44C7F4;
+	background-color: #44C7F4;
 }
 /* line 54, ../../scss/home.scss */
 .btn:focus {
-  outline: none !important;
+	outline: none !important;
 }
 /* line 58, ../../scss/home.scss */
 .btn.btn-lg {
-  padding: 20px 30px;
+	padding: 20px 30px;
 }
 /* line 62, ../../scss/home.scss */
 .btn:disabled {
-  background-color: #333;
-  color: #666;
+	background-color: #333;
+	color: #666;
 }
 
 /* line 68, ../../scss/home.scss */
 h1, h2, h3 {
-  font-weight: 100;
+	font-weight: 100;
 }
 
 /* line 72, ../../scss/home.scss */
 #logo img {
-  width: 300px;
-  margin-bottom: 60px;
+	width: 300px;
+	margin-bottom: 60px;
 }
 
 /* line 77, ../../scss/home.scss */
 .home-description {
-  font-weight: 100;
-  margin: 100px 0;
+	font-weight: 100;
+	margin: 100px 0;
 }
 
 /* line 82, ../../scss/home.scss */
 h2.ng-binding {
-  margin-top: 30px;
-  margin-bottom: 40px;
-  font-size: 200%;
+	margin-top: 30px;
+	margin-bottom: 40px;
+	font-size: 200%;
 }
 
 /* line 88, ../../scss/home.scss */
 label.ng-binding {
-  font-size: 100%;
-  font-weight: 300;
+	font-size: 100%;
+	font-weight: 300;
 }
 
 /* line 93, ../../scss/home.scss */
 .btn-next {
-  margin-top: 30px;
+	margin-top: 30px;
 }
 
 /* line 97, ../../scss/home.scss */
 .answer {
-  width: 70%;
-  margin: auto;
-  text-align: left;
-  padding-left: 10%;
-  margin-bottom: 20px;
+	width: 70%;
+	margin: auto;
+	text-align: left;
+	padding-left: 10%;
+	margin-bottom: 20px;
 }
 
 /* From login.css */
 /* line 106, ../../scss/home.scss */
 .login-page .login-box {
-  padding: 100px 0;
+	padding: 100px 0;
 }

@@ -508,10 +508,10 @@ button#{$unicorn-btn-namespace}:disabled {
                 display: block;
 
                 &:first-child a {
-                     @include border-top-radius(3px);
+					@include border-top-radius(3px);
                 }
                 &:last-child a {
-                     @include border-bottom-radius(3px);
+					@include border-bottom-radius(3px);
                 }
             }
 
