@@ -13,7 +13,15 @@ angular.module('artApp.view1', ['ngRoute', 'firebase'])
 			});
 		}])
 
-	.controller('View1Ctrl', ['$scope', '$firebaseObject', '$http', '$rootScope', function ($scope, $firebase, $http, $rootScope) {
+	.controller('View1Ctrl', ['$scope', '$firebaseObject', '$http', '$rootScope', '$location', '$anchorScroll', function ($scope, $firebase, $http, $rootScope, $location, $anchorScroll) {
+
+			$rootScope.$on('$routeChangeStart', function (ev, to, toParams, from, fromParams) {
+				if (typeof toParams.params.paintingNo !== "undefined") {
+					$location.hash(toParams.params.paintingNo);
+					$anchorScroll();
+				}
+			});
+
 
 			$scope.viewModel = {};
 			$scope.viewModel.errorMessage = {status: false, message: ""};
@@ -25,13 +33,11 @@ angular.module('artApp.view1', ['ngRoute', 'firebase'])
 				var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks");
 				uploadedArtworksRef.on("value", function (data) {
 					var retriveData = data.val();
-
 					for (var key in retriveData) {
 						$scope.viewModel.paintings.push(retriveData[key]);
 					}
 
 					$scope.viewModel.spinner = false;
-
 					if (!$scope.$$phase) {
 						$scope.$apply($scope.viewModel);
 					}
@@ -42,12 +48,9 @@ angular.module('artApp.view1', ['ngRoute', 'firebase'])
 					$scope.viewModel.spinner = false;
 				});
 				$scope.viewModel.errorMessage = {status: false, message: ""};
-
 			} else {
-
-				console.log('viewModel.paintings already exist', $scope.viewModel.paintings.length);
 				$scope.viewModel.spinner = false;
-
 			}
 
+			$rootScope.artworks = $scope.viewModel.paintings;
 		}]);

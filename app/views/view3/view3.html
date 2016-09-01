@@ -4,7 +4,17 @@
 	<!-- Original view --> 
     <div class="">
 		<div class="text-center">
-			<div class="row">
+			<div class="row" style="position: relative">
+				<a href="#/view3/{{viewModel.prevPaintingNumber}}" class="artwork-nav-buttons-lg artworks-lg-prev" ng-if="viewModel.currentPaintingNumber !== 1">
+					<button type="button" class="button button-3d button-pill next-prev-artwork-button">
+						<i class="fa fa-arrow-left fa-3x" aria-hidden="true"></i>
+					</button>
+				</a>
+				<a href="#/view3/{{viewModel.nextPaintingNumber}}" class="artwork-nav-buttons-lg artworks-lg-next" ng-if="viewModel.currentPaintingNumber !== artworks.length">
+					<button type="button" class="button button-3d button-pill next-prev-artwork-button">
+						<i class="fa fa-arrow-right fa-3x" aria-hidden="true"></i>
+					</button>
+				</a>
 				<div class="col-md-6 col-md-offset-3">
 					<div id="artworkContainer">
 						<img id="artwork" 
@@ -46,6 +56,18 @@
 								ng-click="uploadAdditionalImages(additionalImages)">
 							Submit New Data
 						</button>
+					</div>
+					<div class="artwork-nav-buttons-sm">
+						<a href="#/view3/{{viewModel.prevPaintingNumber}}" ng-if="viewModel.currentPaintingNumber !== 1">
+							<button type="button" class="button button-3d button-pill next-prev-artwork-button">
+								<i class="fa fa-arrow-left fa-3x" aria-hidden="true"></i>
+							</button>
+						</a>
+						<a href="#/view3/{{viewModel.nextPaintingNumber}}" ng-if="viewModel.currentPaintingNumber !== artworks.length">
+							<button type="button" class="button button-3d button-pill next-prev-artwork-button">
+								<i class="fa fa-arrow-right fa-3x" aria-hidden="true"></i>
+							</button>
+						</a>
 					</div>
 				</div>
 			</div>

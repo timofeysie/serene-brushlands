@@ -10,7 +10,13 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
 		function ($rootScope, $scope, Upload, $routeParams, $http, InspectionsFactory, $firebaseObject) {
 
 			$scope.viewModel = {};
-			var paintingNo = $routeParams.paintingNo;
+			var paintingNo = parseInt($routeParams.paintingNo);
+			$scope.viewModel.currentPaintingNumber = paintingNo;
+			$scope.viewModel.prevPaintingNumber = paintingNo - 1;
+
+			$scope.viewModel.nextPaintingNumber = paintingNo + 1;
+			
+			$scope.viewModel.nextPaintingNumber = parseInt(paintingNo) + 1;
 			$scope.viewModel.imageFile = 'assets/images/spinner.gif';
 			var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks/" + paintingNo);
 
