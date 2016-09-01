@@ -31,8 +31,7 @@ angular.module('artApp.locations', ['ngRoute'])
 			$scope.spinner = true;
 			var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks");
 			//$http.get('/artworks').success(function(data) {
-			uploadedArtworksRef.limitToFirst(10).on("value", function (data) {
-
+			uploadedArtworksRef.on("value", function (data) {
 				var retrivedData = data.val();
 				for (var key in retrivedData) {
 					newJsonArray.push(retrivedData[key]);
