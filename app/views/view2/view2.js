@@ -13,11 +13,19 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 			});
 		}])
 
-	.controller('View2Ctrl', ['$scope', '$rootScope', '$routeParams', '$http',
-		function ($scope, $rootScope, $routeParams, $http) {
+	.controller('View2Ctrl', ['$scope', '$rootScope', '$routeParams', '$http', '$sce',
+		function ($scope, $rootScope, $routeParams, $http, $sce) {
+			function urlify(text) {
+				var urlRegex = /(((https?:\/\/)|(www\.))[^\s]+)/g;
+				return text.replace(urlRegex, function (url, b, c) {
+					var url2 = (c == 'www.') ? 'http://' + url : url;
+					return '<a href="' + url2 + '" target="_blank">' + url + '</a>';
+				})
+			}
+
 			$scope.getAASDLink = function (obj)
 			{
-				if (obj.bio.AASDLink != "") {
+				if (obj.bio.AASDLink) {
 					return "http://www.aasd.com.au/index.cfm/artist/?concat=" + obj.bio.AASDLink;
 				} else if (obj.name != "") {
 					var full_name = obj.name.split(" ");
@@ -29,8 +37,8 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 
 			$scope.getWikiLink = function (obj)
 			{
-				if (obj.bio.WikiLink != "" || $scope.viewModel.bio.WikiLink == undefined) {
-					return "https://en.wikipedia.org/wiki/" + $scope.viewModel.bio.WikiLink;
+				if (obj.bio.WikiLink) {
+					return "https://en.wikipedia.org/wiki/" + obj.bio.WikiLink;
 				} else if (obj.name != "") {
 					var full_name = obj.name.split(" ");
 					return "https://en.wikipedia.org/wiki/" + full_name[0] + "_" + full_name[1];
@@ -40,7 +48,7 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 			};
 
 			var artistsRef = new Firebase($rootScope.firebaseUri + "/artists/" + $routeParams.artist);
-			$scope.viewModel = {};
+			$scope.viewModel = {bio: {}};
 			$scope.viewModel.spinner = true;
 			$scope.updatedMessage = {"status": false, "msg": ""};
 			$scope.editModeEnabled = false;
@@ -49,20 +57,25 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 				if (retrivedArtistData !== null)
 				{
 					$scope.viewModel.name = retrivedArtistData.name;
-					$scope.viewModel.bio = retrivedArtistData.bio;
+					$scope.viewModel.bio.title = $sce.trustAsHtml("<span>" + urlify(retrivedArtistData.bio.title) + "</span>");
+					$scope.viewModel.bio.body = $sce.trustAsHtml("<span>" + urlify(retrivedArtistData.bio.body) + "</span>");
 					$scope.viewModel.skinName = retrivedArtistData.skinName;
 					$scope.viewModel.language = retrivedArtistData.language;
 					$scope.viewModel.region = retrivedArtistData.region;
 					$scope.viewModel.dreaming = retrivedArtistData.dreaming;
 					$scope.viewModel.DOB = retrivedArtistData.DOB;
-					$scope.viewModel.AASDLink = $scope.getAASDLink($scope.viewModel);
-					$scope.viewModel.wikiLink = $scope.getWikiLink($scope.viewModel);
+					$scope.viewModel.bio.AASDLink = retrivedArtistData.bio.AASDLink;
+					$scope.viewModel.bio.WikiLink = retrivedArtistData.bio.WikiLink;
 					$scope.viewModel.AASDLinkFound = false;
+					$scope.viewModel.realAASDLink = $scope.getAASDLink(retrivedArtistData);
 					$scope.viewModel.wikiLinkFound = false;
+					$scope.viewModel.realWikiLink = $scope.getWikiLink(retrivedArtistData);
 
 					$scope.editModel = angular.copy($scope.viewModel);
+					$scope.editModel.bio.title = retrivedArtistData.bio.title;
+					$scope.editModel.bio.body = retrivedArtistData.bio.body;
 
-					$http({method: "GET", url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + $scope.viewModel.AASDLink + "%22&format=json"})
+					$http({method: "GET", url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + $scope.viewModel.realAASDLink + "%22&format=json"})
 						.then(function (response) {
 							if (response.data.query.results)
 							{
@@ -70,7 +83,7 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 							}
 						});
 
-					$http({method: "GET", url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + $scope.viewModel.wikiLink + "%22&format=json"})
+					$http({method: "GET", url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + $scope.viewModel.realWikiLink + "%22&format=json"})
 						.then(function (response) {
 							if (response.data.query.results)
 							{
@@ -94,6 +107,16 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 
 			$scope.saveTitleAndBody = function (obj)
 			{
+				function ifIsNullOrEmpty(value)
+				{
+					if (value || typeof value !== "undefined")
+					{
+						return value;
+					}
+
+					return "";
+				}
+
 				var updateArtistsBioRef = new Firebase($rootScope.firebaseUri + "/artists/" + $routeParams.artist + "/bio");
 
 				var onComplete = function (error) {
@@ -110,17 +133,12 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 					}
 				};
 
-				updateArtistsBioRef.child('title').set(obj.bio.title, onComplete);
-				updateArtistsBioRef.child('body').set(obj.bio.body, onComplete);
-				updateArtistsBioRef.child('AASDLink').set(obj.bio.AASDLink, onComplete);
-				updateArtistsBioRef.child('WikiLink').set(obj.bio.WikiLink, onComplete);
-			};
+				updateArtistsBioRef.child('title').set(ifIsNullOrEmpty(obj.bio.title), onComplete);
+				updateArtistsBioRef.child('body').set(ifIsNullOrEmpty(obj.bio.body), onComplete);
+				updateArtistsBioRef.child('AASDLink').set(ifIsNullOrEmpty(obj.bio.AASDLink), onComplete);
+				updateArtistsBioRef.child('WikiLink').set(ifIsNullOrEmpty(obj.bio.WikiLink), onComplete);
 
-			/* data available:
-			 "SkinName":"Mbitjana / Mpetyane",
-			 "Language":"Anmatyerre",
-			 "Region":"Utopia, Central Australia",
-			 "Dreaming":"Bush Berry , Bush Plum, Awelye & Bush Melon",
-			 "DOB":"c.1945",
-			 */
+				$scope.viewModel.bio.title = $sce.trustAsHtml("<span>" + urlify(obj.bio.title) + "</span>");
+				$scope.viewModel.bio.body = $sce.trustAsHtml("<span>" + urlify(obj.bio.body) + "</span>");
+			};
 		}]);
