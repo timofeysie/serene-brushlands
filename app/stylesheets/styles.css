@@ -448,3 +448,35 @@ a {
 	padding: 10px 0px;
 	background-color: aliceblue;
 }
+
+@media screen and (min-width: 765px) {
+    .artwork-nav-buttons-lg {
+       display:inline-block;
+	   position: absolute;
+	   top: 50%;
+    }
+	
+	.artwork-nav-buttons-sm {
+       display:none;
+    }
+	
+	.artworks-lg-next{
+		right: 10%;
+	}
+	
+	.artworks-lg-prev{
+		left: 10%;
+	}
+}
+
+@media screen and (max-width: 764px) {
+    .artwork-nav-buttons-sm {
+       display:block;
+	   padding-top: 35px;
+    }
+	
+	.artwork-nav-buttons-lg {
+       display:none;
+    }
+	
+}

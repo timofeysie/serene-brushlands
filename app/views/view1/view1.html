@@ -13,7 +13,7 @@
 				<img ng-show="viewModel.spinner" ng-src="assets/images/spinner.gif" style="background:none">
 				<div class="">
 					<div ng-repeat="painting in viewModel.paintings">
-						<div class="row">
+						<div class="row" id="{{painting.assetRefNo}}">
 							<a href="#/view3/{{painting.assetRefNo}}"
 							   ng-show="!smallWidth"
 							   class="button button-3d button-pill">{{painting.assetRefNo}}</a>
