@@ -19,10 +19,10 @@
     "angular-acl": "~0.1.5",
     "angular-jwt": "^0.1.3",
     "auth0-angular": "^4.2.3",
-    "angularfire": "^2.0.2",
+    "angularfire": "^1.1.3",
     "firebase": "2.3.2"
   },
   "resolutions": {
-    "firebase": "2.3.2"
+    "firebase": "2.x.x"
   }
 }
