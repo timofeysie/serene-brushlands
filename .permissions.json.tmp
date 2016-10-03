@@ -1,0 +1,10 @@
+{
+"assignedPermissions":{
+"manage-user-permissions": [],
+"upload-artworks": [],
+"access-locations-page":[]
+},
+"users":[
+"work@thesanmark.com", "developer@thesanmark.com","user@thesanmark.com"
+]
+}

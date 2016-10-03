@@ -480,3 +480,8 @@ a {
     }
 	
 }
+
+.unauthorized
+{
+	display: none !important;
+}

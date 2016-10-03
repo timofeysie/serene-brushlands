@@ -4,7 +4,7 @@ app/bower_components/
 tmp/
 node_modules
 .env
-.roles.json
+.permissions.json
 **/.sass-cache/*
 **/.sass-cache
 **.sass-cache**

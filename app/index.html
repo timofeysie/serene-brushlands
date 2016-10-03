@@ -29,7 +29,6 @@
 					'bower_components/angular-cookies/angular-cookies.min.js',
 					'bower_components/auth0-lock/build/auth0-lock.min.js',
 					'bower_components/a0-angular-storage/dist/angular-storage.min.js',
-					'bower_components/angular-acl/angular-acl.js',
 					'bower_components/angular-jwt/dist/angular-jwt.min.js',
 					'bower_components/auth0-angular/build/auth0-angular.min.js',
 					'bower_components/firebase/firebase.js',
@@ -49,9 +48,11 @@
 					'components/factories/inspectionsFactory.js',
 					'components/directives/tableDots.js',
 					'components/navbar/navbar.js',
+					'components/is_authorized/isAuthorized.js',
 					'components/version/version.js',
 					'components/version/version-directive.js',
-					'components/version/interpolate-filter.js'
+					'components/version/interpolate-filter.js',
+					'components/factories/isAuthorizedService.js'
 				], function() {
 				angular.bootstrap(document, ['artApp']);
 				});
@@ -59,7 +60,6 @@
 	</head>
 	<body ng-cloak>
 		<input type="hidden" id="env-values"/>
-		<input type="hidden" id="role-permissions"/>
 		<div ng-view></div>
 		<script type="text/javascript">
 			function getEnvValues()
@@ -74,22 +74,7 @@
 			xhttp.open("GET", "/env", true);
 			xhttp.send();
 			}
-
-			function getRolePermissions()
-			{
-			var xhttp = new XMLHttpRequest();
-			xhttp.onreadystatechange = function(data) {
-			if (xhttp.readyState == 4 && xhttp.status == 200) {
-			var response = xhttp.responseText;
-			document.getElementById('role-permissions').value = response;
-			}
-			};
-			xhttp.open("GET", "/auth-roles", true);
-			xhttp.send();
-			}
-
 			getEnvValues();
-			getRolePermissions();
 		</script>
 	</body>
 </html>

@@ -10,9 +10,9 @@ angular.module('artApp', [
 	'auth0',
 	'angular-storage',
 	'angular-jwt',
-	'mm.acl',
 	'firebase',
 	'artApp.navbar',
+	'artApp.isAuthorized',
 	'artApp.view1',
 	'artApp.view2',
 	'artApp.view3',
@@ -26,14 +26,7 @@ angular.module('artApp', [
 	'artApp.data',
 	'artApp.directives'
 ])
-	.config(['AclServiceProvider', function (AclServiceProvider) {
-			var myConfig = {
-				storage: 'localStorage',
-				storageKey: 'AppAcl'
-			};
-			AclServiceProvider.config(myConfig);
-		}])
-	.config(['$routeProvider', function ($routeProvider, authProvider) {
+	.config(['$routeProvider', function ($routeProvider) {
 			$routeProvider.when('/view1', {
 				templateUrl: 'views/view1/view1.html',
 				requiresLogin: true
@@ -41,6 +34,15 @@ angular.module('artApp', [
 				.when('/locations', {
 					templateUrl: 'views/view1/locations.html',
 					requiresLogin: true,
+					resolve: ["IsAuthorizedService", "$location", function (IsAuthorizedService, $location) {
+							return IsAuthorizedService.checkAuth('access-locations-page')
+								.then(function (response) {
+									return response;
+								}, function (error) {
+									alert("Unauthorized")
+									$location.path("/");
+								});
+						}]
 				})
 				.when('/locations/:artist', {
 					templateUrl: 'views/view1/locations.html',
@@ -67,7 +69,16 @@ angular.module('artApp', [
 				.when('/add', {
 					templateUrl: 'views/view3/add.html',
 					pageTitle: 'Add',
-					requiresLogin: true
+					requiresLogin: true,
+					resolve: ["IsAuthorizedService", "$location", function (IsAuthorizedService, $location) {
+							return IsAuthorizedService.checkAuth('upload-artworks')
+								.then(function (response) {
+									return response;
+								}, function (error) {
+									alert("Unauthorized")
+									$location.path("/");
+								});
+						}]
 				})
 				.when('/inspections', {
 					templateUrl: 'views/view3/inspections.html',
@@ -77,18 +88,15 @@ angular.module('artApp', [
 					templateUrl: 'views/userPermissions/userPermissions.html',
 					requiresLogin: true,
 					controller: 'UserPermissionsCtrl',
-					resolve: {
-						'acl': ['$q', 'AclService', function ($q, AclService) {
-								if (AclService.can('admin')) {
-									// Has proper permissions
-									return true;
-								} else {
-									// Does not have permission
-									alert("Does not have permissions");
-									return $q.reject('Unauthorized');
-								}
-							}]
-					}
+					resolve: ["IsAuthorizedService", "$location", function (IsAuthorizedService, $location) {
+							return IsAuthorizedService.checkAuth('manage-user-permissions')
+								.then(function (response) {
+									return response;
+								}, function (error) {
+									alert("Unauthorized")
+									$location.path("/");
+								});
+						}]
 				})
 				.otherwise({redirectTo: '/login'});
 		}])
@@ -143,35 +151,4 @@ angular.module('artApp', [
 			}
 			$rootScope.$digest();
 		});
-	})
-	.run(['AclService', function (AclService) {
-
-			// Set the ACL data. Normally, you'd fetch this from an API or something.
-			// The data should have the roles as the property names,
-			// with arrays listing their permissions as their value.
-			var roleBasedPermissions = document.getElementById('role-permissions').value;
-
-			delete roleBasedPermissions.userRoles;
-
-			var aclData = JSON.parse(roleBasedPermissions);
-
-			AclService.setAbilities(aclData);
-
-			// Attach the member role to the current user
-			var profile = JSON.parse(localStorage.getItem('profile'));
-			if (profile == null)
-			{
-				var email = null;
-			} else {
-				var email = profile.email;
-			}
-			AclService.attachRole(email);
-		}])
-	.run(['$rootScope', '$location', function ($rootScope, $location) {
-			// If the route change failed due to our "Unauthorized" error, redirect them
-			$rootScope.$on('$routeChangeError', function (current, previous, rejection) {
-				if (rejection === 'Unauthorized') {
-					$location.path('/');
-				}
-			});
-		}]);
+	});
