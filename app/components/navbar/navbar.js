@@ -5,9 +5,6 @@ angular.module('artApp.navbar', [])
 		return {
 			restrict: 'E',
 			templateUrl: 'components/navbar/navbar.template.html',
-			controller: ['$scope', 'AclService', function ($scope, AclService) {
-					$scope.isAllowed = AclService.can('admin');
-				}],
 			link: function (scope, element) {
 				// Set the initial value for the responsive menu
 				scope.width = false;

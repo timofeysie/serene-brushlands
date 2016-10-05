@@ -9,6 +9,7 @@ var striptags = require('striptags');
 var util = require('util');
 var Busboy = require('busboy');
 var busboy = require('connect-busboy');
+
 require('dotenv').config();
 
 $.prototype.eq = function (placement) {
@@ -29,7 +30,7 @@ module.exports = {
 app.use(busboy());
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/app'));
-// views is directory for all template files
+//views is directory for all template files
 app.set('views', __dirname + '/app');
 app.engine('html', require('ejs').renderFile);
 app.get('/', function (request, response) {
@@ -554,19 +555,47 @@ app.post('/save-from-firebase', function (req, res) {
 	return req.pipe(busboy);
 });
 
-app.post('/save-user-roles', function (req, res) {
+app.post('/save-user-permissions', function (req, res) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	var busboy = new Busboy({headers: req.headers});
 	busboy.on('field', function (fieldname, val, fieldnameTruncated, valTruncated) {
 		if (fieldname == "fetched_data")
 		{
-			fs.writeFile(".roles.json", val, function (err) {
+			fs.writeFile(".permissions.json", val, function (err) {
 				if (err) {
 					res.status(400).send(err);
 					return;
 				}
 			});
+		}
+	});
+	busboy.on('finish', function () {
+		res.send();
+	});
+	return req.pipe(busboy);
+});
+
+app.post('/is-authorized', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	var busboy = new Busboy({headers: req.headers});
+	busboy.on('field', function (fieldname, val) {
+		var email = JSON.parse(val).email;
+		var task = JSON.parse(val).task;
+		
+		var file = fs.readFileSync('.permissions.json').toString();
+		var assignedPermissions = JSON.parse(file).assignedPermissions;
+		var index = assignedPermissions[task].indexOf(email);
+		
+		if (index == -1)
+		{
+			res.status(401).send();
+			return;
+		} else
+		{
+			res.status(200).send();
+			return;
 		}
 	});
 	busboy.on('finish', function () {
@@ -609,7 +638,7 @@ app.get('/auth-roles', function (req, res) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.setHeader('Content-Type', 'application/json');
-	var file = fs.readFileSync('.roles.json').toString();
+	var file = fs.readFileSync('.permissions.json').toString();
 	var rolesFileJson = JSON.parse(file);
 	res.send(rolesFileJson);
 });

@@ -12,14 +12,14 @@
 						Artworks
 					</a>
 				</li>
-				<li role="presentation">
+				<li role="presentation" data-is-authorized authorized-task="access-locations-page">
 					<a href="#/locations"
 					   class="button button-3d button-pill"
 					   id="navbar__button">
 						Gallery
 					</a>
 				</li>
-				<li role="presentation">
+				<li role="presentation" data-is-authorized authorized-task="upload-artworks">
 					<a href="#/add"
 					   class="button button-3d button-pill"
 					   id="navbar__button">
@@ -40,7 +40,7 @@
 						Inspections
 					</a>
 				</li>
-				<li role="presentation" ng-show="isAllowed">
+				<li role="presentation" data-is-authorized authorized-task="manage-user-permissions">
 					<a href="#/user-permissions"
 					   class="button button-3d button-pill"
 					   id="navbar__button">
