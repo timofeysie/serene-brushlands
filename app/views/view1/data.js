@@ -32,9 +32,15 @@ angular.module('artApp.data', ['ngRoute'])
 			});
 		}])
 
-	.controller('DataCtrl', ['$scope', '$rootScope', '$http', function ($scope, $rootScope, $http) {
+	.controller('DataCtrl', ['$scope', '$rootScope', 'IsAuthorizedService', function ($scope, $rootScope, IsAuthorizedService) {
 			$scope.viewModel = {};
 			// table sorting
+			IsAuthorizedService.checkAuth("view-location-insured-and-provenance")
+				.then(function (response) {
+					$rootScope.permissions["view-location-insured-and-provenance"] = true;
+				}, function (error) {
+					$rootScope.permissions["view-location-insured-and-provenance"] = false;
+				});
 			$scope.viewModel.sortType = 'name'; // set the default sort type
 			$scope.viewModel.sortReverse = false;  // set the default sort order
 			$scope.viewModel.officeLocation = '';     // set the default search/filter term

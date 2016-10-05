@@ -37,7 +37,7 @@
 					</a>
 				<table-dots></table-dots>
 				</td>
-				<td style="text-align:left">
+				<td style="text-align:left" data-ng-if="permissions['view-location-insured-and-provenance']">
 					<a href="javascript:;" 
 					   ng-click="viewModel.sortType = 'officeLocation'; viewModel.sortReverse = !viewModel.sortReverse">
 						Location
@@ -80,7 +80,7 @@
 							</a>
 							<table-dots></table-dots>
 						  </td> -->
-				<td style="text-align:left"><a href="javascript:;" 
+				<td style="text-align:left" data-ng-if="permissions['view-location-insured-and-provenance']"><a href="javascript:;" 
 											   ng-click="viewModel.sortType = 'insured'; viewModel.sortReverse = !viewModel.sortReverse">
 						Insured
 						<span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
@@ -90,7 +90,7 @@
 					</a>
 				<table-dots></table-dots>
 				</td>
-				<td style="text-align:left"><a href="javascript:;" 
+				<td style="text-align:left" data-ng-if="permissions['view-location-insured-and-provenance']"><a href="javascript:;" 
 											   ng-click="viewModel.sortType = 'provenance'; viewModel.sortReverse = !viewModel.sortReverse">
 						Provenance
 						<span ng-show="viewModel.sortType == 'src' && !viewModel.sortReverse" 
@@ -108,7 +108,7 @@
 						{{artwork.title}}</td>
 					<td style="text-align:left" >
 						{{artwork.artist}}</td>
-					<td style="text-align:left" >
+					<td style="text-align:left" data-ng-if="permissions['view-location-insured-and-provenance']">
 						{{artwork.officeLocation}}</td>
 					<td ni-if="{artwork.src !== ''}"
 						style="text-align:left" >
@@ -120,10 +120,10 @@
 								style="text-align:left" >
 								{{artwork.amountPaid}}</td> -->
 					<td ni-if="{artwork.src !== ''}"
-						style="text-align:left" >
+						style="text-align:left" data-ng-if="permissions['view-location-insured-and-provenance']">
 						{{artwork.insured}}</td>
 					<td ni-if="{artwork.src !== ''}"
-						style="text-align:left" >
+						style="text-align:left" data-ng-if="permissions['view-location-insured-and-provenance']">
 						{{artwork.provenance}}</td>
 				</tr>
 			</table>

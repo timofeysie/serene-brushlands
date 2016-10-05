@@ -12,7 +12,6 @@ angular.module('artApp', [
 	'angular-jwt',
 	'firebase',
 	'artApp.navbar',
-	'artApp.isAuthorized',
 	'artApp.view1',
 	'artApp.view2',
 	'artApp.view3',
@@ -33,16 +32,7 @@ angular.module('artApp', [
 			})
 				.when('/locations', {
 					templateUrl: 'views/view1/locations.html',
-					requiresLogin: true,
-					resolve: ["IsAuthorizedService", "$location", function (IsAuthorizedService, $location) {
-							return IsAuthorizedService.checkAuth('access-locations-page')
-								.then(function (response) {
-									return response;
-								}, function (error) {
-									alert("Unauthorized")
-									$location.path("/");
-								});
-						}]
+					requiresLogin: true
 				})
 				.when('/locations/:artist', {
 					templateUrl: 'views/view1/locations.html',
@@ -69,16 +59,7 @@ angular.module('artApp', [
 				.when('/add', {
 					templateUrl: 'views/view3/add.html',
 					pageTitle: 'Add',
-					requiresLogin: true,
-					resolve: ["IsAuthorizedService", "$location", function (IsAuthorizedService, $location) {
-							return IsAuthorizedService.checkAuth('upload-artworks')
-								.then(function (response) {
-									return response;
-								}, function (error) {
-									alert("Unauthorized")
-									$location.path("/");
-								});
-						}]
+					requiresLogin: true
 				})
 				.when('/inspections', {
 					templateUrl: 'views/view3/inspections.html',
@@ -110,6 +91,7 @@ angular.module('artApp', [
 		});
 	})
 	.run(function (auth, $window, $rootScope, store, jwtHelper, $location) {
+		$rootScope.permissions = {};
 		var envValues = document.getElementById('env-values').value;
 		var response = JSON.parse(envValues);
 		$rootScope.firebaseUri = response.FIREBASE_URI;

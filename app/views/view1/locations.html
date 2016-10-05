@@ -2,6 +2,7 @@
 <div id="outer">
 	<div ng-controller="LocationsCtrl as controller">
 		<br/>
+		<div data-ng-if="permissions['view-location-insured-and-provenance']">
 		<label>Filter by office location: </label>
 		<select ng-model="selectedLocation"
 				class="button button-3d button-pill">
@@ -11,6 +12,7 @@
 		</select>
 		<br />
 		<br />
+		</div>
 		<label> Filter by artist: </label>
 		<select ng-model="selectedArtist"
 				class="button button-3d button-pill">
@@ -34,7 +36,10 @@
 						<div><p1>{{artwork.assetRefNo}}.</p1>{{artwork.title}}
 							<span ng-show="artwork.inspected"><i class="fa fa-check-circle"></i></span></div>
 						<div ng-show="artwork.artist">by {{artwork.artist}}</div>
-						<div ng-show="true" ng-class="'' == selectedLocation ? 'all-locations-same' : ''" class="{{artwork.locationBg}} artwork__locationBg {{allArtWorksClass}}"
+						<div 
+							data-ng-if="permissions['view-location-insured-and-provenance']"
+							ng-show="true"
+							ng-class="'' == selectedLocation ? 'all-locations-same' : ''" class="{{artwork.locationBg}} artwork__locationBg {{allArtWorksClass}}"
 							 style="display: table-cell; vertical-align: bottom;">{{artwork.officeLocation}}</div>
 					</div>
 				</div>

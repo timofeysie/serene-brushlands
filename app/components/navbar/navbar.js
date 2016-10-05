@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('artApp.navbar', [])
-	.directive('navbar', function ($window) {
+	.directive('navbar', function ($window, $rootScope) {
 		return {
 			restrict: 'E',
 			templateUrl: 'components/navbar/navbar.template.html',

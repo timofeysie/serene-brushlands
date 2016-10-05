@@ -6,8 +6,8 @@
  */
 angular.module('artApp.locations', ['ngRoute'])
 
-	.controller('LocationsCtrl', ['$scope', '$rootScope', '$routeParams',
-		function ($scope, $rootScope, $routeParams) {
+	.controller('LocationsCtrl', ['$scope', '$rootScope', '$routeParams', 'IsAuthorizedService',
+		function ($scope, $rootScope, $routeParams, IsAuthorizedService) {
 
 			var viewModel = this;
 			$scope.officelocations = [];
@@ -17,6 +17,13 @@ angular.module('artApp.locations', ['ngRoute'])
 			if ($routeParams.artist) {
 				$scope.selectedArtist = $routeParams.artist;
 			}
+
+			IsAuthorizedService.checkAuth("view-location-insured-and-provenance")
+				.then(function (response) {
+					$rootScope.permissions["view-location-insured-and-provenance"] = true;
+				}, function (error) {
+					$rootScope.permissions["view-location-insured-and-provenance"] = false;
+				});
 
 			var newJsonArray = [];
 			$scope.spinner = true;
