@@ -1,10 +1,9 @@
 {
 "assignedPermissions":{
-"manage-user-permissions": [],
-"upload-artworks": [],
-"access-locations-page":[]
+"manage-user-permissions": ["tonymb@rockend.com.au","timofeyc@hotmail.com","work@thesanmark.com"],
+"view-location-insured-and-provenance":["tonymb@rockend.com.au","timofeyc@hotmail.com"]
 },
 "users":[
-"work@thesanmark.com", "developer@thesanmark.com","user@thesanmark.com"
+"work@thesanmark.com","tonymb@rockend.com.au","timofeyc@hotmail.com"
 ]
 }

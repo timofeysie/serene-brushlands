@@ -6,11 +6,18 @@
  */
 angular.module('artApp.userPermissions', [])
 
-	.controller('UserPermissionsCtrl', ['$scope', '$location', '$http',
-		function ($scope, $location, $http) {
+	.controller('UserPermissionsCtrl', ['$rootScope', '$scope', '$http', 'IsAuthorizedService',
+		function ($rootScope, $scope, $http, IsAuthorizedService) {
 
 			$scope.currentSelectedUser = "";
 			$scope.permissionsCheckboxes = {};
+
+			IsAuthorizedService.checkAuth("manage-user-permissions")
+				.then(function (response) {
+					$rootScope.permissions["manage-user-permissions"] = true;
+				}, function (error) {
+					$rootScope.permissions["manage-user-permissions"] = false;
+				});
 
 			function getUserPermissions()
 			{
@@ -63,7 +70,7 @@ angular.module('artApp.userPermissions', [])
 				$scope.permissionsFile["assignedPermissions"] = $scope.assignedPermissions;
 
 				array.append('fetched_data', JSON.stringify($scope.permissionsFile));
-				
+
 				if ($scope.permissionsFile["assignedPermissions"]["manage-user-permissions"].length == 0)
 				{
 					alert("Please assign at least one user for user management");
