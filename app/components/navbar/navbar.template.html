@@ -47,11 +47,20 @@
 						User Permissions
 					</a>
 				</li>
-				<li role="presentation">
-					<a href="#/about"
+				<li role="presentation" data-is-logged data-if-logged="hide">
+					<a href="#"
+					   ng-click="login()"
 					   class="button button-3d button-pill"
 					   id="navbar__button">
-						Login/Logout
+						Login
+					</a>
+				</li>
+				<li role="presentation" data-is-logged data-if-logged="show">
+					<a href="#"
+					   ng-click="signout()"
+					   class="button button-3d button-pill"
+					   id="navbar__button">
+						Logout
 					</a>
 				</li>
 			</ul>
@@ -88,10 +97,17 @@
 				   id="navbar__button">
 					Inspections
 				</a>
-				<a href="#/about"
+				<a href="#"
+				   ng-click="login()"
 				   class="button button-3d button-pill"
 				   id="navbar__button">
-					Login/Logout
+					Login
+				</a>
+				<a href="#"
+				   ng-click="signout()"
+				   class="button button-3d button-pill"
+				   id="navbar__button">
+					Logout
 				</a>
 			</div>
 		</div>
@@ -115,7 +131,8 @@
 				<span class="hamburger hamburger-2"></span>
 				<span class="hamburger hamburger-3"></span>
 			</label>
-			<a href="#/login" class="menu-item">Login</a>
+			<a href="#" data-ng-click='login()' class="menu-item" data-is-logged data-if-logged="hide">Login</a>
+			<a href="#" data-ng-click='signout()' class="menu-item" data-is-logged data-if-logged="show">Logout</a>
 			<a href="#/data" class="menu-item">Data</a>
 			<a href="#/add" class="menu-item">Update</i> </a>
 			<a href="#/inspections" class="menu-item">Inspect</a>
