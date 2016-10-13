@@ -99,6 +99,7 @@ body {
 	top: 30px;
 	text-align: center;
 	min-height: 200px;
+	width: 50%;
 }
 
 /* line 97, ../../scss/styles.scss */
@@ -454,6 +455,7 @@ a {
        display:inline-block;
 	   position: absolute;
 	   top: 50%;
+	   z-index: 9;
     }
 	
 	.artwork-nav-buttons-sm {
@@ -473,6 +475,7 @@ a {
     .artwork-nav-buttons-sm {
        display:block;
 	   padding-top: 35px;
+	   z-index: 9;
     }
 	
 	.artwork-nav-buttons-lg {
