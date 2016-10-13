@@ -78,9 +78,9 @@
 								<td>
 									<p style="text-indent: 50px;" id="bio">
 										<a data-ng-if="viewModel.AASDLinkFound" href={{viewModel.realAASDLink}} target="_blank" ng-hide="editModeEnabled">
-											<span>{{viewModel.bio.AASDLink}}</span>
+											<span>{{viewModel.realAASDLink}}</span>
 										</a>
-										<span data-ng-if="!viewModel.bio.AASDLinkFound" ng-hide="editModeEnabled">AASD does not have an article with this exact name.</span>
+										<span data-ng-if="!viewModel.AASDLinkFound" ng-hide="editModeEnabled">AASD does not have an article with this exact name.</span>
 										<input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.AASDLink"/>
 									</p>
 								</td>
@@ -90,7 +90,7 @@
 								<td>
 									<p style="text-indent: 50px;" id="bio">
 										<a data-ng-if="viewModel.wikiLinkFound" href={{viewModel.realWikiLink}} target="_blank" ng-hide="editModeEnabled">
-											<span>{{viewModel.bio.WikiLink === "" ? "WiKi Link Empty" : viewModel.bio.WikiLink}}</span>
+											<span>{{viewModel.realWikiLink}}</span>
 										</a>
 										<span data-ng-if="!viewModel.wikiLinkFound" ng-hide="editModeEnabled">Wikipedia does not have an article with this exact name</span>
 										<input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.WikiLink"/>

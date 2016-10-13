@@ -97,6 +97,7 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 				}
 				$scope.viewModel.spinner = false;
 				if (!$scope.$$phase) {
+					console.log($scope.viewModel);
 					$scope.$apply($scope.viewModel);
 				}
 			}, function (errObj) {
