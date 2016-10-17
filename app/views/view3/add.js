@@ -13,10 +13,18 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 			});
 		}])
 
-	.controller('addCtrl', ['$scope', '$rootScope', 'Upload', '$routeParams', '$http', '$q', '$timeout', '$firebaseObject',
-		function ($scope, $rootScope, Upload, $routeParams, $http, $q, $timeout, $firebaseObject) {
+	.controller('addCtrl', ['$scope', '$rootScope', 'Upload', '$routeParams', '$http', '$q', '$timeout', '$firebaseObject', 'IsAuthorizedService',
+		function ($scope, $rootScope, Upload, $routeParams, $http, $q, $timeout, $firebaseObject, IsAuthorizedService) {
 			var viewModel = this;
 			// this is the argument passed in by the ng-route as configured in the app.js
+
+			IsAuthorizedService.checkAuth("upload-and-backup-artworks")
+				.then(function (response) {
+					$rootScope.permissions["upload-and-backup-artworks"] = true;
+				}, function (error) {
+					$rootScope.permissions["upload-and-backup-artworks"] = false;
+				});
+
 			$scope.isBackupSuccess = false;
 			$scope.showBackupProcessing = false;
 			viewModel.PhotoRefNo = $routeParams.PhotoRefNo;
@@ -89,9 +97,9 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 										"WikiLink": ""
 									}
 								},
-								function (data) {
-									d.resolve(data);
-								}
+							function (data) {
+								d.resolve(data);
+							}
 							);
 						}
 					});

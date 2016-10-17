@@ -47,7 +47,7 @@
 						User Permissions
 					</a>
 				</li>
-				<li role="presentation" data-is-logged data-if-logged="hide">
+				<li role="presentation" ng-if="!isAuthenticated">
 					<a href="#"
 					   ng-click="login()"
 					   class="button button-3d button-pill"
@@ -55,7 +55,7 @@
 						Login
 					</a>
 				</li>
-				<li role="presentation" data-is-logged data-if-logged="show">
+				<li role="presentation" ng-if="isAuthenticated">
 					<a href="#"
 					   ng-click="signout()"
 					   class="button button-3d button-pill"
@@ -99,11 +99,13 @@
 				</a>
 				<a href="#"
 				   ng-click="login()"
+				   ng-if="!isAuthenticated"
 				   class="button button-3d button-pill"
 				   id="navbar__button">
 					Login
 				</a>
 				<a href="#"
+				   ng-if="isAuthenticated"
 				   ng-click="signout()"
 				   class="button button-3d button-pill"
 				   id="navbar__button">
@@ -131,8 +133,8 @@
 				<span class="hamburger hamburger-2"></span>
 				<span class="hamburger hamburger-3"></span>
 			</label>
-			<a href="#" data-ng-click='login()' class="menu-item" data-is-logged data-if-logged="hide">Login</a>
-			<a href="#" data-ng-click='signout()' class="menu-item" data-is-logged data-if-logged="show">Logout</a>
+			<a href="#" data-ng-click='login()' class="menu-item" ng-if="!isAuthenticated">Login</a>
+			<a href="#" data-ng-click='signout()' class="menu-item" ng-if="isAuthenticated">Logout</a>
 			<a href="#/data" class="menu-item">Data</a>
 			<a href="#/add" class="menu-item">Update</i> </a>
 			<a href="#/inspections" class="menu-item">Inspect</a>

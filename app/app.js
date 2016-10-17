@@ -59,7 +59,16 @@ angular.module('artApp', [
 				.when('/add', {
 					templateUrl: 'views/view3/add.html',
 					pageTitle: 'Add',
-					requiresLogin: true
+					requiresLogin: true,
+					resolve: ["IsAuthorizedService", "$location", function (IsAuthorizedService, $location) {
+							return IsAuthorizedService.checkAuth('upload-and-backup-artworks')
+								.then(function (response) {
+									return response;
+								}, function (error) {
+									alert("Unauthorized")
+									$location.path("/");
+								});
+						}]
 				})
 				.when('/inspections', {
 					templateUrl: 'views/view3/inspections.html',
@@ -104,18 +113,29 @@ angular.module('artApp', [
 			$rootScope.mediumWidth = true;
 		}
 
+		var refreshingToken = null;
 		$rootScope.$on('$locationChangeStart', function () {
-
 			var token = store.get('token');
+			var refreshToken = store.get('refreshToken');
 			if (token) {
 				if (!jwtHelper.isTokenExpired(token)) {
 					if (!auth.isAuthenticated) {
-						//Re-authenticate user if token is valid
 						auth.authenticate(store.get('profile'), token);
 					}
 				} else {
-					// Either show the login page or use the refresh token to get a new idToken
-					$location.path('/');
+					if (refreshToken) {
+						if (refreshingToken === null) {
+							refreshingToken = auth.refreshIdToken(refreshToken).then(function (idToken) {
+								store.set('token', idToken);
+								auth.authenticate(store.get('profile'), idToken);
+							}).finally(function () {
+								refreshingToken = null;
+							});
+						}
+						return refreshingToken;
+					} else {
+						$location.path('/login');
+					}
 				}
 			}
 		});

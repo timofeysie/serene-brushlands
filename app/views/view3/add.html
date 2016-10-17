@@ -93,7 +93,7 @@
 			<<<<<<< HEAD
 					id="form__element">Submit</a> -->
 			<br/>
-			<button type="file" class="button button-3d-caution button-pill" ngf-select="uploadFiles($file, $invalidFiles)" accept=".docx">
+			<button data-ng-if="permissions['upload-and-backup-artworks']" type="file" class="button button-3d-caution button-pill" ngf-select="uploadFiles($file, $invalidFiles)" accept=".docx">
 				Upload File
 			</button>
 			<br>
@@ -107,7 +107,7 @@
 			</div>
 			{{errorMsg}}
 			<br/>
-			<button type="button" class="button button-3d-primary button-pill" ng-click="getFromFirebase()">
+			<button data-ng-if="permissions['upload-and-backup-artworks']" type="button" class="button button-3d-primary button-pill" ng-click="getFromFirebase()">
 				Use Backup
 			</button>
 			<br/>
