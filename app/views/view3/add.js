@@ -76,44 +76,58 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 				loopArray(uniqueArtistsArray);
 
 				function saveOrDiscard(artistName, callback) {
-					var formattedArtistName = artistName.replace(/[$#,.]/g, "");
-					var artistsRef = new Firebase($rootScope.firebaseUri + "/artists/" + formattedArtistName);
+					if (artistName)
+					{
+						var formattedArtistName = artistName.replace(/[$#,.]/g, "");
+						var artistsRef = new Firebase($rootScope.firebaseUri + "/artists/" + formattedArtistName);
 
-					artistsRef.once("value", function (data) {
-						if (data.val() === null)
-						{
-							artistsRef.set(
-								{
-									"name": formattedArtistName,
-									"skinName": "",
-									"language": "",
-									"region": "",
-									"dreaming": "",
-									"DOB": "",
-									"bio": {
-										"title": "",
-										"body": "",
-										"AASDLink": "",
-										"WikiLink": ""
-									}
-								},
-							function (data) {
-								d.resolve(data);
+						artistsRef.once("value", function (data) {
+							if (data.val() === null)
+							{
+								artistsRef.set(
+									{
+										"name": formattedArtistName,
+										"skinName": "",
+										"language": "",
+										"region": "",
+										"dreaming": "",
+										"DOB": "",
+										"bio": {
+											"title": "",
+											"body": "",
+											"AASDLink": "",
+											"WikiLink": ""
+										}
+									},
+								function (data) {
+									d.resolve(data);
+								}
+								);
 							}
-							);
-						}
-					});
-					callback();
-					return d.promise;
+						});
+						callback();
+						return d.promise;
+					}
+
 				}
 			}
 
 			function saveSingleArtwork(data) {
-
 				var d = $q.defer();
 				var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks/" + data.assetRefNo);
 
 				uploadedArtworksRef.set(data, function () {
+					d.resolve();
+				});
+
+				return d.promise;
+			}
+
+			function saveImage(data) {
+				var d = $q.defer();
+				var uploadedImagesRef = new Firebase($rootScope.firebaseUri + "/images/" + data.assetRefNo);
+
+				uploadedImagesRef.set(data, function () {
 					d.resolve();
 				});
 
@@ -131,20 +145,24 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 					});
 
 					file.upload.then(function (response) {
+						var artworksData = response.data[0];
+						var images = response.data[1];
+						
 						$timeout(function () {
 
 							var promises = []
 							var uniqueArtistsArray = [];
 
-							for (var i = 0; i < response.data.length; i++)
+							for (var i = 0; i < artworksData.length; i++)
 							{
 
-								if (uniqueArtistsArray.indexOf(response.data[i].artist) == -1)
+								if (uniqueArtistsArray.indexOf(artworksData[i].artist) == -1)
 								{
-									uniqueArtistsArray.push(response.data[i].artist);
+									uniqueArtistsArray.push(artworksData[i].artist);
 								}
-
-								promises.push(saveSingleArtwork(response.data[i]));
+								
+								promises.push(saveImage(images[i]));
+								promises.push(saveSingleArtwork(artworksData[i]));
 
 							}
 

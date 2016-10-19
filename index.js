@@ -127,34 +127,46 @@ app.post('/upload', function (req, res) {
 					//
 					// return false;
 
-					var allPagesArray = [];
+					var artworksDataArray = [];
+					var imagesArray = [];
 
 					for (var i = 0; i < elementsArray.length; i++)
 					{
 						if (elementsArray[i].indexOf("Asset Reference No") != -1)
 						{
-							var onePageObject = {};
+							var artworkDetailsObj = {};
+							var imageObj = {};
+
 							var referenceNo = grabInfo(elementsArray[i], "Asset Reference No:", "", false);
-							onePageObject["assetRefNo"] = referenceNo;
+							artworkDetailsObj["assetRefNo"] = referenceNo;
+							imageObj["assetRefNo"] = referenceNo;
+
 							var artist = grabInfo(elementsArray[i + 1], "Artist:", "", false);
-							onePageObject["artist"] = artist;
+							artworkDetailsObj["artist"] = artist;
+
 							var title = grabInfo(elementsArray[i + 2], "Title:", "", false);
-							onePageObject["title"] = title;
+							artworkDetailsObj["title"] = title;
+
 							var size = grabInfo(elementsArray[i + 3], "Size:", "", false);
-							onePageObject["size"] = size;
+							artworkDetailsObj["size"] = size;
+
 							var amountPaid = grabInfo(elementsArray[i + 4], "Amount Paid:", "", false);
-							onePageObject["amountPaid"] = amountPaid;
+							artworkDetailsObj["amountPaid"] = amountPaid;
+
 							var insured = grabInfo(elementsArray[i + 5], "Insured:", "", false);
-							onePageObject["insured"] = insured;
+							artworkDetailsObj["insured"] = insured;
+
 							var provenance = grabInfo(elementsArray[i + 6], "Provenance:", "", false);
-							onePageObject["provenance"] = provenance;
+							artworkDetailsObj["provenance"] = provenance;
+
 							var officeLocation = grabInfo(elementsArray[i + 7], "Office Location:", "", false);
-							onePageObject["officeLocation"] = officeLocation;
+							artworkDetailsObj["officeLocation"] = officeLocation;
+
 							var base64Data = grabInfo(elementsArray[i + 8], /^data:image\/jpeg;base64,/, "", true);
 
 							if (base64Data !== "")
 							{
-								fs.writeFile("uploads/images/image-" + onePageObject['assetRefNo'] + ".jpeg", base64Data, 'base64', function (err) {
+								fs.writeFile("uploads/images/image-" + artworkDetailsObj["assetRefNo"] + ".jpeg", base64Data, 'base64', function (err) {
 									if (err) {
 										res.status(400).send(err);
 										return;
@@ -162,26 +174,28 @@ app.post('/upload', function (req, res) {
 								});
 							}
 
-							onePageObject["imageFile"] = checkIfNullOrEmpty(elementsArray[i + 8]);
-							onePageObject["imageFileName"] = "image-" + onePageObject['assetRefNo'] + ".jpeg";
-							onePageObject["inspected"] = false;
-							onePageObject["additionalImages"] = [];
-							onePageObject["text"] = "";
-							allPagesArray.push(onePageObject);
+							artworkDetailsObj["imageFileName"] = "image-" + artworkDetailsObj["assetRefNo"] + ".jpeg";
+							artworkDetailsObj["inspected"] = false;
+							artworkDetailsObj["text"] = "";
+							
+							imageObj["imageFile"] = checkIfNullOrEmpty(elementsArray[i + 8]);
+							imageObj["additionalImages"] = [];
+							
+							artworksDataArray.push(artworkDetailsObj);
+							imagesArray.push(imageObj);
 						}
 					}
 
-					fs.writeFile("uploads/uploaded-artworks.json", JSON.stringify(allPagesArray), function (err) {
+					fs.writeFile("uploads/artworks.json", JSON.stringify([artworksDataArray,imagesArray]), function (err) {
 						if (err) {
 							res.status(400).send(err);
 							return;
 						} else {
 							fs.unlink("tmp/" + newFileName);
-							res.status(200).json(allPagesArray);
+							res.status(200).json([artworksDataArray,imagesArray]);
 						}
 					});
 
-					var messages = result.messages;
 				})
 				.done();
 		});
@@ -583,11 +597,11 @@ app.post('/is-authorized', function (req, res) {
 	busboy.on('field', function (fieldname, val) {
 		var email = JSON.parse(val).email;
 		var task = JSON.parse(val).task;
-		
+
 		var file = fs.readFileSync('.permissions.json').toString();
 		var assignedPermissions = JSON.parse(file).assignedPermissions;
 		var index = assignedPermissions[task].indexOf(email);
-		
+
 		if (index == -1)
 		{
 			res.status(401).send();
