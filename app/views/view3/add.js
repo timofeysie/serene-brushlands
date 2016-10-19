@@ -125,13 +125,40 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 
 			function saveImage(data) {
 				var d = $q.defer();
-				var uploadedImagesRef = new Firebase($rootScope.firebaseUri + "/images/" + data.assetRefNo);
+				
+				var img = new Image;
 
-				uploadedImagesRef.set(data, function () {
-					d.resolve();
-				});
+				img.onload = resizeImage;
+				img.src = data.imageFile;
+
+				function resizeImage() {
+					var newDataUri = imageToDataUri(this, 100, 100);
+					data.thumbnail = newDataUri;
+
+					var uploadedImagesRef = new Firebase($rootScope.firebaseUri + "/images/" + data.assetRefNo);
+
+					uploadedImagesRef.set(data, function () {
+						d.resolve();
+					});
+				}
 
 				return d.promise;
+			}
+
+			function imageToDataUri(img, width, height) {
+				// create an off-screen canvas
+				var canvas = document.createElement('canvas'),
+					ctx = canvas.getContext('2d');
+
+				// set its dimension to target size
+				canvas.width = width;
+				canvas.height = height;
+
+				// draw source image into the off-screen canvas:
+				ctx.drawImage(img, 0, 0, width, height);
+
+				// encode image to data-uri with base64 version of compressed image
+				return canvas.toDataURL();
 			}
 
 			$scope.uploadFiles = function (file, errFiles) {
@@ -147,7 +174,7 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 					file.upload.then(function (response) {
 						var artworksData = response.data[0];
 						var images = response.data[1];
-						
+
 						$timeout(function () {
 
 							var promises = []
@@ -160,7 +187,7 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 								{
 									uniqueArtistsArray.push(artworksData[i].artist);
 								}
-								
+
 								promises.push(saveImage(images[i]));
 								promises.push(saveSingleArtwork(artworksData[i]));
 

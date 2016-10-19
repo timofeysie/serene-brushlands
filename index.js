@@ -66,7 +66,6 @@ app.post('/upload', function (req, res) {
 
 					var html = "<div class='wrapper'>" + striptags(result.value, '<p><img>') + "</div>";
 					var parsedHTML = $.load(html);
-					var allPagesArray = []
 
 					function grabInfo(element, findString, replaceString, isImage)
 					{
@@ -95,7 +94,7 @@ app.post('/upload', function (req, res) {
 							return element;
 						}
 					}
-
+					
 					var elementsArray = [];
 
 					parsedHTML('.wrapper').children('p').each(function () {
@@ -117,15 +116,6 @@ app.post('/upload', function (req, res) {
 							elementsArray.push(element.text());
 						}
 					});
-
-					//  var elementsArray = parsedHTML('.wrapper').children().toArray();
-
-					//Log to file
-					//  var file = fs.createWriteStream('debug.json');
-					//  file.write(JSON.stringify(elementsArray));
-					//   file.end();
-					//
-					// return false;
 
 					var artworksDataArray = [];
 					var imagesArray = [];
@@ -177,22 +167,22 @@ app.post('/upload', function (req, res) {
 							artworkDetailsObj["imageFileName"] = "image-" + artworkDetailsObj["assetRefNo"] + ".jpeg";
 							artworkDetailsObj["inspected"] = false;
 							artworkDetailsObj["text"] = "";
-							
+
 							imageObj["imageFile"] = checkIfNullOrEmpty(elementsArray[i + 8]);
 							imageObj["additionalImages"] = [];
-							
+
 							artworksDataArray.push(artworkDetailsObj);
 							imagesArray.push(imageObj);
 						}
 					}
 
-					fs.writeFile("uploads/artworks.json", JSON.stringify([artworksDataArray,imagesArray]), function (err) {
+					fs.writeFile("uploads/artworks.json", JSON.stringify([artworksDataArray, imagesArray]), function (err) {
 						if (err) {
 							res.status(400).send(err);
 							return;
 						} else {
 							fs.unlink("tmp/" + newFileName);
-							res.status(200).json([artworksDataArray,imagesArray]);
+							res.status(200).json([artworksDataArray, imagesArray]);
 						}
 					});
 

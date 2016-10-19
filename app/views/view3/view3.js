@@ -27,7 +27,13 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
 				$scope.viewModel.title = retriveData.title;
 				$scope.viewModel.size = retriveData.size;
 				$scope.viewModel.imageFileName = retriveData.imageFileName;
-				$scope.viewModel.imageFile = retriveData.imageFile;
+				var thumbnailRef = new Firebase($rootScope.firebaseUri + "/images/" + paintingNo+"/thumbnail");
+				
+				thumbnailRef.on("value", function (data) {
+					var thumbnail = data.val();
+					$scope.viewModel.thumbnail = thumbnail;
+				});
+				
 				$scope.viewModel.id = retriveData.assetRefNo;
 
 				if ($rootScope.inspectionOn) {
