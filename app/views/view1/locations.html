@@ -3,15 +3,15 @@
 	<div ng-controller="LocationsCtrl as controller">
 		<br/>
 		<div data-ng-if="permissions['view-location-insured-and-provenance']">
-		<label>Filter by office location: </label>
-		<select ng-model="selectedLocation"
-				class="button button-3d button-pill">
-			<option value="">All</option>
-			<option ng-repeat="officelocation in officelocations"
-					value="{{officelocation}}">{{officelocation}}</option>
-		</select>
-		<br />
-		<br />
+			<label>Filter by office location: </label>
+			<select ng-model="selectedLocation"
+					class="button button-3d button-pill">
+				<option value="">All</option>
+				<option ng-repeat="officelocation in officelocations"
+						value="{{officelocation}}">{{officelocation}}</option>
+			</select>
+			<br />
+			<br />
 		</div>
 		<label> Filter by artist: </label>
 		<select ng-model="selectedArtist"
@@ -24,26 +24,39 @@
 		<br/>
 		<img ng-show="spinner" ng-src="assets/images/spinner.gif" style="background:none">
 		<div class="flex-container">
-			<div ng-repeat="artwork in controller.artworks | orderBy:'officeLocation' | filter:{officeLocation:selectedLocation, artist:selectedArtist}:strict"
+			<div ng-repeat="artwork in controller.artworks| orderBy:'officeLocation' | filter:{officeLocation:selectedLocation, artist:selectedArtist}:strict"
 				 style="position: relative; left: 45px;">
 
 				<div id="productos"
 					 class="col col-span-3">
 					<div class="container">
-						<a href="#/view3/{{artwork.assetRefNo}}">
-							<img ng-src="{{artwork.imageFile}}" alt="No image" style="width:100px"/>
+						<a class="lightbox" href="javascript:void(0)" data-ng-click="openLightBox(artwork)">
+							<img ng-src="{{artwork.thumbnail}}" alt="No image"/>
 						</a>
-						<div><p1>{{artwork.assetRefNo}}.</p1>{{artwork.title}}
-							<span ng-show="artwork.inspected"><i class="fa fa-check-circle"></i></span></div>
-						<div ng-show="artwork.artist">by {{artwork.artist}}</div>
-						<div 
-							data-ng-if="permissions['view-location-insured-and-provenance']"
-							ng-show="true"
-							ng-class="'' == selectedLocation ? 'all-locations-same' : ''" class="{{artwork.locationBg}} artwork__locationBg {{allArtWorksClass}}"
-							 style="display: table-cell; vertical-align: bottom;">{{artwork.officeLocation}}</div>
+						<a href="#/view3/{{artwork.assetRefNo}}">
+							<div>
+								<p>{{artwork.assetRefNo}}.</p>
+
+								{{artwork.title}}
+								<span ng-show="artwork.inspected">
+									<i class="fa fa-check-circle"></i>
+								</span>
+							</div>
+							<div ng-show="artwork.artist">by {{artwork.artist}}</div>
+							<div 
+								data-ng-if="permissions['view-location-insured-and-provenance']"
+								ng-show="true"
+								ng-class="'' == selectedLocation ? 'all-locations-same' : ''" class="{{artwork.locationBg}} artwork__locationBg {{allArtWorksClass}}"
+								style="display: table-cell; vertical-align: bottom;">{{artwork.officeLocation}}
+							</div>
+						</a>
 					</div>
 				</div>
 			</div><!-- end repeat -->
+		</div>
+		<div class="lightbox-target" id="locations-lightbox" data-ng-click="closeLightBox()">
+			<img id="locations-lightbox-image" alt="No Image" src=""/>
+			<a class="lightbox-close" href="javascript:void(0)"></a>
 		</div>
 	</div>
 </div>

@@ -35,7 +35,7 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 			{
 				$scope.showBackupProcessing = true;
 				var newJsonArray = [];
-				var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks");
+				var uploadedArtworksRef = new Firebase($rootScope.firebaseUri);
 				uploadedArtworksRef.once("value", function (data) {
 					var retrivedData = data.val();
 					for (var key in retrivedData) {
@@ -112,35 +112,36 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 				}
 			}
 
-			function saveSingleArtwork(data) {
+			function saveSingleArtwork(data,imageFile) {
 				var d = $q.defer();
-				var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks/" + data.assetRefNo);
 
-				uploadedArtworksRef.set(data, function () {
-					d.resolve();
-				});
+				var img = new Image;
+
+				img.onload = resizeImage;
+				img.src = imageFile;
+
+				function resizeImage() {
+					var newDataUri = imageToDataUri(this, 60, 60);
+					data.thumbnail = newDataUri;
+
+					var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks/" + data.assetRefNo);
+
+					uploadedArtworksRef.set(data, function () {
+						d.resolve();
+					});
+				}
 
 				return d.promise;
 			}
 
 			function saveImage(data) {
 				var d = $q.defer();
-				
-				var img = new Image;
 
-				img.onload = resizeImage;
-				img.src = data.imageFile;
+				var uploadedImagesRef = new Firebase($rootScope.firebaseUri + "/images/" + data.assetRefNo);
 
-				function resizeImage() {
-					var newDataUri = imageToDataUri(this, 100, 100);
-					data.thumbnail = newDataUri;
-
-					var uploadedImagesRef = new Firebase($rootScope.firebaseUri + "/images/" + data.assetRefNo);
-
-					uploadedImagesRef.set(data, function () {
-						d.resolve();
-					});
-				}
+				uploadedImagesRef.set(data, function () {
+					d.resolve();
+				});
 
 				return d.promise;
 			}
@@ -189,7 +190,7 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 								}
 
 								promises.push(saveImage(images[i]));
-								promises.push(saveSingleArtwork(artworksData[i]));
+								promises.push(saveSingleArtwork(artworksData[i], images[i].imageFile));
 
 							}
 

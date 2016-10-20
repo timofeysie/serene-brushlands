@@ -545,7 +545,7 @@ app.post('/save-from-firebase', function (req, res) {
 	busboy.on('field', function (fieldname, val, fieldnameTruncated, valTruncated) {
 		if (fieldname == "fetched_data")
 		{
-			fs.writeFile("uploads/uploaded-artworks.json", val, function (err) {
+			fs.writeFile("uploads/firebase-backup.json", val, function (err) {
 				if (err) {
 					res.status(400).send(err);
 					return;

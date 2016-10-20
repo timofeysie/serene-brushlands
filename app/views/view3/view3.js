@@ -27,12 +27,7 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
 				$scope.viewModel.title = retriveData.title;
 				$scope.viewModel.size = retriveData.size;
 				$scope.viewModel.imageFileName = retriveData.imageFileName;
-				var thumbnailRef = new Firebase($rootScope.firebaseUri + "/images/" + paintingNo + "/thumbnail");
-
-				thumbnailRef.on("value", function (data) {
-					var thumbnail = data.val();
-					$scope.viewModel.thumbnail = thumbnail;
-				});
+				$scope.viewModel.thumbnail = retriveData.thumbnail;
 
 				$scope.viewModel.id = retriveData.assetRefNo;
 
@@ -48,15 +43,15 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
 				console.log("read failed" + errorObject.code);
 			});
 
-			$scope.openLightBox = function (data)
+			$scope.openLightBox = function ()
 			{
-				document.getElementById("view3-lightbox").style.display = "block";
 
 				var imageRef = new Firebase($rootScope.firebaseUri + "/images/" + paintingNo + "/imageFile");
 
 				imageRef.on("value", function (data) {
 					var image = data.val();
 					document.getElementById("view3-lightbox-image").src = image;
+					document.getElementById("view3-lightbox").style.display = "block";
 				});
 			}
 

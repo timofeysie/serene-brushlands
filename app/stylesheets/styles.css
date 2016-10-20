@@ -290,8 +290,9 @@ nav {
 /* line 255, ../../scss/styles.scss */
 #productos img {
 	border-radius: 5px;
-	height: 120px;
-	margin: 15px;
+	height: 100px;
+	width: 100px;
+	margin: 15px 15px 0px 15px;
 	border-top: solid black 1px;
 	border-left: solid black 1px;
 }

@@ -18,6 +18,24 @@ angular.module('artApp.locations', ['ngRoute'])
 				$scope.selectedArtist = $routeParams.artist;
 			}
 
+			$scope.openLightBox = function (artwork)
+			{
+
+				var imageRef = new Firebase($rootScope.firebaseUri + "/images/" + artwork.assetRefNo + "/imageFile");
+
+				imageRef.on("value", function (data) {
+					var image = data.val();
+					document.getElementById("locations-lightbox").style.display = "block";
+					document.getElementById("locations-lightbox-image").src = image;
+				});
+			}
+
+			$scope.closeLightBox = function ()
+			{
+				document.getElementById("locations-lightbox").style.display = "none";
+				document.getElementById("locations-lightbox-image").src = "";
+			}
+
 			IsAuthorizedService.checkAuth("view-location-insured-and-provenance")
 				.then(function (response) {
 					$rootScope.permissions["view-location-insured-and-provenance"] = true;
