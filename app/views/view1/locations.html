@@ -4,7 +4,7 @@
 		<br/>
 		<div data-ng-if="permissions['view-location-insured-and-provenance']">
 			<label>Filter by office location: </label>
-			<select ng-model="selectedLocation"
+			<select ng-model="$parent.selectedLocation"
 					class="button button-3d button-pill">
 				<option value="">All</option>
 				<option ng-repeat="officelocation in officelocations"
