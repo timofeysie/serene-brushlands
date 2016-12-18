@@ -114,7 +114,7 @@ angular.module('artApp', [
 		}
 
 		var refreshingToken = null;
-		$rootScope.$on('$locationChangeStart', function () {
+		$rootScope.$on('$locationChangeStart', function (obj, from, to) {
 			var token = store.get('token');
 			var refreshToken = store.get('refreshToken');
 			if (token) {
@@ -137,6 +137,8 @@ angular.module('artApp', [
 						$location.path('/login');
 					}
 				}
+			} else {
+				$rootScope.redirect = to;
 			}
 		});
 
