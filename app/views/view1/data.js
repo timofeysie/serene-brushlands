@@ -32,7 +32,7 @@ angular.module('artApp.data', ['ngRoute'])
 			});
 		}])
 
-	.controller('DataCtrl', ['$scope', '$rootScope', 'IsAuthorizedService', function ($scope, $rootScope, IsAuthorizedService) {
+	.controller('DataCtrl', ['$scope', '$rootScope', '$http', 'IsAuthorizedService', function ($scope, $rootScope, $http, IsAuthorizedService) {
 			$scope.viewModel = {};
 			// table sorting
 			IsAuthorizedService.checkAuth("view-location-insured-and-provenance")
@@ -46,9 +46,8 @@ angular.module('artApp.data', ['ngRoute'])
 			$scope.viewModel.officeLocation = '';     // set the default search/filter term
 			$scope.viewModel.artworks = [];
 
-			var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks");
-			uploadedArtworksRef.on("value", function (data) {
-				var retriveData = data.val();
+			$http.get('/get-artworks').then(function (res) {
+				var retriveData = res.data;
 
 				for (var key in retriveData) {
 					$scope.viewModel.artworks.push(retriveData[key]);

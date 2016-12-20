@@ -18,11 +18,10 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
 
 			$scope.viewModel.nextPaintingNumber = parseInt(paintingNo) + 1;
 			$scope.viewModel.imageFile = 'assets/images/spinner.gif';
-			var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks/" + paintingNo);
-
-			uploadedArtworksRef.on("value", function (data) {
-
-				var retriveData = data.val();
+//			var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks/" + paintingNo);
+//
+			$http.get('/get-artwork/' + paintingNo).then(function(res) {
+				var retriveData = res.data;
 				$scope.viewModel.artist = retriveData.artist;
 				$scope.viewModel.title = retriveData.title;
 				$scope.viewModel.size = retriveData.size;
@@ -45,15 +44,12 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
 
 			$scope.openLightBox = function ()
 			{
-
-				var imageRef = new Firebase($rootScope.firebaseUri + "/images/" + paintingNo + "/imageFile");
-
-				imageRef.on("value", function (data) {
-					var image = data.val();
-					document.getElementById("view3-lightbox-image").src = image;
+				$http.get('/get-image/'+paintingNo).then( function (res) {
+					var data = res.data;
+					document.getElementById("view3-lightbox-image").src = data.imageFile;
 					document.getElementById("view3-lightbox").style.display = "block";
 				});
-			}
+			};
 
 			$scope.closeLightBox = function ()
 			{

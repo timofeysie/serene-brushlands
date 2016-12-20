@@ -47,13 +47,12 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 				}
 			};
 
-			var artistsRef = new Firebase($rootScope.firebaseUri + "/artists/" + $routeParams.artist);
 			$scope.viewModel = {bio: {}};
 			$scope.viewModel.spinner = true;
 			$scope.updatedMessage = {"status": false, "msg": ""};
 			$scope.editModeEnabled = false;
-			artistsRef.on("value", function (data) {
-				var retrivedArtistData = data.val();
+			$http.get('/get-artist/'+ $routeParams.artist).then(function (res) {
+				var retrivedArtistData = res.data;
 				if (retrivedArtistData !== null)
 				{
 					$scope.viewModel.name = retrivedArtistData.name;
@@ -133,11 +132,12 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 						$scope.$apply($scope.viewModel);
 					}
 				};
-
-				updateArtistsBioRef.child('title').set(ifIsNullOrEmpty(obj.bio.title), onComplete);
-				updateArtistsBioRef.child('body').set(ifIsNullOrEmpty(obj.bio.body), onComplete);
-				updateArtistsBioRef.child('AASDLink').set(ifIsNullOrEmpty(obj.bio.AASDLink), onComplete);
-				updateArtistsBioRef.child('WikiLink').set(ifIsNullOrEmpty(obj.bio.WikiLink), onComplete);
+				var data = obj;
+				data.artist = $routeParams.artist;
+				
+				$http.post('/update-artist', data).then(function(){
+					onComplete(false);
+				});
 
 				$scope.viewModel.bio.title = $sce.trustAsHtml("<span>" + urlify(obj.bio.title) + "</span>");
 				$scope.viewModel.bio.body = $sce.trustAsHtml("<span>" + urlify(obj.bio.body) + "</span>");

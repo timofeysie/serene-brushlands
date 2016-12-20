@@ -9,6 +9,8 @@ var striptags = require('striptags');
 var util = require('util');
 var Busboy = require('busboy');
 var busboy = require('connect-busboy');
+var MongoClient = require('mongodb').MongoClient;
+var bodyParser = require('body-parser')
 
 require('dotenv').config();
 
@@ -26,7 +28,7 @@ $.prototype.eq = function (placement) {
 module.exports = {
 	normalizeLocation: normalizeLocation
 }
-
+app.use(bodyParser.json({limit: '50mb'}));
 app.use(busboy());
 app.set('port', (process.env.PORT || 5000));
 app.use(express.static(__dirname + '/app'));
@@ -94,7 +96,7 @@ app.post('/upload', function (req, res) {
 							return element;
 						}
 					}
-					
+
 					var elementsArray = [];
 
 					parsedHTML('.wrapper').children('p').each(function () {
@@ -128,8 +130,8 @@ app.post('/upload', function (req, res) {
 							var imageObj = {};
 
 							var referenceNo = grabInfo(elementsArray[i], "Asset Reference No:", "", false);
-							artworkDetailsObj["assetRefNo"] = referenceNo;
-							imageObj["assetRefNo"] = referenceNo;
+							artworkDetailsObj["assetRefNo"] = parseInt(referenceNo);
+							imageObj["assetRefNo"] = parseInt(referenceNo);
 
 							var artist = grabInfo(elementsArray[i + 1], "Artist:", "", false);
 							artworkDetailsObj["artist"] = artist;
@@ -193,7 +195,165 @@ app.post('/upload', function (req, res) {
 	}
 });
 
+app.post('/save-artworks', function (req, res) {
 
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.setHeader('Content-Type', 'application/json');
+	var data = req.body;
+	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
+		if (err) {
+			return console.dir(err);
+		}
+
+		var collection = db.collection('artworks');
+
+		collection.update({assetRefNo: data.assetRefNo}, data, {upsert: true}, function (err, resuslt) {
+			res.send({data: "sucess"});
+		});
+
+		db.close();
+	});
+});
+
+app.post('/save-artist', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.setHeader('Content-Type', 'application/json');
+
+	var data = req.body;
+	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
+		if (err) {
+			return console.dir(err);
+		}
+
+		var collection = db.collection('artists');
+
+		collection.update({name: data.name}, data, {upsert: true}, function (err, resuslt) {
+			res.send({data: "sucess"});
+		});
+		db.close();
+	});
+});
+
+app.post('/save-image', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.setHeader('Content-Type', 'application/json');
+
+	var data = req.body;
+	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
+		if (err) {
+			return console.dir(err);
+		}
+
+		var collection = db.collection('images');
+		collection.update({assetRefNo: data.assetRefNo}, data, {upsert: true}, function (err, resuslt) {
+			res.send({data: "sucess"});
+		});
+		db.close();
+	});
+
+});
+
+app.post('/update-artist', function(req, res){
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.setHeader('Content-Type', 'application/json');
+
+	var data = req.body;
+	
+	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
+		if (err) {
+			return console.dir(err);
+		}
+
+		var collection = db.collection('artists');
+		collection.update({name:data.artist}, {$set:{bio:data.bio}}, function (err, items) {
+			console.log(items);
+			console.log(err);
+			res.send({data:"sucess"});
+		});
+		db.close();
+	});
+});
+
+app.get('/get-artworks', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.setHeader('Content-Type', 'application/json');
+
+	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
+		if (err) {
+			return console.dir(err);
+		}
+
+		var collection = db.collection('artworks');
+		collection.find().sort({assetRefNo: 1}).toArray(function (err, items) {
+			res.send(items);
+		});
+		db.close();
+	});
+});
+
+app.get('/get-artwork/:id', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.setHeader('Content-Type', 'application/json');
+
+	var assetRefNo = parseInt(req.params.id);
+	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
+		if (err) {
+			return console.dir(err);
+		}
+
+		var collection = db.collection('artworks');
+		collection.findOne({assetRefNo: assetRefNo}, function (err, items) {
+			res.send(items);
+		});
+		db.close();
+	});
+});
+
+app.get('/get-image/:id', function(req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.setHeader('Content-Type', 'application/json');
+
+	var assetRefNo = parseInt(req.params.id);
+	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
+		if (err) {
+			return console.dir(err);
+		}
+
+		var collection = db.collection('images');
+		collection.findOne({assetRefNo: assetRefNo}, function (err, items) {
+			res.send(items);
+		});
+		db.close();
+	});
+	
+});
+
+app.get('/get-artist/:name', function(req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.setHeader('Content-Type', 'application/json');
+
+	var name = req.params.name;
+	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
+		if (err) {
+			return console.dir(err);
+		}
+
+		var collection = db.collection('artists');
+		collection.findOne({name: name}, function (err, items) {
+			res.send(items);
+		});
+		db.close();
+	});
+	
+});
 /**
  Return the json file from the uploaded document.
  */

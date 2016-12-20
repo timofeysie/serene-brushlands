@@ -6,8 +6,8 @@
  */
 angular.module('artApp.locations', ['ngRoute'])
 
-	.controller('LocationsCtrl', ['$scope', '$rootScope', '$routeParams', 'IsAuthorizedService',
-		function ($scope, $rootScope, $routeParams, IsAuthorizedService) {
+	.controller('LocationsCtrl', ['$scope', '$rootScope', '$http', '$routeParams', 'IsAuthorizedService',
+		function ($scope, $rootScope, $http, $routeParams, IsAuthorizedService) {
 
 			var viewModel = this;
 			$scope.officelocations = [];
@@ -20,15 +20,12 @@ angular.module('artApp.locations', ['ngRoute'])
 
 			$scope.openLightBox = function (artwork)
 			{
-
-				var imageRef = new Firebase($rootScope.firebaseUri + "/images/" + artwork.assetRefNo + "/imageFile");
-
-				imageRef.on("value", function (data) {
-					var image = data.val();
+				$http.get('/get-image/'+artwork.assetRefNo).then(function (res) {
+					var data = res.data;
 					document.getElementById("locations-lightbox").style.display = "block";
-					document.getElementById("locations-lightbox-image").src = image;
+					document.getElementById("locations-lightbox-image").src = data.imageFile;
 				});
-			}
+			};
 
 			$scope.closeLightBox = function ()
 			{
@@ -45,10 +42,8 @@ angular.module('artApp.locations', ['ngRoute'])
 
 			var newJsonArray = [];
 			$scope.spinner = true;
-			var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks");
-			//$http.get('/artworks').success(function(data) {
-			uploadedArtworksRef.on("value", function (data) {
-				var retrivedData = data.val();
+			$http.get('/get-artworks').then(function (res) {
+				var retrivedData = res.data;
 				for (var key in retrivedData) {
 					newJsonArray.push(retrivedData[key]);
 				}

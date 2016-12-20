@@ -71,7 +71,7 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 							loopArray(uniqueArtistsArray);
 						}
 					});
-				}
+				};
 
 				loopArray(uniqueArtistsArray);
 
@@ -79,31 +79,23 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 					if (artistName)
 					{
 						var formattedArtistName = artistName.replace(/[$#,.]/g, "");
-						var artistsRef = new Firebase($rootScope.firebaseUri + "/artists/" + formattedArtistName);
 
-						artistsRef.once("value", function (data) {
-							if (data.val() === null)
-							{
-								artistsRef.set(
-									{
-										"name": formattedArtistName,
-										"skinName": "",
-										"language": "",
-										"region": "",
-										"dreaming": "",
-										"DOB": "",
-										"bio": {
-											"title": "",
-											"body": "",
-											"AASDLink": "",
-											"WikiLink": ""
-										}
-									},
-								function (data) {
-									d.resolve(data);
-								}
-								);
-							}
+						var data = {
+							"name": formattedArtistName,
+							"skinName": "",
+							"language": "",
+							"region": "",
+							"dreaming": "",
+							"DOB": "",
+							"bio": {
+							"title": "",
+								"body": "",
+								"AASDLink": "",
+								"WikiLink": ""
+							},
+						}
+						$http.post('/save-artist', data).then(function () {
+							d.resolve();
 						});
 						callback();
 						return d.promise;
@@ -112,24 +104,19 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 				}
 			}
 
-			function saveSingleArtwork(data,imageFile) {
+			function saveSingleArtwork(data, imageFile) {
 				var d = $q.defer();
 
 				var img = new Image;
 
-				img.onload = resizeImage;
 				img.src = imageFile;
 
-				function resizeImage() {
-					var newDataUri = imageToDataUri(this, 60, 60);
-					data.thumbnail = newDataUri;
+				var newDataUri = imageToDataUri(img, 60, 60);
+				data.thumbnail = newDataUri;
 
-					var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks/" + data.assetRefNo);
-
-					uploadedArtworksRef.set(data, function () {
-						d.resolve();
-					});
-				}
+				$http.post('/save-artworks', data).then(function () {
+					d.resolve();
+				});
 
 				return d.promise;
 			}
@@ -137,9 +124,7 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 			function saveImage(data) {
 				var d = $q.defer();
 
-				var uploadedImagesRef = new Firebase($rootScope.firebaseUri + "/images/" + data.assetRefNo);
-
-				uploadedImagesRef.set(data, function () {
+				$http.post('/save-image', data).then(function () {
 					d.resolve();
 				});
 
