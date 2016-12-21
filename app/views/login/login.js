@@ -20,7 +20,11 @@ angular.module('artApp.login', [
 				auth.signin({}, function (profile, token) {
 					store.set('profile', profile);
 					store.set('token', token);
-					$window.location = $rootScope.redirect;
+					if ($rootScope.redirect) {
+						$window.location = $rootScope.redirect;
+					} else {
+						$window.location.reload();
+					}
 				}, function (error) {
 					console.log("There was an error logging in", error);
 				});
