@@ -88,7 +88,7 @@ body {
 }
 
 /* line 84, ../../scss/styles.scss */
-#artworkContainer {
+.artworkContainer {
 	display: inline-block;
 	position: relative;
 	border: 0.5px solid #d0d0d0;
@@ -103,17 +103,17 @@ body {
 }
 
 /* line 97, ../../scss/styles.scss */
-#artworkContainer h2 {
+.artworkContainer h2 {
 	text-align: center;
 }
 
 /* line 100, ../../scss/styles.scss */
-#artworkContainer h3 {
+.artworkContainer h3 {
 	text-align: center;
 }
 
 /* line 104, ../../scss/styles.scss */
-#artworkContainer a {
+.rtworkContainer a {
 	font-size: 16px;
 }
 
@@ -379,7 +379,7 @@ a {
 }
 
 /* line 327, ../../scss/styles.scss */
-#bio::first-letter {
+.bio::first-letter {
 	font-size: 200%;
 	color: Moccasin;
 }
@@ -442,13 +442,11 @@ a {
 	margin-left:auto; 
 	margin-right:auto;
 	text-align: left;
-	border: 1px solid #000000;
 }
 
 .artists-info-table #action-bar
 {
 	padding: 10px 0px;
-	background-color: aliceblue;
 }
 
 @media screen and (min-width: 765px) {
