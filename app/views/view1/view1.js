@@ -30,9 +30,8 @@ angular.module('artApp.view1', ['ngRoute', 'firebase'])
 			if ($scope.viewModel.paintings.length == 0) {
 
 				$scope.viewModel.spinner = true;
-				var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks");
-				uploadedArtworksRef.on("value", function (data) {
-					var retriveData = data.val();
+				$http.get('/get-artworks').then(function(res){
+					var retriveData = res.data;
 					for (var key in retriveData) {
 						$scope.viewModel.paintings.push(retriveData[key]);
 					}
