@@ -81,7 +81,7 @@ body {
         margin-right: 100px;
 }
 
-#artworkContainer {
+.artworkContainer {
         display:inline-block; 
         position: relative;
         border: 0.5px solid #d0d0d0;
@@ -94,14 +94,14 @@ body {
         min-height:200px;
 }
 
-#artworkContainer h2{
+.artworkContainer h2{
     text-align: center;
 }
-#artworkContainer h3{
+.artworkContainer h3{
     text-align:center;
 }
 
-#artworkContainer a {
+.artworkContainer a {
         font-size: 16px;
 }
 /*
@@ -324,7 +324,7 @@ a {
   color: Moccasin;
 }
 
-#bio::first-letter { 
+.bio::first-letter { 
     font-size: 200%;
     color: Moccasin;
 }
