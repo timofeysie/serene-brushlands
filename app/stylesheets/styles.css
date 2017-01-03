@@ -102,7 +102,7 @@ body {
 	width: 50%;
 }
 .artworkContainer-small {
-	padding: 20px 10px 50px 10px;
+	padding: 20px 10px 20px 10px;
 	width: 80%;
 }
 
@@ -115,6 +115,15 @@ body {
 }
 
 .artworkContainer-small .button {
+	margin-bottom: 15px;
+}
+
+.artworkContainer-small .additional-image {
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.artworkContainer-small .additional-text {
 	margin-bottom: 15px;
 }
 

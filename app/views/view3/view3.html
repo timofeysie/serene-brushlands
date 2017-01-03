@@ -15,7 +15,7 @@
 						<i class="fa fa-arrow-right fa-3x" aria-hidden="true"></i>
 					</button>
 				</a>
-				<div class="col-md-6 col-md-offset-3">
+				<div ng-if="!mediumWidth && !smallWidth" class="col-md-6 col-md-offset-3">
 					<div id="artworkContainer" class="artworkContainer">
 						<a class="lightbox" href="javascript:void(0)" data-ng-click="openLightBox(viewModel)">
 							<img id="artwork" ng-src="{{viewModel.thumbnail}}" src="assets/images/spinner.gif"
@@ -57,6 +57,63 @@
 								ng-click="uploadAdditionalImages(additionalImages)">
 							Submit New Data
 						</button>
+					</div>
+					<div class="artwork-nav-buttons-sm">
+						<a href="#/view3/{{viewModel.prevPaintingNumber}}" ng-if="viewModel.currentPaintingNumber !== 1">
+							<button type="button" class="button button-3d button-pill next-prev-artwork-button">
+								<i class="fa fa-arrow-left fa-3x" aria-hidden="true"></i>
+							</button>
+						</a>
+						<a href="#/view3/{{viewModel.nextPaintingNumber}}" ng-if="viewModel.currentPaintingNumber !== artworks.length">
+							<button type="button" class="button button-3d button-pill next-prev-artwork-button">
+								<i class="fa fa-arrow-right fa-3x" aria-hidden="true"></i>
+							</button>
+						</a>
+					</div>
+				</div>
+				<div ng-if="mediumWidth || smallWidth" class="col-md-6 col-md-offset-3">
+					<div id="artworkContainer" class="artworkContainer artworkContainer-small">
+						<a class="lightbox" href="javascript:void(0)" data-ng-click="openLightBox(viewModel)">
+							<img id="artwork" ng-src="{{viewModel.thumbnail}}" src="assets/images/spinner.gif"
+								 alt="No image" width="100px;"/>
+						</a>
+						<br/>
+						<a href="#/view1"
+						   class="button button-3d button-pill">
+							{{viewModel.id}}. {{viewModel.title}} 
+						<span ng-show="inspectionOn">
+								<i class="fa fa-check-circle"></i></span>
+						</a>
+						<p><a href="#/view2/{{viewModel.artist}}"
+							  class="button button-3d-action button-pill">
+								{{viewModel.artist}}</a></p>
+						<p>{{viewModel.size}}</p>
+						<div class="additional-image">
+							<span>Add Additional Images</span>
+									<div 
+									   ng-model="additionalImages" 
+									   class="button button-3d-highlight button-pill" 
+									   ngf-select multiple accept="image/*">Choose Image</div>
+							<div>{{additionalImages.name}}</div>
+							<div style="font:smaller">       
+								<span class="progress" ng-show="f.progress >= 0">
+									<div style="width:100%" ng-bind="f.progress + '%'" 
+										 class="ng-binding">100%</div>
+								</span>
+								<span ng-show="f.result" class="">All images uploaded successfully.</span>
+							</div>
+						</div>
+						{{errorMsg}}
+						<div class="add-text-btn" ng-hide="viewModel.addText">
+							<button class="button button-3d-action button-pill" ng-click="viewModel.addText=true">Add Text</button>
+						</div>
+						<div ng-show="viewModel.addText" class="additional-text">
+							<textarea placeholder="Add additional text" data-ng-model="text"></textarea>
+						</div>
+							<button type="button" class="button button-3d-primary button-pill" 
+									ng-click="uploadAdditionalImages(additionalImages)">
+								Submit New Data
+							</button>
 					</div>
 					<div class="artwork-nav-buttons-sm">
 						<a href="#/view3/{{viewModel.prevPaintingNumber}}" ng-if="viewModel.currentPaintingNumber !== 1">
