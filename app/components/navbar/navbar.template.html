@@ -1,7 +1,7 @@
 <div class="container">
 
 	<!-- large screen width menu -->
-	<div class="row"
+	<div ng-if="isAuthenticated" class="row"
 		 ng-show="!smallWidth && !mediumWidth">
 		<div class="col-md-12 col-xs-12">
 			<ul class="nav nav-tabs no-stack">
@@ -68,7 +68,7 @@
 	</div>
 
 	<!-- medium screen width menu -->
-	<div class="row"
+	<div ng-if="isAuthenticated" class="row"
 		 ng-show="mediumWidth">
 		<div class="col-md-12 col-xs-12">
 			<div class="button-group">
@@ -117,7 +117,7 @@
 
 
 	<!-- small screen gooey nav -->
-	<div class="row"
+	<div ng-if="isAuthenticated" class="row"
 		 id="gooeyNav"
 		 ng-show="smallWidth">
 		<nav>
