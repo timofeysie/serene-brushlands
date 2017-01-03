@@ -101,6 +101,22 @@ body {
 	min-height: 200px;
 	width: 50%;
 }
+.artworkContainer-small {
+	padding: 20px 10px 50px 10px;
+	width: 80%;
+}
+
+.artworkContainer-small .bio {
+	margin-top : 0;
+}
+
+.artworkContainer-small .label {
+	margin-bottom: 0;
+}
+
+.artworkContainer-small .button {
+	margin-bottom: 15px;
+}
 
 /* line 97, ../../scss/styles.scss */
 .artworkContainer h2 {
@@ -381,7 +397,7 @@ a {
 /* line 327, ../../scss/styles.scss */
 .bio::first-letter {
 	font-size: 200%;
-	color: Moccasin;
+	color: #e1a85a;
 }
 
 /* Auth0 overridded styles (from the previous login modal)*/
@@ -451,20 +467,20 @@ a {
 
 @media screen and (min-width: 765px) {
     .artwork-nav-buttons-lg {
-       display:inline-block;
-	   position: absolute;
-	   top: 50%;
-	   z-index: 9;
+		display:inline-block;
+		position: absolute;
+		top: 50%;
+		z-index: 9;
     }
-	
+
 	.artwork-nav-buttons-sm {
-       display:none;
+		display:none;
     }
-	
+
 	.artworks-lg-next{
 		right: 10%;
 	}
-	
+
 	.artworks-lg-prev{
 		left: 10%;
 	}
@@ -472,18 +488,25 @@ a {
 
 @media screen and (max-width: 764px) {
     .artwork-nav-buttons-sm {
-       display:block;
-	   padding-top: 35px;
-	   z-index: 9;
+		display:block;
+		padding-top: 35px;
+		z-index: 9;
     }
-	
+
 	.artwork-nav-buttons-lg {
-       display:none;
+		display:none;
     }
-	
+
 }
 
 .unauthorized
 {
 	display: none !important;
+}
+
+.dot-loader {
+	background-image: url("/assets/images/dot-loader.gif");
+	height: 25px;
+	width: 100px;
+	background-position: right;
 }

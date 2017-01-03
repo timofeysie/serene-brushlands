@@ -51,13 +51,15 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 			$scope.viewModel.spinner = true;
 			$scope.updatedMessage = {"status": false, "msg": ""};
 			$scope.editModeEnabled = false;
-			$http.get('/get-artist/'+ $routeParams.artist).then(function (res) {
+			$http.get('/get-artist/' + $routeParams.artist).then(function (res) {
 				var retrivedArtistData = res.data;
 				if (retrivedArtistData !== null)
 				{
+					$scope.viewModel.wikiLinkLoader = true;
+					$scope.viewModel.AASDLinkLoader = true;
 					$scope.viewModel.name = retrivedArtistData.name;
-					$scope.viewModel.bio.title = $sce.trustAsHtml("<span>" + urlify(retrivedArtistData.bio.title) + "</span>");
-					$scope.viewModel.bio.body = $sce.trustAsHtml("<span>" + urlify(retrivedArtistData.bio.body) + "</span>");
+					$scope.viewModel.bio.title = urlify(retrivedArtistData.bio.title);
+					$scope.viewModel.bio.body = urlify(retrivedArtistData.bio.body);
 					$scope.viewModel.skinName = retrivedArtistData.skinName;
 					$scope.viewModel.language = retrivedArtistData.language;
 					$scope.viewModel.region = retrivedArtistData.region;
@@ -76,6 +78,7 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 
 					$http({method: "GET", url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + $scope.viewModel.realAASDLink + "%22&format=json"})
 						.then(function (response) {
+							$scope.viewModel.AASDLinkLoader = false;
 							if (response.data.query.results)
 							{
 								$scope.viewModel.AASDLinkFound = true;
@@ -84,6 +87,7 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 
 					$http({method: "GET", url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + $scope.viewModel.realWikiLink + "%22&format=json"})
 						.then(function (response) {
+							$scope.viewModel.wikiLinkLoader = false;
 							if (response.data.query.results)
 							{
 								$scope.viewModel.wikiLinkFound = true;
@@ -117,8 +121,6 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 					return "";
 				}
 
-				var updateArtistsBioRef = new Firebase($rootScope.firebaseUri + "/artists/" + $routeParams.artist + "/bio");
-
 				var onComplete = function (error) {
 					if (error) {
 						$scope.updatedMessage.status = true;
@@ -134,12 +136,12 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 				};
 				var data = obj;
 				data.artist = $routeParams.artist;
-				
-				$http.post('/update-artist', data).then(function(){
+
+				$http.post('/update-artist', data).then(function () {
 					onComplete(false);
 				});
 
-				$scope.viewModel.bio.title = $sce.trustAsHtml("<span>" + urlify(obj.bio.title) + "</span>");
-				$scope.viewModel.bio.body = $sce.trustAsHtml("<span>" + urlify(obj.bio.body) + "</span>");
+				$scope.viewModel.bio.title = urlify(obj.bio.title);
+				$scope.viewModel.bio.body = urlify(obj.bio.body);
 			};
 		}]);
