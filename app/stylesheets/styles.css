@@ -324,6 +324,8 @@ nav {
 
 /* line 263, ../../scss/styles.scss */
 .artwork__locationBg {
+	position: relative;
+	bottom: -3px;
 	width: 130px;
 	border: solid 1px;
 	border-bottom-right-radius: 7px;
