@@ -6,8 +6,8 @@
  */
 angular.module('artApp.locations', ['ngRoute'])
 
-	.controller('LocationsCtrl', ['$scope', '$rootScope', '$http', '$routeParams', 'IsAuthorizedService',
-		function ($scope, $rootScope, $http, $routeParams, IsAuthorizedService) {
+	.controller('LocationsCtrl', ['$scope', '$rootScope', '$http', '$routeParams', '$filter', 'IsAuthorizedService',
+		function ($scope, $rootScope, $http, $routeParams, $filter, IsAuthorizedService) {
 
 			var viewModel = this;
 			$scope.officelocations = [];
@@ -20,7 +20,7 @@ angular.module('artApp.locations', ['ngRoute'])
 
 			$scope.openLightBox = function (artwork)
 			{
-				$http.get('/get-image/'+artwork.assetRefNo).then(function (res) {
+				$http.get('/get-image/' + artwork.assetRefNo).then(function (res) {
 					var data = res.data;
 					document.getElementById("locations-lightbox").style.display = "block";
 					document.getElementById("locations-lightbox-image").src = data.imageFile;
@@ -50,29 +50,28 @@ angular.module('artApp.locations', ['ngRoute'])
 				var newData = [];
 				var locationBg = 0;
 				var currentLocation = '';
+				var color = 'locationBg0';
+				
+				newJsonArray = $filter('orderBy')(newJsonArray, 'officeLocation');
 				for (var i = 0; i < newJsonArray.length; i++) {
 					var item = newJsonArray[i];
 
 					/* Cycle thru 0 - 3 different backgound colors based on location */
-					try {
-						if (currentLocation.replace('-', '') === item.officeLocation.replace('-', '')) {
-							item.locationBg = 'locationBg' + locationBg; // set the same backgound
-						} else {
-							currentLocation = item.officeLocation;
-							locationBg++; // go to next color if location is different from last loop
-							if (locationBg > 4) {
-								locationBg = 0; // if it's over 2 go back to 0
-							}
-							item.locationBg = 'locationBg' + locationBg; // set the new bg to be used here
+					var index = $scope.officelocations.findIndex(val => val.location==item.officeLocation);
+					if (index === -1) {
+						locationBg++; // go to next color if location is different from last loop
+						if (locationBg > 4) {
+							locationBg = 0; // if it's over 2 go back to 0
 						}
-					} catch (error) {
-						//console.log('no location');
+						color = 'locationBg' + locationBg;
+						var location = {location:item.officeLocation, color:color};
+						$scope.officelocations.push(location);
+						item.locationBg = color; // set the new bg to be used here
+					} else {
+						color = $scope.officelocations[index].color;
+						item.locationBg = color;
 					}
-
-					if ($scope.officelocations.indexOf(item.officeLocation) == -1) {
-						$scope.officelocations.push(item.officeLocation);
-					}
-
+					
 					if ($scope.artists.indexOf(item.artist) == -1 && item.artist !== "") {
 						$scope.artists.push(item.artist);
 					}
@@ -80,9 +79,46 @@ angular.module('artApp.locations', ['ngRoute'])
 					newData.push(item);
 				}
 				viewModel.artworks = newData;
+				$scope.originals = angular.copy(viewModel.artworks);
 				$scope.spinner = false;
 				if (!$scope.$$phase) {
 					$scope.$apply(viewModel);
 				}
 			});
+			
+			$scope.filterArtworks = function (filter)
+			{
+				var newFilter = {};
+				viewModel.artworks = $scope.originals;
+				if (filter.officeLocation !== "" || filter.artist !== "")
+				{
+					if (filter.officeLocation !== "")
+					{
+						newFilter.officeLocation = filter.officeLocation;
+					}
+					if (filter.artist !== "")
+					{
+						newFilter.artist = filter.artist;
+					}
+				}
+				viewModel.artworks = $filter('filter')(viewModel.artworks, newFilter, true);
+
+				newFilter = {};
+				if (filter.searchTerm !== "")
+				{
+					if (filter.searchArtist || filter.searchLocation)
+					{
+						if (filter.searchArtist)
+						{
+							newFilter.artist = filter.searchTerm;
+						}
+						if (filter.searchLocation)
+						{
+							newFilter.officeLocation = filter.searchTerm;
+						}
+						viewModel.artworks = $filter('filter')(viewModel.artworks, newFilter, false);
+					}
+
+				}
+			};
 		}]);

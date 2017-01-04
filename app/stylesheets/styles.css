@@ -519,3 +519,74 @@ a {
 	width: 100px;
 	background-position: right;
 }
+
+.filters{
+	width: 80%;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 15px;
+}
+
+.filters input[type=checkbox]{
+	opacity: 1;
+	position: initial;
+	cursor: pointer;
+}
+
+.filters label
+{
+	cursor: pointer;
+}
+
+.filters .filter-group
+{
+	padding-bottom: 5px;
+}
+
+.filters .search-term 
+{
+	height: 32px;
+	padding : 0 10px;
+	margin-bottom: 5px;
+}
+
+.filters .filter-header
+{
+	width: 100%;
+	cursor: pointer;
+	position: relative;
+}
+.filters .filter-header h2
+{
+	margin: 0;
+}
+
+.filters .filter-body
+{
+	padding-top:10px;
+	background-color: #eee;
+	width:100%;
+	padding-left: 26.5px;
+	padding-right: 26.5px;
+}
+
+.arrow-down {
+	position: absolute;
+	top: 8px;
+	right: 5px;
+	width: 0; 
+	height: 0; 
+	border-left: 16px solid transparent;
+	border-right: 16px solid transparent;
+	border-top: 16px solid #bbbbbb;
+}
+.arrow-up {
+	position: absolute;
+	top: 8px;
+	right: 5px;
+	width: 0; 
+	height: 0; 
+	border-left: 16px solid transparent;
+	border-right: 16px solid transparent;
+	border-bottom: 16px solid #bbbbbb;
+}
