@@ -12,3 +12,4 @@ uploads/uploaded-artworks.json
 debug.html
 npm-debug.log
 /nbproject/private/
+app/assets/backups/

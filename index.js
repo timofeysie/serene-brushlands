@@ -1,4 +1,6 @@
 var express = require('express');
+var async = require('async');
+var officegen = require('officegen');
 var app = express();
 var $ = require('cheerio');
 var fs = require('fs');
@@ -153,19 +155,8 @@ app.post('/upload', function (req, res) {
 
 							var officeLocation = grabInfo(elementsArray[i + 7], "Office Location:", "", false);
 							artworkDetailsObj["officeLocation"] = officeLocation;
-
-							var base64Data = grabInfo(elementsArray[i + 8], /^data:image\/jpeg;base64,/, "", true);
-
-							if (base64Data !== "")
-							{
-								fs.writeFile("uploads/images/image-" + artworkDetailsObj["assetRefNo"] + ".jpeg", base64Data, 'base64', function (err) {
-									if (err) {
-										res.status(400).send(err);
-										return;
-									}
-								});
-							}
-
+							
+							var base64Data = grabInfo(elementsArray[i + 8], /^data:image\//, /^data:image\//, true);
 							artworkDetailsObj["imageFileName"] = "image-" + artworkDetailsObj["assetRefNo"] + ".jpeg";
 							artworkDetailsObj["inspected"] = false;
 							artworkDetailsObj["text"] = "";
@@ -184,6 +175,17 @@ app.post('/upload', function (req, res) {
 							return;
 						} else {
 							fs.unlink("tmp/" + newFileName);
+							
+							async.forEach(imagesArray, function (image) {
+								var type = image.imageFile.substring("data:image/".length, image.imageFile.indexOf(";base64"))
+								fs.writeFile("uploads/images/image-" + image["assetRefNo"] + "." + type, image.imageFile.replace("data:image\/" + type + ";base64,", ""), 'base64', function (err) {
+									if (err) {
+										res.status(400).send(err);
+										return;
+									}
+								});
+							});
+							
 							res.status(200).json([artworksDataArray, imagesArray]);
 						}
 					});
@@ -270,8 +272,6 @@ app.post('/update-artist', function(req, res){
 
 		var collection = db.collection('artists');
 		collection.update({name:data.artist}, {$set:{bio:data.bio}}, function (err, items) {
-			console.log(items);
-			console.log(err);
 			res.send({data:"sucess"});
 		});
 		db.close();
@@ -354,6 +354,86 @@ app.get('/get-artist/:name', function(req, res) {
 	});
 	
 });
+
+app.get('/download-backup', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.setHeader('Content-Type', 'application/json');
+
+	var fileName = 'assets/backups/artwork-backup.docx';
+
+	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
+		if (err) {
+			return console.dir(err);
+		}
+		var content = [];
+		var collection = db.collection('artworks');
+		var imageCollection = db.collection('images');
+
+		collection.find().sort({assetRefNo: 1}).toArray(function (err, items) {
+			var count = items.length;
+			var docxFile = officegen('docx');
+			async.forEach(items, function (item) {
+				imageCollection.findOne({assetRefNo: item.assetRefNo}, function (err, image) {
+					var singleItem = item;
+					
+					var type = image.imageFile.substring("data:image/".length, image.imageFile.indexOf(";base64"))
+					var imagePath = path.resolve(__dirname + '/app/assets/backups/images/image-'+ item.assetRefNo+'.' + type);
+					
+					singleItem.imagePath = imagePath;
+					singleItem.imageFile = image.imageFile;
+					content.push(singleItem);
+					
+					fs.writeFile(imagePath, image.imageFile.replace("data:image\/" + type + ";base64,", ""), 'base64', function (err) {
+						if (err) {
+							res.status(400).send(err);
+							return;
+						}
+						count--;
+
+						if (count === 0) {
+							
+							for (var i = 0; i < content.length; i++) {
+								var pObj = docxFile.createP();
+								pObj.addText('Asset Reference No: ' + content[i].assetRefNo);
+								var pObj = docxFile.createP();
+								pObj.addText('Artist: ' + content[i].artist);
+								var pObj = docxFile.createP();
+								pObj.addText('Title: ' + content[i].title);
+								var pObj = docxFile.createP();
+								pObj.addText('Size: ' + content[i].size);
+								var pObj = docxFile.createP();
+								pObj.addText('Amount Paid: ' + content[i].amountPaid);
+								var pObj = docxFile.createP();
+								pObj.addText('Insured: ' + content[i].insured);
+								var pObj = docxFile.createP();
+								pObj.addText('Provenance: ' + content[i].provenance);
+								var pObj = docxFile.createP();
+								pObj.addText('Office Location: ' + content[i].officeLocation);
+								var pObj = docxFile.createP();
+								if (content[i].imageFile.indexOf("data:image/") != -1) {
+									pObj.addImage(content[i].imagePath);
+								}
+							}
+							
+							var file = fs.createWriteStream(path.resolve(__dirname + '/app/' + fileName));
+							docxFile.generate(file);
+							file.on('close', function () {
+								res.send({data: fileName});
+							});
+						}
+					});
+
+
+				});
+
+			});
+
+		});
+
+	});
+
+});
 /**
  Return the json file from the uploaded document.
  */
@@ -381,7 +461,6 @@ app.get('/artwork', function (req, res) {
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.setHeader('Content-Type', 'application/json');
 	var artworkId = req.query.assetRefNo;
-	console.log('artworkId', artworkId);
 	var artworks = fs.readFileSync('uploads/uploaded-artworks.json').toString();
 	var artworksJson = JSON.parse(artworks);
 
