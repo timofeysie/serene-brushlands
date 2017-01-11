@@ -13,8 +13,8 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 			});
 		}])
 
-	.controller('addCtrl', ['$scope', '$rootScope', 'Upload', '$routeParams', '$http', '$q', '$timeout', '$firebaseObject', 'IsAuthorizedService',
-		function ($scope, $rootScope, Upload, $routeParams, $http, $q, $timeout, $firebaseObject, IsAuthorizedService) {
+	.controller('addCtrl', ['$scope', '$rootScope', 'Upload', '$routeParams', '$http', '$q', '$timeout', '$firebaseObject', '$filter', 'IsAuthorizedService',
+		function ($scope, $rootScope, Upload, $routeParams, $http, $q, $timeout, $firebaseObject, $filter, IsAuthorizedService) {
 			var viewModel = this;
 			// this is the argument passed in by the ng-route as configured in the app.js
 
@@ -108,17 +108,18 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 				var d = $q.defer();
 
 				var img = new Image;
-
+				
 				img.src = imageFile;
+				img.onload = function () {
+					var newDataUri = imageToDataUri(img, 60, 60);
+					data.thumbnail = newDataUri;
 
-				var newDataUri = imageToDataUri(img, 60, 60);
-				data.thumbnail = newDataUri;
+					$http.post('/save-artworks', data).then(function () {
+						d.resolve();
+					});
 
-				$http.post('/save-artworks', data).then(function () {
-					d.resolve();
-				});
-
-				return d.promise;
+					return d.promise;
+				}
 			}
 
 			function saveImage(data) {
@@ -274,5 +275,17 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 
 			$scope.submitForm = function () {
 				alert("under construction");
+			};
+			
+			$scope.downloadBackup = function () {
+				$scope.fileGenerating = true;
+				$http.get('/download-backup').success(function (data) {
+					var fileName = 'artwork-backup-' + $filter('date')(Date.now(), 'yyyy-MM-dd-HHmmss') + '.docx';
+					var downloadLink = angular.element('<a></a>');
+					downloadLink.attr('href', data.data);
+					downloadLink.attr('download', fileName);
+					downloadLink[0].click();
+					$scope.fileGenerating = false;
+				});
 			};
 		}]);

@@ -114,6 +114,14 @@
 			<br/>
 			<span ng-show="showBackupProcessing">Please wait until the data is backed up.</span>
 			<span ng-show="isBackupSuccess">Backed up Successfully.</span>
+			<div id="download-backup">
+				<button ng-if="permissions['upload-and-backup-artworks']" type="button" class="button button-3d-primary button-pill" ng-click="downloadBackup()"
+						ng-disabled="fileGenerating">
+					Download Backup
+				</button>
+				<br>
+				<span ng-show="fileGenerating">Please wait until download begins.</span>
+			</div>
 		</form>
 
 	</div>
