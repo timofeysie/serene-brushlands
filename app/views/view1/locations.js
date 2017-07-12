@@ -20,7 +20,7 @@ angular.module('artApp.locations', ['ngRoute'])
 
 			$scope.openLightBox = function (artwork)
 			{
-				$http.get('/get-image/' + artwork.assetRefNo).then(function (res) {
+				$http.get('/get-image/' + artwork.id).then(function (res) {
 					var data = res.data;
 					document.getElementById("locations-lightbox").style.display = "block";
 					document.getElementById("locations-lightbox-image").src = data.imageFile;
@@ -51,27 +51,27 @@ angular.module('artApp.locations', ['ngRoute'])
 				var locationBg = 0;
 				var currentLocation = '';
 				var color = 'locationBg0';
-				
+
 				newJsonArray = $filter('orderBy')(newJsonArray, 'officeLocation');
 				for (var i = 0; i < newJsonArray.length; i++) {
 					var item = newJsonArray[i];
 
 					/* Cycle thru 0 - 3 different backgound colors based on location */
-					var index = $scope.officelocations.findIndex(val => val.location==item.officeLocation);
+					var index = $scope.officelocations.findIndex(val => val.location == item.officeLocation);
 					if (index === -1) {
 						locationBg++; // go to next color if location is different from last loop
 						if (locationBg > 4) {
 							locationBg = 0; // if it's over 2 go back to 0
 						}
 						color = 'locationBg' + locationBg;
-						var location = {location:item.officeLocation, color:color};
+						var location = {location: item.officeLocation, color: color};
 						$scope.officelocations.push(location);
 						item.locationBg = color; // set the new bg to be used here
 					} else {
 						color = $scope.officelocations[index].color;
 						item.locationBg = color;
 					}
-					
+
 					if ($scope.artists.indexOf(item.artist) == -1 && item.artist !== "") {
 						$scope.artists.push(item.artist);
 					}
@@ -85,7 +85,7 @@ angular.module('artApp.locations', ['ngRoute'])
 					$scope.$apply(viewModel);
 				}
 			});
-			
+
 			$scope.filterArtworks = function (filter)
 			{
 				var newFilter = {};

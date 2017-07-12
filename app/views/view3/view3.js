@@ -4,24 +4,23 @@
  * @class artApp.view3
  * @description Controller for view 3.
  */
-angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
+angular.module('artApp.view3', ['ngRoute', 'ngFileUpload'])
 
-	.controller('View3Ctrl', ['$rootScope', '$scope', 'Upload', '$routeParams', '$http', 'InspectionsFactory', '$firebaseObject',
-		function ($rootScope, $scope, Upload, $routeParams, $http, InspectionsFactory, $firebaseObject) {
+	.controller('View3Ctrl', ['$rootScope', '$scope', 'Upload', '$routeParams', '$http', 'InspectionsFactory',
+		function ($rootScope, $scope, Upload, $routeParams, $http, InspectionsFactory) {
 
 			$scope.viewModel = {};
 			var paintingNo = parseInt($routeParams.paintingNo);
 			$scope.viewModel.currentPaintingNumber = paintingNo;
 			$scope.viewModel.prevPaintingNumber = paintingNo - 1;
 
-			$scope.viewModel.nextPaintingNumber = paintingNo + 1;
-
 			$scope.viewModel.nextPaintingNumber = parseInt(paintingNo) + 1;
 			$scope.viewModel.imageFile = 'assets/images/spinner.gif';
-//			var uploadedArtworksRef = new Firebase($rootScope.firebaseUri + "/uploaded-artworks/" + paintingNo);
-//
-			$http.get('/get-artwork/' + paintingNo).then(function(res) {
+			$scope.viewModel.thumbnail = 'assets/images/spinner.gif';
+
+			$http.get('/get-artwork/' + paintingNo).then(function (res) {
 				var retriveData = res.data;
+				console.log(retriveData);
 				$scope.viewModel.artist = retriveData.artist;
 				$scope.viewModel.title = retriveData.title;
 				$scope.viewModel.size = retriveData.size;
@@ -44,7 +43,7 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload', 'firebase'])
 
 			$scope.openLightBox = function ()
 			{
-				$http.get('/get-image/'+paintingNo).then( function (res) {
+				$http.get('/get-image/' + paintingNo).then(function (res) {
 					var data = res.data;
 					document.getElementById("view3-lightbox-image").src = data.imageFile;
 					document.getElementById("view3-lightbox").style.display = "block";
