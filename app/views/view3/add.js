@@ -88,7 +88,7 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 							"dreaming": "",
 							"DOB": "",
 							"bio": {
-							"title": "",
+								"title": "",
 								"body": "",
 								"AASDLink": "",
 								"WikiLink": ""
@@ -108,7 +108,7 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 				var d = $q.defer();
 
 				var img = new Image;
-				
+
 				img.src = imageFile;
 				img.onload = function () {
 					var newDataUri = imageToDataUri(img, 60, 60);
@@ -160,36 +160,11 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 
 					file.upload.then(function (response) {
 						var artworksData = response.data[0];
-						var images = response.data[1];
 
-						$timeout(function () {
+						$scope.isBackupSuccess = false;
+						file.result = response.data;
+						$scope.showStartedToProcess = false;
 
-							var promises = []
-							var uniqueArtistsArray = [];
-
-							for (var i = 0; i < artworksData.length; i++)
-							{
-
-								if (uniqueArtistsArray.indexOf(artworksData[i].artist) == -1)
-								{
-									uniqueArtistsArray.push(artworksData[i].artist);
-								}
-
-								promises.push(saveImage(images[i]));
-								promises.push(saveSingleArtwork(artworksData[i], images[i].imageFile));
-
-							}
-
-							promises.push(saveArtistsToFireBase(uniqueArtistsArray));
-
-							$q.all(promises)
-								.then(function (data) {
-									$scope.isBackupSuccess = false;
-									file.result = response.data;
-									$scope.showStartedToProcess = false;
-								});
-
-						});
 					}, function (response) {
 						if (response.status > 0)
 							$scope.errorMsg = response.status + ': ' + response.data;
@@ -276,7 +251,7 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 			$scope.submitForm = function () {
 				alert("under construction");
 			};
-			
+
 			$scope.downloadBackup = function () {
 				$scope.fileGenerating = true;
 				$http.get('/download-backup').success(function (data) {
