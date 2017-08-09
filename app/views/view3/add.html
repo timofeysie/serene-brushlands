@@ -104,8 +104,12 @@
 				</span>
 				<span ng-show="showStartedToProcess">Please wait until the uploaded document is processed.</span>
 				<span ng-show="f.result" class="">Uploaded and Processed Successfully.</span>
+				<div ng-show="errors.length>0" class="error-list">
+					<ul>
+						<li ng-repeat="error in errors">{{error}}</li>
+					</ul>
+				</div>
 			</div>
-			{{errorMsg}}
 			<br/>
 			<button data-ng-if="permissions['upload-and-backup-artworks']" type="button" class="button button-3d-primary button-pill" ng-click="getFromFirebase()">
 				Use Backup
