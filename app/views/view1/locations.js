@@ -20,7 +20,7 @@ angular.module('artApp.locations', ['ngRoute'])
 
 			$scope.openLightBox = function (artwork)
 			{
-				$http.get('/get-image/' + artwork.id).then(function (res) {
+				$http.get('/get-image/' + artwork.assetRefNo).then(function (res) {
 					var data = res.data;
 					document.getElementById("locations-lightbox").style.display = "block";
 					document.getElementById("locations-lightbox-image").src = data.imageFile;
