@@ -206,3 +206,12 @@ h1 {
 	transition-duration: 560ms;
 	transform: translate3d(-89.53595px, 9.12762px, 0);
 }
+
+
+.error-list{
+	width: 50%;
+    margin: auto;
+    text-align: left;
+    background: #ffc9c9;
+    padding: 5px;
+}

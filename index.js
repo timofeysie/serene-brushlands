@@ -53,6 +53,75 @@ app.listen(app.get('port'), function () {
 app.use('/uploads/images', express.static('uploads/images'));
 var newFileName;
 
+function grabInfo(element, findString, replaceString, isImage)
+{
+	if (typeof element == "undefined" || element == null)
+	{
+		var text = "No Data";
+		return text;
+	} else {
+		if (isImage)
+		{
+			var value = element.replace(findString, replaceString);
+		} else {
+			var value = element.replace(findString, replaceString).trim();
+		}
+		return value;
+	}
+}
+
+function checkIfNullOrEmpty(element)
+{
+	if (typeof element == "undefined" || element == null || element == "" || element.indexOf("data:image") == -1)
+	{
+		return "";
+	} else {
+		return element;
+	}
+}
+
+function addThumbnail(artwork) {
+	return new Promise(function (resolve, reject) {
+		try {
+			if (artwork.image.imageFile == "") {
+				resolve(artwork);
+			}
+
+			var imgSrc = artwork.image.imageFile.substr(artwork.image.imageFile.indexOf("base64,") + 7);
+
+			var jimp = Jimp.read(Buffer.from(imgSrc, 'base64'), (err, image) => {
+				if (image == null) {
+					resolve(artwork);
+				} else {
+					image.resize(60, 60);
+					image.getBase64(image.getMIME(), function (err, base64Data) {
+						artwork.thumbnail = base64Data;
+						resolve(artwork);
+					});
+				}
+			})
+		} catch (err) {
+			reject(err);
+		}
+	})
+}
+
+// prosess data
+function processData(artworks) {
+	var promises = [];
+	for (var it = 0; it < artworks.length; it++) {
+		promises.push(addThumbnail(artworks[it]))
+	}
+	return new Promise(function (resolve, reject) {
+		Promise.all(promises)
+			.then(data => {
+				resolve(data);
+			}).catch(err => {
+			reject(err);
+		})
+	})
+}
+
 app.post('/upload', function (req, res) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
@@ -60,10 +129,16 @@ app.post('/upload', function (req, res) {
 		var busboy = new Busboy({headers: req.headers});
 
 		busboy.on('file', function (fieldname, file, filename, encoding, mimetype) {
-			var datetimestamp = Date.now();
-			newFileName = fieldname + '-' + datetimestamp + '.' + filename.split('.')[filename.split('.').length - 1];
-			var saveTo = path.join('./tmp/', newFileName);
-			file.pipe(fs.createWriteStream(saveTo));
+			if (mimetype === "application/vnd.openxmlformats-officedocument.wordprocessingml.document")
+			{
+				var datetimestamp = Date.now();
+				newFileName = fieldname + '-' + datetimestamp + '.' + filename.split('.')[filename.split('.').length - 1];
+				var saveTo = path.join('./tmp/', newFileName);
+				file.pipe(fs.createWriteStream(saveTo));
+			} else {
+				res.status(400).send(["Invalid file format."]);
+				return false;
+			}
 		});
 		busboy.on('finish', function () {
 			mammoth.convertToHtml({path: "tmp/" + newFileName})
@@ -72,61 +147,6 @@ app.post('/upload', function (req, res) {
 					var html = "<div class='wrapper'>" + striptags(result.value, '<p><img>') + "</div>";
 					var parsedHTML = $.load(html);
 
-					function grabInfo(element, findString, replaceString, isImage)
-					{
-						if (typeof element == "undefined" || element == null)
-						{
-							var text = "No Data";
-							return text;
-						} else {
-							if (isImage)
-							{
-								var value = element.replace(findString, replaceString);
-							} else {
-								var value = element.replace(findString, replaceString).trim();
-							}
-							return value;
-						}
-					}
-
-					function checkIfNullOrEmpty(element)
-					{
-						if (typeof element == "undefined" || element == null || element == "" || element.indexOf("data:image") == -1)
-						{
-							return "";
-						} else {
-							return element;
-						}
-					}
-
-					function addThumbnail(artwork) {
-						return new Promise(function (resolve, reject) {
-							try {
-								if (artwork.image.imageFile == "") {
-									resolve(artwork);
-								}
-
-								var imgSrc = artwork.image.imageFile.substr(artwork.image.imageFile.indexOf("base64,") + 7);
-
-								var jimp = Jimp.read(Buffer.from(imgSrc, 'base64'), (err, image) => {
-									if (image == null) {
-										console.log('read error', err);
-										resolve(artwork);
-									} else {
-										image.resize(60, 60);
-										image.getBase64(image.getMIME(), function (err, base64Data) {
-											console.log('get base64 eror', err);
-											artwork.thumbnail = base64Data;
-											resolve(artwork);
-										});
-									}
-								})
-							} catch (err) {
-								console.log(err);
-								reject(err);
-							}
-						})
-					}
 					var elementsArray = [];
 
 					parsedHTML('.wrapper').children('p').each(function () {
@@ -151,6 +171,7 @@ app.post('/upload', function (req, res) {
 
 					var artworksDataArray = [];
 					var imagesArray = [];
+					var dataErorrs = [];
 					var index = 0;
 					for (var i = 0; i < elementsArray.length; i++)
 					{
@@ -162,6 +183,10 @@ app.post('/upload', function (req, res) {
 							artworkDetailsObj.id = index;
 							var referenceNo = grabInfo(elementsArray[i], "Asset Reference No:", "", false);
 							artworkDetailsObj.assetRefNo = referenceNo;
+
+							var dupRef = artworksDataArray.filter((value) => {
+								return value.assetRefNo == referenceNo;
+							});
 							imageObj.artwork_id = artworkDetailsObj.id;
 
 							var artist = grabInfo(elementsArray[i + 1], "Artist:", "", false);
@@ -195,30 +220,24 @@ app.post('/upload', function (req, res) {
 							artworkDetailsObj.image = imageObj;
 							artworksDataArray.push(artworkDetailsObj);
 							imagesArray.push(imageObj);
+							if (!imageObj.imageFile) {
+								dataErorrs.push("Image type error : [referenceNo: " + referenceNo + ", title:" + title + "]");
+							}
+							if (dupRef.length > 0) {
+								dataErorrs.push("Duplicate assetRefNo : [referenceNo: " + referenceNo + ", title:" + title + "]")
+							}
 						}
 					}
 
-					// prosess data
-					function processData(artworks) {
-						var promises = [];
-						for (var it = 0; it < artworks.length; it++) {
-							promises.push(addThumbnail(artworks[it]))
-						}
-						return new Promise(function (resolve, reject) {
-							Promise.all(promises)
-								.then(data => {
-									resolve(data);
-								}).catch(err => {
-								console.log(err);
-								reject(err);
-							})
-						})
+					if (dataErorrs.length > 0) {
+						res.status(400).send(dataErorrs);
+						return false;
 					}
-
 					// save data to database
 					MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
 						if (err) {
-							return console.dir(err);
+							res.status(404).send(["Database connection error"]);
+							return false;
 						}
 						processData(artworksDataArray)
 							.then(data => {
@@ -270,22 +289,22 @@ app.post('/upload', function (req, res) {
 										]).
 											then(() => {
 												db.close();
+												res.status(200).send(true);
 											});
 									}).catch((err) => {
-									console.error(err);
+									res.status(404).send(["Data insert error"]);
+									return false;
 								});
 							})
 
 					});
 					// end save data to database
-
 					fs.writeFile("uploads/artworks.json", JSON.stringify([artworksDataArray, imagesArray]), function (err) {
 						if (err) {
 							res.status(400).send(err);
 							return;
 						} else {
 							fs.unlink("tmp/" + newFileName);
-
 							async.forEach(imagesArray, function (image) {
 								var type = image.imageFile.substring("data:image/".length, image.imageFile.indexOf(";base64"))
 								fs.writeFile("uploads/images/image-" + image.artwork_id + "." + type, image.imageFile.replace("data:image\/" + type + ";base64,", ""), 'base64', function (err) {
@@ -295,11 +314,12 @@ app.post('/upload', function (req, res) {
 									}
 								});
 							});
-
-							res.status(200).json([artworksDataArray, imagesArray]);
 						}
-					});
-
+					})
+				})
+				.catch(function (err) {
+					res.status(404).send(["Data parse error."]);
+					return false;
 				})
 				.done();
 		});

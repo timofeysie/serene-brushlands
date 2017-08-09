@@ -152,6 +152,7 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 				$scope.f = file;
 				$scope.showStartedToProcess = false;
 				$scope.errFile = errFiles && errFiles[0];
+				$scope.errors = [];
 				if (file) {
 					file.upload = Upload.upload({
 						url: '/upload',
@@ -159,6 +160,7 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 					});
 
 					file.upload.then(function (response) {
+						console.log(response);
 						var artworksData = response.data[0];
 
 						$scope.isBackupSuccess = false;
@@ -166,8 +168,8 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 						$scope.showStartedToProcess = false;
 
 					}, function (response) {
-						if (response.status > 0)
-							$scope.errorMsg = response.status + ': ' + response.data;
+						$scope.showStartedToProcess = false;
+						$scope.errors = response.data;
 					}, function (evt) {
 						file.progress = Math.min(100, parseInt(100.0 *
 							evt.loaded / evt.total));
