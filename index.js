@@ -172,60 +172,51 @@ app.post('/upload', function (req, res) {
 					var artworksDataArray = [];
 					var imagesArray = [];
 					var dataErorrs = [];
-					var index = 0;
 					for (var i = 0; i < elementsArray.length; i++)
 					{
 						if (elementsArray[i].indexOf("Asset Reference No") != -1)
 						{
-							index++;
 							var artworkDetailsObj = {};
 							var imageObj = {};
-							artworkDetailsObj.id = index;
+
 							var referenceNo = grabInfo(elementsArray[i], "Asset Reference No:", "", false);
-							artworkDetailsObj.assetRefNo = referenceNo;
-
-							var dupRef = artworksDataArray.filter((value) => {
-								return value.assetRefNo == referenceNo;
-							});
-							imageObj.artwork_id = artworkDetailsObj.id;
-
 							var artist = grabInfo(elementsArray[i + 1], "Artist:", "", false);
-							artworkDetailsObj.artist = artist;
-
 							var title = grabInfo(elementsArray[i + 2], "Title:", "", false);
-							artworkDetailsObj.title = title;
-
 							var size = grabInfo(elementsArray[i + 3], "Size:", "", false);
-							artworkDetailsObj.size = size;
-
 							var amountPaid = grabInfo(elementsArray[i + 4], "Amount Paid:", "", false);
-							artworkDetailsObj.amountPaid = amountPaid;
-
 							var insured = grabInfo(elementsArray[i + 5], "Insured:", "", false);
-							artworkDetailsObj.insured = insured;
-
 							var provenance = grabInfo(elementsArray[i + 6], "Provenance:", "", false);
-							artworkDetailsObj.provenance = provenance;
-
 							var officeLocation = grabInfo(elementsArray[i + 7], "Office Location:", "", false);
-							artworkDetailsObj.officeLocation = officeLocation;
 
-							var base64Data = grabInfo(elementsArray[i + 8], /^data:image\//, /^data:image\//, true);
+							artworkDetailsObj.assetRefNo = referenceNo;
+							artworkDetailsObj.artist = artist;
+							artworkDetailsObj.title = title;
+							artworkDetailsObj.size = size;
+							artworkDetailsObj.amountPaid = amountPaid;
+							artworkDetailsObj.insured = insured;
+							artworkDetailsObj.provenance = provenance;
+							artworkDetailsObj.officeLocation = officeLocation;
 							artworkDetailsObj.imageFileName = "image-" + artworkDetailsObj.id + ".jpeg";
 							artworkDetailsObj.inspected = false;
 							artworkDetailsObj.text = "";
 
 							imageObj.imageFile = checkIfNullOrEmpty(elementsArray[i + 8]);
+							imageObj.assetRefNo = referenceNo;
 							imageObj.additionalImages = [];
 							artworkDetailsObj.image = imageObj;
-							artworksDataArray.push(artworkDetailsObj);
-							imagesArray.push(imageObj);
+
+							var dupRef = artworksDataArray.filter((value) => {
+								return value.assetRefNo == referenceNo;
+							});
 							if (!imageObj.imageFile) {
 								dataErorrs.push("Image type error : [referenceNo: " + referenceNo + ", title:" + title + "]");
 							}
 							if (dupRef.length > 0) {
 								dataErorrs.push("Duplicate assetRefNo : [referenceNo: " + referenceNo + ", title:" + title + "]")
 							}
+
+							artworksDataArray.push(artworkDetailsObj);
+							imagesArray.push(imageObj);
 						}
 					}
 
@@ -479,14 +470,14 @@ app.get('/get-artwork/:id', function (req, res) {
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.setHeader('Content-Type', 'application/json');
 
-	var artworkId = parseInt(req.params.id);
+	var artworkId = req.params.id;
 	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
 		if (err) {
 			return console.dir(err);
 		}
 
 		var collection = db.collection('artworks');
-		collection.findOne({id: artworkId}, function (err, items) {
+		collection.findOne({assetRefNo: artworkId}, function (err, items) {
 			res.send(items);
 		});
 		db.close();
@@ -498,14 +489,14 @@ app.get('/get-image/:id', function (req, res) {
 	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
 	res.setHeader('Content-Type', 'application/json');
 
-	var arworkId = parseInt(req.params.id);
+	var arworkId = req.params.id;
 	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
 		if (err) {
 			return console.dir(err);
 		}
 
 		var collection = db.collection('images');
-		collection.findOne({artwork_id: arworkId}, function (err, items) {
+		collection.findOne({assetRefNo: arworkId}, function (err, items) {
 			res.send(items);
 		});
 		db.close();
@@ -548,11 +539,11 @@ app.get('/download-backup', function (req, res) {
 		var collection = db.collection('artworks');
 		var imageCollection = db.collection('images');
 
-		collection.find().sort({id: 1}).toArray(function (err, items) {
+		collection.find().sort({assetRefNo: 1}).toArray(function (err, items) {
 			var count = items.length;
 			var docxFile = officegen('docx');
 			async.forEach(items, function (item) {
-				imageCollection.findOne({artwork_id: item.id}, function (err, image) {
+				imageCollection.findOne({assetRefNo: item.assetRefNo}, function (err, image) {
 					var singleItem = item;
 
 					var type = image.imageFile.substring("data:image/".length, image.imageFile.indexOf(";base64"))

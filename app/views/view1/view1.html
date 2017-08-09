@@ -14,11 +14,11 @@
 				<div class="">
 					<div ng-repeat="painting in viewModel.paintings">
 						<div class="row" id="{{painting.assetRefNo}}">
-							<a href="#/view3/{{painting.id}}"
+							<a href="#/view3/{{painting.assetRefNo}}"
 							   ng-show="!smallWidth"
 							   class="button button-3d button-pill">{{painting.assetRefNo}}</a>
 
-							<a href="#/view3/{{painting.id}}"
+							<a href="#/view3/{{painting.assetRefNo}}"
 							   id="title"
 							   class="button button-3d-action button-pill">{{painting.title}}</a>
 
