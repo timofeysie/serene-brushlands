@@ -10,11 +10,11 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload'])
 		function ($rootScope, $scope, Upload, $routeParams, $http, InspectionsFactory) {
 
 			$scope.viewModel = {};
-			var paintingNo = parseInt($routeParams.paintingNo);
+			var paintingNo = $routeParams.paintingNo;
 			$scope.viewModel.currentPaintingNumber = paintingNo;
-			$scope.viewModel.prevPaintingNumber = paintingNo - 1;
+			$scope.viewModel.prevPaintingNumber = null;
 
-			$scope.viewModel.nextPaintingNumber = parseInt(paintingNo) + 1;
+			$scope.viewModel.nextPaintingNumber = null;
 			$scope.viewModel.imageFile = 'assets/images/spinner.gif';
 			$scope.viewModel.thumbnail = 'assets/images/spinner.gif';
 
@@ -26,7 +26,8 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload'])
 				$scope.viewModel.size = retriveData.size;
 				$scope.viewModel.imageFileName = retriveData.imageFileName;
 				$scope.viewModel.thumbnail = retriveData.thumbnail;
-
+				$scope.viewModel.nextPaintingNumber = retriveData.next;
+				$scope.viewModel.prevPaintingNumber = retriveData.previous;
 				$scope.viewModel.id = retriveData.assetRefNo;
 
 				if ($rootScope.inspectionOn) {
