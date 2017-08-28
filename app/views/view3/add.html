@@ -93,6 +93,8 @@
 			<<<<<<< HEAD
 					id="form__element">Submit</a> -->
 			<br/>
+			<div>Last updated at : {{lastUpdatedDate}}</div>
+			<br/>
 			<button data-ng-if="permissions['upload-and-backup-artworks']" type="file" class="button button-3d-caution button-pill" ngf-select="uploadFiles($file, $invalidFiles)" accept=".docx">
 				Upload File
 			</button>
@@ -104,7 +106,7 @@
 				</span>
 				<span ng-show="showStartedToProcess">Please wait until the uploaded document is processed.</span>
 				<span ng-show="f.result" class="">Uploaded and Processed Successfully.</span>
-				<div ng-show="errors.length>0" class="error-list">
+				<div ng-show="errors.length > 0" class="error-list">
 					<ul>
 						<li ng-repeat="error in errors">{{error}}</li>
 					</ul>

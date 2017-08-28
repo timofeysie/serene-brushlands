@@ -30,6 +30,11 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 			viewModel.PhotoRefNo = $routeParams.PhotoRefNo;
 			viewModel.paintings = [];
 			$scope.fields = [];
+			$scope.lastUpdatedDate;
+
+			$http.get('/get-meta/last-update').then((response) => {
+				$scope.lastUpdatedDate = response.data.value;
+			})
 
 			$scope.getFromFirebase = function ()
 			{
@@ -161,8 +166,8 @@ angular.module('artApp.add', ['ngRoute', 'ngFileUpload', 'firebase'])
 
 					file.upload.then(function (response) {
 						console.log(response);
-						var artworksData = response.data[0];
-
+						var responseData = response.data;
+						$scope.lastUpdatedDate = responseData.update_at;
 						$scope.isBackupSuccess = false;
 						file.result = response.data;
 						$scope.showStartedToProcess = false;

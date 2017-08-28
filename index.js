@@ -238,6 +238,7 @@ app.post('/upload', function (req, res) {
 								var artworkCol = db.collection('artworks');
 								var imageCol = db.collection('images');
 								var artistCol = db.collection('artists');
+								var metaCol = db.collection('meta');
 								var artworkBulk = artworkCol.initializeUnorderedBulkOp();
 								var imageBulk = imageCol.initializeUnorderedBulkOp();
 								var artistBulk = artistCol.initializeUnorderedBulkOp();
@@ -274,16 +275,24 @@ app.post('/upload', function (req, res) {
 										uniqueArtists.push(artist);
 									}
 								}
+								var updateAt = new Date();
 								Promise.all(promises)
 									.then(() => {
 										Promise.all([
 											artworkBulk.execute(),
 											imageBulk.execute(),
-											artistBulk.execute()
+											artistBulk.execute(),
+											metaCol.update(
+												{key: "last-update"},
+												{
+													key: "last-update",
+													value: updateAt.toLocaleString()
+												},
+												{upsert: true})
 										]).
 											then(() => {
 												db.close();
-												res.status(200).send(true);
+												res.status(200).send({update_at: updateAt.toLocaleString()});
 											});
 									}).catch((err) => {
 									res.status(404).send(["Data insert error"]);
@@ -520,6 +529,26 @@ app.get('/get-artist/:name', function (req, res) {
 
 		var collection = db.collection('artists');
 		collection.findOne({name: name}, function (err, items) {
+			res.send(items);
+		});
+		db.close();
+	});
+
+});
+
+app.get('/get-meta/:key', function (req, res) {
+	res.header("Access-Control-Allow-Origin", "*");
+	res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+	res.setHeader('Content-Type', 'application/json');
+
+	var key = req.params.key;
+	MongoClient.connect("mongodb://localhost:27017/serene-brushland", function (err, db) {
+		if (err) {
+			return console.dir(err);
+		}
+
+		var collection = db.collection('meta');
+		collection.findOne({key: key}, function (err, items) {
 			res.send(items);
 		});
 		db.close();
