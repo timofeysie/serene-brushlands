@@ -110,7 +110,10 @@ function addThumbnail(artwork) {
 function processData(artworks) {
 	var promises = [];
 	for (var it = 0; it < artworks.length; it++) {
-		promises.push(addThumbnail(artworks[it]))
+		var artwork = artworks[it];
+		artwork.next = (artworks[it + 1]) ? artworks[it + 1].assetRefNo : null;
+		artwork.previous = (artworks[it - 1]) ? artworks[it - 1].assetRefNo : null;
+		promises.push(addThumbnail(artwork))
 	}
 	return new Promise(function (resolve, reject) {
 		Promise.all(promises)
