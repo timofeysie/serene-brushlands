@@ -22,14 +22,12 @@ angular.module('artApp.login', [
 					store.set('token', token);
 					if ($rootScope.redirect) {
 						$window.location = $rootScope.redirect;
-					} else {
-						$window.location.reload();
 					}
 				}, function (error) {
 					console.log("There was an error logging in", error);
 				});
 			};
-			
+
 			$scope.signout = function () {
 				$scope.auth = null;
 				store.remove('profile');
