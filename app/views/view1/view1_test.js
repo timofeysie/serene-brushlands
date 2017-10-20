@@ -1,10 +1,10 @@
 'use strict';
-describe('View1Ctrl', function(){
+describe('View1Ctrl', function () {
 	beforeEach(module('artApp.view1'));
-	describe('get data/artists result', function(){
-		it('should be added to scope', inject(function($rootScope, 
-				$controller, 
-				$httpBackend) {
+	describe('get data/artists result', function () {
+		it('should be added to scope', inject(function ($rootScope,
+			$controller,
+			$httpBackend) {
 			var scope = $rootScope;
 			$httpBackend
 				.when('GET', 'data/artists.json')

@@ -1,71 +1,70 @@
 <navbar></navbar>
 <div ng-controller="LoginCtrl as controller"
-	class="login-page clearfix">
+	 class="login-page clearfix">
 	<p></p><p></p><p></p><p></p>
     <img src="assets/images/ryans-tree-logo.svg"
-    	width="27%"
-    	id="ryans-tree-logo"/>
+		 id="ryans-tree-logo"/>
     <h3>The Rockend Art Collection</h3>
     <div ng-if="!auth.profile">
-	    <p ng-if="auth.profile === undefined">You must be logged in to use this site</p>
-    	<a ng-click="login()"
-    		class="button button-3d-caution button-pill"
-    		style="text-align-last: none !important;">Sign In</a>
+		<p ng-if="auth.profile === undefined">You must be logged in to use this site</p>
+		<a ng-click="login()"
+		   class="button button-3d-caution button-pill"
+		   style="text-align-last: none !important;">Sign In</a>
     </div>
- 	<div ng-if="auth.profile">
- 		<a ng-click="signout()"
- 			class="button button-3d-action button-pill">Sign Out</a>
- 		<div class="userInfo"
- 			ng-if="auth.profile.email">
-  			<div class="item item-button-right">
+	<div ng-if="auth.profile">
+		<a ng-click="signout()"
+		   class="button button-3d-action button-pill">Sign Out</a>
+		<div class="userInfo"
+			 ng-if="auth.profile.email">
+			<div class="item item-button-right">
 				<span>
 					<i class="button button-3d button-pill">
-					Logged in as
+						Logged in as
 					</i>
 					<i class="button button-3d-primary button-pill">
-					{{auth.profile.nickname}}</i>
+						{{auth.profile.nickname}}</i>
 				</span>
 			</div>
 			<div class="item item-button-right">
 				<span>
 					<i class="button button-3d button-pill">
-					Created at
+						Created at
 					</i>
 					<i class="button button-3d-primary button-pill">
-					{{auth.profile.created_at}}
+						{{auth.profile.created_at}}
 					</i>
 				</span>
-			 </div>
-			 <div class="item item-button-right">
+			</div>
+			<div class="item item-button-right">
 				<span>
 					<i class="button button-3d button-pill">
-					Email
+						Email
 					</i>
 					<i class="button button-3d-primary button-pill">
-					{{auth.profile.email}}
+						{{auth.profile.email}}
 					</i>
 				</span>
-			 </div>
-			 <div class="item item-button-right">
+			</div>
+			<div class="item item-button-right">
 				<span>
 					<i class="button button-3d button-pill">
-					Email verified
+						Email verified
 					</i>
 					<i class="button button-3d-primary button-pill">
-					{{auth.profile.email_verified}}
+						{{auth.profile.email_verified}}
 					</i>
 				</span>
-			 </div>
-			 <div class="item item-button-right">
+			</div>
+			<div class="item item-button-right">
 				<span>
 					<i class="button button-3d button-pill">
-					Auth
+						Auth
 					</i>
 					<i class="button button-3d-primary button-pill">
-					{{auth.profile.connection}}
+						{{auth.profile.connection}}
 					</i>
 				</span>
-			 </div>
+			</div>
 		</div>
 	</div>
 </div>

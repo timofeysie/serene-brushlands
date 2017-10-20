@@ -1,121 +1,135 @@
 <navbar></navbar>
 <div ng-controller="addCtrl as controller">
-  <div class="container">
-<!--      <div class="lab text-center">
-      <ul class="nav nav-pills center-pills"
-        role="tablist">
-        <li role="presentation"
-          class="active">
-          <a href="#/view1">
-            Collection #
-            <span class="badge">
-            {{controller.id}}</span>
-          </a>
-        </li>
-      </ul>
-      <div class="row">
-        <div class="col-md-6 col-md-offset-3">
-          <div id="text">
-            <h3>{{controller.title}}</h3>
-            <p><a href="#/view2/{{controller.artist}}">{{controller.artist}}</a></p>
-            <p2>{{controller.media}}</p2>
-          </div>
-        </div>
-      </div>
-    </div> -->
-          <div>&nbsp; &nbsp;</div>
-          <div>&nbsp; &nbsp;</div>
+	<div class="container">
+		<!--      <div class="lab text-center">
+			  <ul class="nav nav-pills center-pills"
+				role="tablist">
+				<li role="presentation"
+				  class="active">
+				  <a href="#/view1">
+					Collection #
+					<span class="badge">
+					{{controller.id}}</span>
+				  </a>
+				</li>
+			  </ul>
+			  <div class="row">
+				<div class="col-md-6 col-md-offset-3">
+				  <div id="text">
+					<h3>{{controller.title}}</h3>
+					<p><a href="#/view2/{{controller.artist}}">{{controller.artist}}</a></p>
+					<p2>{{controller.media}}</p2>
+				  </div>
+				</div>
+			  </div>
+			</div> -->
+		<div>&nbsp; &nbsp;</div>
+		<div>&nbsp; &nbsp;</div>
 
-    <!-- add form -->
-    <form name="signup_form"
-      ng-controller="addCtrl"
-      ng-submit="submitForm()"
-      novalidate>
-<!--       <div ng-repeat="field in fields"
-        ng-form="signup_form_input">
-        <div ng-switch on="field.type">
-          <!-- type: input -->
-<!--           <div ng-switch-when="input">
-            <input type="text"
-              style="text-align:center;"
-              id="form__element"
-              class="button-pill"
-              name="dynamic_input"
-              ng-required="field.isRequired"
-              ng-model="field.name"
-              placeholder="&nbsp; &nbsp; {{field.placeholder}}" />
-            <div ng-show="signup_form_input.dynamic_input.$dirty && signup_form_input.dynamic_input.$invalid">
-              <span class="error"
-                ng-show="signup_form_input.dynamic_input.$error.required">The field is required.</span>
-            </div>
-          </div> -->
-          <!-- type: select -->
-<!--           <div ng-switch-when="select">
-            <select ng-model="field.city"
-                    ng-options="field.city for name in city">
-              <option ng-repeat="field.name in city"
-                value="">Choose {{field.city.name}}</option>
-            </select>
-          </div> -->
-          <!-- type: checkbox -->
-<!--           <div ng-switch-when="checkbox">
-            <div class="row">
-              <div class="col-md-2">
-                {{$index+1}}. &nbsp;
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-md-2">
-                <input id="checkbox-{{$index}}"
-                  type="checkbox"
-                  name="dynamic_input"
-                  ng-required="field.isRequired"
-                  ng-model="field.name"/>
-              </div>
-              <div class="col-md-6">
-                <label for="checkbox-{{$index}}">
-                    {{field.placeholder}}</label>
-                <div ng-show="signup_form_input.dynamic_input.$dirty && signup_form_input.dynamic_input.$invalid">
-                <span class="error" ng-show="signup_form_input.dynamic_input.$error.required">
-                      The field is required.</span>
-                </div>
-              </div>
-            </div>
-          </div>
+		<!-- add form -->
+		<form name="signup_form"
+			  ng-controller="addCtrl"
+			  ng-submit="submitForm()"
+			  novalidate>
+			<!--       <div ng-repeat="field in fields"
+					ng-form="signup_form_input">
+					<div ng-switch on="field.type">
+			<!-- type: input -->
+			<!--           <div ng-switch-when="input">
+						<input type="text"
+						  style="text-align:center;"
+						  id="form__element"
+						  class="button-pill"
+						  name="dynamic_input"
+						  ng-required="field.isRequired"
+						  ng-model="field.name"
+						  placeholder="&nbsp; &nbsp; {{field.placeholder}}" />
+						<div ng-show="signup_form_input.dynamic_input.$dirty && signup_form_input.dynamic_input.$invalid">
+						  <span class="error"
+							ng-show="signup_form_input.dynamic_input.$error.required">The field is required.</span>
+						</div>
+					  </div> -->
+			<!-- type: select -->
+			<!--           <div ng-switch-when="select">
+						<select ng-model="field.city"
+								ng-options="field.city for name in city">
+						  <option ng-repeat="field.name in city"
+							value="">Choose {{field.city.name}}</option>
+						</select>
+					  </div> -->
+			<!-- type: checkbox -->
+			<!--           <div ng-switch-when="checkbox">
+						<div class="row">
+						  <div class="col-md-2">
+							{{$index+1}}. &nbsp;
+						  </div>
+						</div>
+						<div class="row">
+						  <div class="col-md-2">
+							<input id="checkbox-{{$index}}"
+							  type="checkbox"
+							  name="dynamic_input"
+							  ng-required="field.isRequired"
+							  ng-model="field.name"/>
+						  </div>
+						  <div class="col-md-6">
+							<label for="checkbox-{{$index}}">
+								{{field.placeholder}}</label>
+							<div ng-show="signup_form_input.dynamic_input.$dirty && signup_form_input.dynamic_input.$invalid">
+							<span class="error" ng-show="signup_form_input.dynamic_input.$error.required">
+								  The field is required.</span>
+							</div>
+						  </div>
+						</div>
+					  </div>
+			
+					</div>
+				  </div> -->
+			<!-- <button type="submit" ng-disabled="signup_form.$invalid">Submit All</button> -->
+			<!--       <a ng-click="submitForm()"
+					class="button button-3d-caution button-pill"
+					index="0"
+					href
+			<<<<<<< HEAD
+					id="form__element">Submit</a> -->
+			<br/>
+			<div>Last updated at : {{lastUpdatedDate}}</div>
+			<br/>
+			<button data-ng-if="permissions['upload-and-backup-artworks']" type="file" class="button button-3d-caution button-pill" ngf-select="uploadFiles($file, $invalidFiles)" accept=".docx">
+				Upload File
+			</button>
+			<br>
+			<br>
+			<div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+				<span class="progress" ng-show="f.progress >= 0">
+					<div style="width:100%" ng-bind="f.progress + '%'" class="ng-binding">100%</div>
+				</span>
+				<span ng-show="showStartedToProcess">Please wait until the uploaded document is processed.</span>
+				<span ng-show="f.result" class="">Uploaded and Processed Successfully.</span>
+				<div ng-show="errors.length > 0" class="error-list">
+					<ul>
+						<li ng-repeat="error in errors">{{error}}</li>
+					</ul>
+				</div>
+			</div>
+			<br/>
+			<button data-ng-if="permissions['upload-and-backup-artworks']" type="button" class="button button-3d-primary button-pill" ng-click="getFromFirebase()">
+				Use Backup
+			</button>
+			<br/>
+			<br/>
+			<span ng-show="showBackupProcessing">Please wait until the data is backed up.</span>
+			<span ng-show="isBackupSuccess">Backed up Successfully.</span>
+			<div id="download-backup">
+				<button ng-if="permissions['upload-and-backup-artworks']" type="button" class="button button-3d-primary button-pill" ng-click="downloadBackup()"
+						ng-disabled="fileGenerating">
+					Download Backup
+				</button>
+				<br>
+				<span ng-show="fileGenerating">Please wait until download begins.</span>
+			</div>
+		</form>
 
-        </div>
-      </div> -->
-      <!-- <button type="submit" ng-disabled="signup_form.$invalid">Submit All</button> -->
-<!--       <a ng-click="submitForm()"
-        class="button button-3d-caution button-pill"
-        index="0"
-        href
-<<<<<<< HEAD
-        id="form__element">Submit</a> -->
-        <br/>
-        <button type="file" class="button button-3d-caution button-pill" ngf-select="uploadFiles($file, $invalidFiles)" accept=".docx">
-          Upload File
-        </button>
-        <br>
-        <br>
-        <div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
-          <span class="progress" ng-show="f.progress >= 0">
-                  <div style="width:100%" ng-bind="f.progress + '%'" class="ng-binding">100%</div>
-          </span>
-          <span ng-show="showStartedToProcess">Please wait until the uploaded document is processed.</span>
-          <span ng-show="f.result" class="">Uploaded and Processed Successfully.</span>
-        </div>
-        {{errorMsg}}
-        <br/>
-        <button type="button" class="button button-3d-primary button-pill" ng-click="getFromFirebase()">
-          Use Backup
-        </button>
-        <br/>
-        <br/>
-        <span ng-show="showBackupProcessing">Please wait until the data is backed up.</span>
-        <span ng-show="isBackupSuccess">Backed up Successfully.</span>
-    </form>
-
-  </div>
+	</div>
 
 </div>

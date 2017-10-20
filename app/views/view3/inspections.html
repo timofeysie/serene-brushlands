@@ -1,45 +1,45 @@
 <navbar></navbar>
 <div ng-controller="InspectionsCtrl as controller">
-  <div class="container">
-    <h3>Inpections <span ng-show="inspectionOn">are ON</span>
-    <span ng-show="!inspectionOn">are OFF</span></h3>
-    <!--
-    Current status.
-    List of inspections.
-    First inspection is the one that is activated.
-    List of previous inspections is disabled.  
-    Inspections include:
-    start/finish time (if finished), number of scanned, number remaining,
-    list of what, reference numbers scanned? 
-    What happens if a work is deleted later?
-    Should it's name, title,  etc be listed and stored in each inspection?
-    -->
-      <a ng-click="startInspection()"
-        class="button button-3d-action button-pill"
-        href
-        id="form__element">Start inspection</a>
-      <a ng-click="stopInspection()"
-        class="button button-3d-caution button-pill"
-        href
-        id="form__element">Stop inspection</a>
-      <a ng-click="resetInspection()"
-        class="button button-3d-primary button-pill"
-        href
-        id="form__element">Reset</a>
-  </div>
+	<div class="container">
+		<h3>Inpections <span ng-show="inspectionOn">are ON</span>
+			<span ng-show="!inspectionOn">are OFF</span></h3>
+		<!--
+		Current status.
+		List of inspections.
+		First inspection is the one that is activated.
+		List of previous inspections is disabled.  
+		Inspections include:
+		start/finish time (if finished), number of scanned, number remaining,
+		list of what, reference numbers scanned? 
+		What happens if a work is deleted later?
+		Should it's name, title,  etc be listed and stored in each inspection?
+		-->
+		<a ng-click="startInspection()"
+		   class="button button-3d-action button-pill"
+		   href
+		   id="form__element">Start inspection</a>
+		<a ng-click="stopInspection()"
+		   class="button button-3d-caution button-pill"
+		   href
+		   id="form__element">Stop inspection</a>
+		<a ng-click="resetInspection()"
+		   class="button button-3d-primary button-pill"
+		   href
+		   id="form__element">Reset</a>
+	</div>
     <div ng-repeat="inspection in controller.inspectedArtworks">
         <div class="row">
-              <a href="#/view3/{{inspection.assetRefNo}}"
-                ng-show="!smallWidth"
-                class="button button-3d button-pill">{{inspection.assetRefNo}}</a>
+			<a href="#/view3/{{inspection.assetRefNo}}"
+			   ng-show="!smallWidth"
+			   class="button button-3d button-pill">{{inspection.assetRefNo}}</a>
 
-              <a href="#/view3/{{inspection.assetRefNo}}"
-                id="title"
-                class="button button-3d-action  button-pill">{{inspection.title}}</a>
+			<a href="#/view3/{{inspection.assetRefNo}}"
+			   id="title"
+			   class="button button-3d-action  button-pill">{{inspection.title}}</a>
 
-              <a href="#/view2/{{inspection.artist}}" 
-                id="artist"
-                class="button button-3d-highlight button-pill">{{inspection.artist}}</a>
+			<a href="#/view2/{{inspection.artist}}" 
+			   id="artist"
+			   class="button button-3d-highlight button-pill">{{inspection.artist}}</a>
         </div>
     </div>
 </div>

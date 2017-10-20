@@ -1,37 +1,37 @@
 <navbar></navbar>
 <div id="outer">
-  <div ng-controller="View1Ctrl as controller">
-    <div class="flex-container">
-      <div id="view1">
-        <span class="alert alert-warning" 
-          ng-show="viewModel.errorMessage.status">{{viewModel.errorMessage.message}}</span>
-        <a href="#/add"
-          ng-show="viewModel.errorMessage.status"
-          class="button button-3d button-pill">
-          Update
-        </a>
-        <img ng-show="viewModel.spinner" ng-src="assets/images/spinner.gif" style="background:none">
-        <div class="">
-          <div ng-repeat="painting in viewModel.paintings">
-            <div class="row">
-              <a href="#/view3/{{painting.assetRefNo}}"
-                ng-show="!smallWidth"
-                class="button button-3d button-pill">{{painting.assetRefNo}}</a>
+	<div ng-controller="View1Ctrl as controller">
+		<div class="flex-container">
+			<div id="view1">
+				<span class="alert alert-warning" 
+					  ng-show="viewModel.errorMessage.status">{{viewModel.errorMessage.message}}</span>
+				<a href="#/add"
+				   ng-show="viewModel.errorMessage.status"
+				   class="button button-3d button-pill">
+					Update
+				</a>
+				<img ng-show="viewModel.spinner" ng-src="assets/images/spinner.gif" style="background:none">
+				<div class="">
+					<div ng-repeat="painting in viewModel.paintings">
+						<div class="row" id="{{painting.assetRefNo}}">
+							<a href="#/view3/{{painting.assetRefNo}}"
+							   ng-show="!smallWidth"
+							   class="button button-3d button-pill">{{painting.assetRefNo}}</a>
 
-              <a href="#/view3/{{painting.assetRefNo}}"
-                id="title"
-                class="button button-3d-action button-pill">{{painting.title}}</a>
+							<a href="#/view3/{{painting.assetRefNo}}"
+							   id="title"
+							   class="button button-3d-action button-pill">{{painting.title}}</a>
 
-              <a href="#/view2/{{painting.artist}}" 
-                id="artist"
-                class="button button-3d-highlight button-pill">{{painting.artist}}</a>
-                <button type="button" ng-show="painting.inspected"
-                  class="button button-3d-primary button-pill">Inspected
-                </button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+							<a href="#/view2/{{painting.artist}}" 
+							   id="artist"
+							   class="button button-3d-highlight button-pill">{{painting.artist}}</a>
+							<button type="button" ng-show="painting.inspected"
+									class="button button-3d-primary button-pill">Inspected
+							</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

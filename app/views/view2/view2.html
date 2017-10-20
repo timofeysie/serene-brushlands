@@ -1,104 +1,273 @@
 <navbar></navbar>
 <div ng-controller="View2Ctrl as controller">
-  <div class="container">
-     <div class="lab text-center">
-      <img ng-show="viewModel.spinner" ng-src="assets/images/spinner.gif" style="background:none">
-      <div id="text" ng-hide="viewModel.spinner">
-          <div class="row">
-              <div class="col-md-12 text-center">
-                  <span id="artist"
-                        style="color: Moccasin;"
-                        class="button button-pill button-highlight">
-                      {{viewModel.name}}</span>
-                  <br/>
-                  <span id="title"
-                        ng-if ="viewModel.DOB"
-                        style="color: Moccasin;"
-                        class="button button-pill button-highlight">
-                      {{viewModel.DOB}}</span>
-              </div>
-          </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p ng-if="viewModel.skinName">
-              <span id="SkinNameSkinName"
-                class="button button-pill">Skin Name</span>
-              <span class="button-pill button-highlight"
-                id="skinName__text">{{viewModel.skinName}}</span>
-            </p>
-            <p ng-if="viewModel.language">
-              <span class="button button-pill">Language</span>
-                <span class="button button-pill button-highlight">{{viewModel.language}}</span>
-            </p>
-            <p ng-if="viewModel.region">
-              <span class="button button-pill">Region</span>
-              <span class="button button-pill button-highlight">{{viewModel.region}}</span>
-            </p>
-            <p ng-if="viewModel.dreaming">
-              <span class="button button-pill">Dreaming</span>
-              <span class="button button-pill button-highlight">{{viewModel.dreaming}}</span>
-            </p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-md-12 text-center">
-            <p id="artist" style="margin:30px;" class="button-pill button-highlight">
-              <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{viewModel.bio.title}}</span>
-              <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.title"/>
-              </p>
-              <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{viewModel.bio.body}}</span>
-              <textarea ng-show="editModeEnabled" data-ng-model="editModel.bio.body" >{{editModel.bio.body}}</textarea>
-              </p>
-			  <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{viewModel.bio.AASDLink}}</span>
-              <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.AASDLink"/>
-              </p>
-			  <p style="padding: 25px; text-indent: 50px;" id="bio">
-              <span ng-hide="editModeEnabled">{{viewModel.bio.WikiLink}}</span>
-              <input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.WikiLink"/>
-              </p>
-              <button type="button" ng-hide="editModeEnabled" ng-click="editModeEnabled = true" class="button-pill button-highlight">
-                Click to edit
-              </button>
-              <button ng-show="editModeEnabled" type="button" ng-click="saveTitleAndBody(editModel)" class="button-pill button-highlight">
-                Save
-              </button>
-              <button ng-show="editModeEnabled" type="button" ng-click="editModeEnabled = false" class="button-pill button-highlight">
-                Cancel
-              </button> 
-            </p> 
-          </div> 
-          <span ng-show="updatedMessage.status">{{updatedMessage.msg}}</span>
-        </div>
-		<div class="row">
-		  <div class="col-md-12 text-center">
-		    <p id="link">
-                <a href={{viewModel.AASDLink}} target="_blank">
-                    <span id="AASDLink"
-                          style="color: Moccasin;"
-                          class="button button-pill button-highlight">
-                        AASD Link</span>
-                </a>
-                <br>
-                <a href={{viewModel.wikiLink}} target="_blank">
-                    <span id="wikiLinks"
-                          style="color: Moccasin;"
-                          class="button button-pill button-highlight">
-                        Wiki Link</span>
-                </a>
-                <br/>
-                <a href="#/locations/{{viewModel.name}}">
-                    <span id="wikiLinks"
-                          style="color: Moccasin;"
-                          class="button button-pill button-highlight">
-                        Artist's Work</span>
-                </a>
-		    </p>
-		  </div>
+	<div class="container">
+		<div class="lab text-center">
+			<img ng-show="viewModel.spinner" ng-src="assets/images/spinner.gif" style="background:none">
+			<div id="text" ng-hide="viewModel.spinner">
+				<div class="row">
+					<div ng-show="!smallWidth && !mediumWidth" class="col-md-6 col-md-offset-3">
+						<div class="artworkContainer">
+							<table class="artists-info-table">
+								<tr>
+									<td><P>Name</p></td>
+									<td>
+										<p style="text-indent: 50px;" class="bio">
+											<span>{{viewModel.name}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-if ="viewModel.DOB">
+									<td><P>DOB</p></td>
+									<td>
+										<p style="text-indent: 50px;" class="bio">
+											<span>{{viewModel.DOB}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-if="viewModel.skinName">
+									<td><P>Skin Name</p></td>
+									<td>
+										<p style="text-indent: 50px;" class="bio">
+											<span>{{viewModel.skinName}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-if="viewModel.language">
+									<td><P>Language</p></td>
+									<td>
+										<p style="text-indent: 50px;" class="bio">
+											<span>{{viewModel.language}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-if="viewModel.region">
+									<td><P>Region</p></td>
+									<td>
+										<p style="text-indent: 50px;" class="bio">
+											<span>{{viewModel.region}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-if="viewModel.dreaming">
+									<td><P>Dreaming</p></td>
+									<td>
+										<p style="text-indent: 50px;" class="bio">
+											<span>{{viewModel.dreaming}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-show="editModeEnabled || viewModel.bio.title">
+									<td><P>Bio Title</p></td>
+									<td>
+										<p style="text-indent: 50px;" class="bio">
+											<span ng-hide="editModeEnabled">{{viewModel.bio.title}}</span>
+											<input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.title"/>
+										</p>
+									</td>
+								</tr>
+								<tr ng-show="viewModel.bio.body || editModeEnabled">
+									<td><P>Bio Body</p></td>
+									<td>
+										<p style="text-indent: 50px;" class="bio">
+											<span ng-hide="editModeEnabled">{{viewModel.bio.body}}</span>
+											<textarea ng-show="editModeEnabled" data-ng-model="editModel.bio.body" >{{editModel.bio.body}}</textarea>
+										</p>
+									</td>
+								</tr>
+								<tr>
+									<td><P>AASD Link</p></td>
+									<td>
+										<div style="text-indent: 50px;" class="bio">
+											<a data-ng-if="viewModel.AASDLinkFound && !viewModel.AASDLinkLoader" href={{viewModel.realAASDLink}} target="_blank" ng-hide="editModeEnabled">
+												<span>{{viewModel.realAASDLink}}</span>
+											</a>
+											<div ng-show="viewModel.AASDLinkLoader" class="dot-loader"></div>
+
+											<span data-ng-if="!viewModel.AASDLinkFound && !viewModel.AASDLinkLoader" ng-hide="editModeEnabled">AASD does not have an article with this exact name.</span>
+											<input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.AASDLink"/>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td><P>Wiki Link</p></td>
+									<td>
+										<div style="text-indent: 50px;" class="bio">
+											<a data-ng-if="viewModel.wikiLinkFound && !viewModel.wikiLinkLoader" href={{viewModel.realWikiLink}} target="_blank" ng-hide="editModeEnabled">
+												<span>{{viewModel.realWikiLink}}</span>
+											</a>
+											<div ng-show="viewModel.wikiLinkLoader" class="dot-loader" ></div>
+
+											<span data-ng-if="!viewModel.wikiLinkFound && !viewModel.wikiLinkLoader" ng-hide="editModeEnabled">Wikipedia does not have an article with this exact name</span>
+											<input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.WikiLink"/>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" id="action-bar">
+
+										<a href="#/locations/{{viewModel.name}}">
+											<button type="button" class="button button-3d-highlight button-pill ng-binding">
+												View Artist's Works
+											</button>
+										</a>
+										<button type="button" ng-hide="editModeEnabled" ng-click="editModeEnabled = true" class="button button-3d-highlight button-pill ng-binding">
+											Click to edit
+										</button>
+										<button ng-show="editModeEnabled" type="button" ng-click="saveTitleAndBody(editModel)" class="button button-3d-highlight button-pill ng-binding">
+											Save
+										</button>
+										<button ng-show="editModeEnabled" type="button" ng-click="editModeEnabled = false" class="button button-3d-highlight button-pill ng-binding">
+											Cancel
+										</button> 
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div> 
+					
+					
+					<div ng-show="smallWidth || mediumWidth" class="col-md-6 col-md-offset-3">
+						<div class="artworkContainer artworkContainer-small">
+							<table class="artists-info-table">
+								<tr>
+									<td><P class="label">Name</p></td>
+								</tr>
+								<tr>
+									<td>
+										<p class="bio">
+											<span>{{viewModel.name}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-if ="viewModel.DOB">
+									<td><P class="label">DOB</p></td>
+								</tr>
+								<tr ng-if ="viewModel.DOB">
+									<td>
+										<p class="bio">
+											<span>{{viewModel.DOB}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-if="viewModel.skinName">
+									<td><P class="label">Skin Name</p></td>
+								</tr>
+								<tr ng-if="viewModel.skinName">
+									<td>
+										<p class="bio">
+											<span>{{viewModel.skinName}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-if="viewModel.language">
+									<td><P class="label">Language</p></td>
+								</tr>
+								<tr ng-if="viewModel.language">
+									<td>
+										<p class="bio">
+											<span>{{viewModel.language}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-if="viewModel.region">
+									<td class="label"><P>Region</p></td>
+								</tr>
+								<tr ng-if="viewModel.region">
+									<td>
+										<p class="bio">
+											<span>{{viewModel.region}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-if="viewModel.dreaming">
+									<td><P class="label">Dreaming</p></td>
+								</tr>
+								<tr ng-if="viewModel.dreaming">
+									<td>
+										<p class="bio">
+											<span>{{viewModel.dreaming}}</span>
+										</p>
+									</td>
+								</tr>
+								<tr ng-show="editModeEnabled || viewModel.bio.title">
+									<td><P class="label">Bio Title</p></td>
+								</tr>
+								<tr ng-show="editModeEnabled || viewModel.bio.title">
+									<td>
+										<p class="bio">
+											<span ng-hide="editModeEnabled">{{viewModel.bio.title}}</span>
+											<input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.title"/>
+										</p>
+									</td>
+								</tr>
+								<tr ng-show="viewModel.bio.body || editModeEnabled">
+									<td><P class="label">Bio Body</p></td>
+								</tr>
+								<tr ng-show="viewModel.bio.body || editModeEnabled">
+									<td>
+										<p class="bio">
+											<span ng-hide="editModeEnabled">{{viewModel.bio.body}}</span>
+											<textarea ng-show="editModeEnabled" data-ng-model="editModel.bio.body" >{{editModel.bio.body}}</textarea>
+										</p>
+									</td>
+								</tr>
+								<tr>
+									<td><P class="label">AASD Link</p></td>
+								</tr>
+								<tr>
+									<td>
+										<div class="bio">
+											<a data-ng-if="viewModel.AASDLinkFound && !viewModel.AASDLinkLoader" href={{viewModel.realAASDLink}} target="_blank" ng-hide="editModeEnabled">
+												<span>{{viewModel.realAASDLink}}</span>
+											</a>
+											<div ng-show="viewModel.AASDLinkLoader" class="dot-loader"></div>
+
+											<span data-ng-if="!viewModel.AASDLinkFound && !viewModel.AASDLinkLoader" ng-hide="editModeEnabled">AASD does not have an article with this exact name.</span>
+											<input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.AASDLink"/>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td><P class="label">Wiki Link</p></td>
+								</tr>
+								<tr>
+									<td>
+										<div class="bio">
+											<a data-ng-if="viewModel.wikiLinkFound && !viewModel.wikiLinkLoader" href={{viewModel.realWikiLink}} target="_blank" ng-hide="editModeEnabled">
+												<span>{{viewModel.realWikiLink}}</span>
+											</a>
+											<div ng-show="viewModel.wikiLinkLoader" class="dot-loader" ></div>
+
+											<span data-ng-if="!viewModel.wikiLinkFound && !viewModel.wikiLinkLoader" ng-hide="editModeEnabled">Wikipedia does not have an article with this exact name</span>
+											<input ng-show="editModeEnabled" type="text" data-ng-model="editModel.bio.WikiLink"/>
+										</div>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" id="action-bar">
+
+										<a href="#/locations/{{viewModel.name}}">
+											<button type="button" class="button button-3d-highlight button-pill ng-binding">
+												View Artist's Works
+											</button>
+										</a>
+										<button type="button" ng-hide="editModeEnabled" ng-click="editModeEnabled = true" class="button button-3d-highlight button-pill ng-binding">
+											Click to edit
+										</button>
+										<button ng-show="editModeEnabled" type="button" ng-click="saveTitleAndBody(editModel)" class="button button-3d-highlight button-pill ng-binding">
+											Save
+										</button>
+										<button ng-show="editModeEnabled" type="button" ng-click="editModeEnabled = false" class="button button-3d-highlight button-pill ng-binding">
+											Cancel
+										</button> 
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div> 
+					<span ng-show="updatedMessage.status">{{updatedMessage.msg}}</span>
+				</div>
+			</div>
 		</div>
-      </div>
-    </div>
-  </div>
+	</div>
 </div>

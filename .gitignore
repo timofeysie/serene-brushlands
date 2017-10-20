@@ -4,10 +4,12 @@ app/bower_components/
 tmp/
 node_modules
 .env
-.roles.json
+.permissions.json
 **/.sass-cache/*
 **/.sass-cache
 **.sass-cache**
 uploads/uploaded-artworks.json
 debug.html
 npm-debug.log
+/nbproject/private/
+app/assets/backups/

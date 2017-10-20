@@ -1,163 +1,182 @@
 <div class="container">
 
-  <!-- large screen width menu -->
-  <div class="row"
-    ng-show="!smallWidth && !mediumWidth">
-    <div class="col-md-12 col-xs-12">
-      <ul class="nav nav-tabs no-stack">
-        <li role="presentation">
-          <a href="#/view1"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Artworks
-          </a>
-        </li>
-        <li role="presentation">
-          <a href="#/locations"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Gallery
-          </a>
-        </li>
-        <li role="presentation">
-          <a href="#/add"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Update
-          </a>
-        </li>
-        <li role="presentation">
-          <a href="#/data"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Collection Data
-          </a>
-        </li>
-        <li role="presentation">
-          <a href="#/inspections"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Inspections
-          </a>
-        </li>
-        <li role="presentation" ng-show="isAllowed">
-          <a href="#/user-permissions"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            User Permissions
-          </a>
-        </li>
-        <li role="presentation">
-          <a href="#/about"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Login/Logout
-          </a>
-        </li>
-      </ul>
-    </div>
-  </div>
+	<!-- large screen width menu -->
+	<div ng-if="isAuthenticated" class="row"
+		 ng-show="!smallWidth && !mediumWidth">
+		<div class="col-md-12 col-xs-12">
+			<ul class="nav nav-tabs no-stack">
+				<li role="presentation">
+					<a href="#/view1"
+					   class="button button-3d button-pill"
+					   id="navbar__button">
+						Artworks
+					</a>
+				</li>
+				<li role="presentation">
+					<a href="#/locations"
+					   class="button button-3d button-pill"
+					   id="navbar__button">
+						Gallery
+					</a>
+				</li>
+				<li role="presentation">
+					<a href="#/add"
+					   class="button button-3d button-pill"
+					   id="navbar__button">
+						Update
+					</a>
+				</li>
+				<li role="presentation">
+					<a href="#/data"
+					   class="button button-3d button-pill"
+					   id="navbar__button">
+						Collection Data
+					</a>
+				</li>
+				<li role="presentation">
+					<a href="#/inspections"
+					   class="button button-3d button-pill"
+					   id="navbar__button">
+						Inspections
+					</a>
+				</li>
+				<li role="presentation">
+					<a href="#/user-permissions"
+					   class="button button-3d button-pill"
+					   id="navbar__button">
+						User Permissions
+					</a>
+				</li>
+				<li role="presentation" ng-if="!isAuthenticated">
+					<a href="#"
+					   ng-click="login()"
+					   class="button button-3d button-pill"
+					   id="navbar__button">
+						Login
+					</a>
+				</li>
+				<li role="presentation" ng-if="isAuthenticated">
+					<a href="#"
+					   ng-click="signout()"
+					   class="button button-3d button-pill"
+					   id="navbar__button">
+						Logout
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
 
-  <!-- medium screen width menu -->
-  <div class="row"
-    ng-show="mediumWidth">
-    <div class="col-md-12 col-xs-12">
-      <div class="button-group">
-        <a href="#/view1"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Artworks
-        </a>
-          <a href="#/locations"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Gallery
-          </a>
-          <a href="#/add"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Update
-          </a>
-          <a href="#/data"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Collection Data
-          </a>
-          <a href="#/inspections"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Inspections
-          </a>
-          <a href="#/about"
-            class="button button-3d button-pill"
-            id="navbar__button">
-            Login/Logout
-          </a>
-      </div>
-    </div>
-  </div>
+	<!-- medium screen width menu -->
+	<div ng-if="isAuthenticated" class="row"
+		 ng-show="mediumWidth">
+		<div class="col-md-12 col-xs-12">
+			<div class="button-group">
+				<a href="#/view1"
+				   class="button button-3d button-pill"
+				   id="navbar__button">
+					Artworks
+				</a>
+				<a href="#/locations"
+				   class="button button-3d button-pill"
+				   id="navbar__button">
+					Gallery
+				</a>
+				<a href="#/add"
+				   class="button button-3d button-pill"
+				   id="navbar__button">
+					Update
+				</a>
+				<a href="#/data"
+				   class="button button-3d button-pill"
+				   id="navbar__button">
+					Collection Data
+				</a>
+				<a href="#/inspections"
+				   class="button button-3d button-pill"
+				   id="navbar__button">
+					Inspections
+				</a>
+				<a href="#"
+				   ng-click="login()"
+				   ng-if="!isAuthenticated"
+				   class="button button-3d button-pill"
+				   id="navbar__button">
+					Login
+				</a>
+				<a href="#"
+				   ng-if="isAuthenticated"
+				   ng-click="signout()"
+				   class="button button-3d button-pill"
+				   id="navbar__button">
+					Logout
+				</a>
+			</div>
+		</div>
+	</div>
 
 
-  <!-- small screen gooey nav -->
-  <div class="row"
-    id="gooeyNav"
-    ng-show="smallWidth">
-    <nav>
-      <input type="checkbox"
-        href="#"
-        class="menu-open"
-        name="menu-open"
-        id="menu-open"
-        style="content: none"/>
-      <label class="menu-open-button"
-        for="menu-open">
-        <span class="hamburger hamburger-1"></span>
-        <span class="hamburger hamburger-2"></span>
-        <span class="hamburger hamburger-3"></span>
-      </label>
-      <a href="#/login" class="menu-item">Login</a>
-      <a href="#/data" class="menu-item">Data</a>
-      <a href="#/add" class="menu-item">Update</i> </a>
-      <a href="#/inspections" class="menu-item">Inspect</a>
-      <a href="#/locations" class="menu-item">Gallery</a>
-      <a href="#/view1" class="menu-item">Artwork</a>
-    </nav>
+	<!-- small screen gooey nav -->
+	<div ng-if="isAuthenticated" class="row"
+		 id="gooeyNav"
+		 ng-show="smallWidth">
+		<nav>
+			<input type="checkbox"
+				   href="#"
+				   class="menu-open"
+				   name="menu-open"
+				   id="menu-open"
+				   style="content: none"/>
+			<label class="menu-open-button"
+				   for="menu-open">
+				<span class="hamburger hamburger-1"></span>
+				<span class="hamburger hamburger-2"></span>
+				<span class="hamburger hamburger-3"></span>
+			</label>
+			<a href="#" data-ng-click='login()' class="menu-item" ng-if="!isAuthenticated">Login</a>
+			<a href="#" data-ng-click='signout()' class="menu-item" ng-if="isAuthenticated">Logout</a>
+			<a href="#/data" class="menu-item">Data</a>
+			<a href="#/add" class="menu-item">Update</i> </a>
+			<a href="#/inspections" class="menu-item">Inspect</a>
+			<a href="#/locations" class="menu-item">Gallery</a>
+			<a href="#/view1" class="menu-item">Artwork</a>
+		</nav>
 
-    <!-- filters -->
-    <svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+		<!-- filters -->
+		<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
         <defs>
-          <filter id="shadowed-goo">
-              <feGaussianBlur in="SourceGraphic"
-                result="blur"
-                stdDeviation="10" />
-              <feColorMatrix in="blur"
-                mode="matrix"
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
-                result="goo" />
-              <feGaussianBlur in="goo"
-                stdDeviation="3"
-                result="shadow" />
-              <feColorMatrix in="shadow"
-                mode="matrix"
-                values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2"
-                result="shadow" />
-              <feOffset in="shadow" dx="1" dy="1" result="shadow" />
-              <feBlend in2="shadow" in="goo" result="goo" />
-              <feBlend in2="goo" in="SourceGraphic" result="mix" />
-          </filter>
-          <filter id="goo">
-              <feGaussianBlur in="SourceGraphic"
-                result="blur" stdDeviation="10" />
-              <feColorMatrix in="blur"
-                mode="matrix"
-                values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 10 -7"
-                result="goo" />
-              <feBlend in2="goo" in="SourceGraphic"
-                result="mix" />
-          </filter>
+		<filter id="shadowed-goo">
+			<feGaussianBlur in="SourceGraphic"
+							result="blur"
+							stdDeviation="10" />
+			<feColorMatrix in="blur"
+						   mode="matrix"
+						   values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7"
+						   result="goo" />
+			<feGaussianBlur in="goo"
+							stdDeviation="3"
+							result="shadow" />
+			<feColorMatrix in="shadow"
+						   mode="matrix"
+						   values="0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 1 -0.2"
+						   result="shadow" />
+			<feOffset in="shadow" dx="1" dy="1" result="shadow" />
+			<feBlend in2="shadow" in="goo" result="goo" />
+			<feBlend in2="goo" in="SourceGraphic" result="mix" />
+		</filter>
+		<filter id="goo">
+			<feGaussianBlur in="SourceGraphic"
+							result="blur" stdDeviation="10" />
+			<feColorMatrix in="blur"
+						   mode="matrix"
+						   values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 10 -7"
+						   result="goo" />
+			<feBlend in2="goo" in="SourceGraphic"
+					 result="mix" />
+		</filter>
         </defs>
-    </svg>
-    <!-- end gooey menu -->
+		</svg>
+		<!-- end gooey menu -->
 
-  </div>
+	</div>
 </div>

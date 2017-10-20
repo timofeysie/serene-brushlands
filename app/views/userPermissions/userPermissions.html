@@ -1,28 +1,25 @@
 <navbar></navbar>
 <div class="user-permissions-view">
-  <h2>User Permissions</h2>
-  <table class="user-permissions-table">
-    <thead>
-      <tr>
-        <th>Email</th>
-        <th>Role</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr data-ng-repeat="(key,values) in roleBasedPermissions" ng-if="key!='userRoles'">
-        <td>{{key}}</td>
-        <td>
-          <ul>
-            <li data-ng-repeat="role in roles">
-              <input type="radio" name="{{key}}" data-ng-model="userRoles[key]" data-ng-checked="setDefaultCheck(role,values[0])" value="{{role}}" class="user-permissions-radio">
-            {{role}}
-            </li>
-          </ul>
-      </td>
-      </tr>
-    </tbody>
-  </table>
-  <button type="button" class="button button-3d-primary button-pill" ng-click="saveUserRoles()">
-          Save Changes
-  </button>
+	<h2>User Permissions</h2>
+	<select ng-model="currentSelectedUser" data-ng-change="onChangeUser()" class="button button-3d button-pill">
+		<option value="" >Select a User</option>
+		<option ng-repeat="user in users"
+				value="{{user}}">{{user}}</option>
+	</select>
+	<ul class="list-group" ng-if="currentSelectedUser !== ''">
+		<li class="list-group-item" data-ng-repeat="permission in permissions">
+			<input
+				type="checkbox"
+				data-ng-model="permissionsCheckboxes['checkbox-' + $index+'-status']"
+				data-ng-click="setUserPermissions(permission,'checkbox-' + $index+'-status')"
+				data-ng-checked="setDefaultCheck(permission)"
+				data-ng-true-value="true"
+				data-ng-false-value="false"
+				class="user-permissions-radio">
+			{{permission}}
+		</li>
+	</ul>
+	<button ng-if="currentSelectedUser !== ''" type="button" class="button button-3d-primary button-pill" ng-click="saveUserPermissions()">
+		Save Changes
+	</button>
 </div>

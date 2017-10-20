@@ -1,44 +1,81 @@
 <navbar></navbar>
 <div id="outer">
-  <div ng-controller="LocationsCtrl as controller">
-    <br/>
-    <label ng-show="isAdmin">Filter by office location: </label>
-    <select ng-show="isAdmin" ng-model="selectedLocation"
-      class="button button-3d button-pill">
-        <option value="">All</option>
-      <option ng-repeat="officelocation in officelocations"
-        value="{{officelocation}}">{{officelocation}}</option>
-    </select>
-    <br />
-    <br />
-    <label> Filter by artist: </label>
-    <select ng-model="selectedArtist"
-      class="button button-3d button-pill">
-        <option value="">All</option>
-      <option ng-repeat="artist in artists"
-        value="{{artist}}">{{artist }}</option>
-    </select>
-    <br/>
-    <br/>
-	<img ng-show="spinner" ng-src="assets/images/spinner.gif" style="background:none">
-    <div class="flex-container">
-        <div ng-repeat="artwork in controller.artworks | orderBy:'officeLocation' | filter:{officeLocation:selectedLocation, artist:selectedArtist}:strict"
-          style="position: relative; left: 45px;">
+	<div ng-controller="LocationsCtrl as controller">
+		<br/>
+		<div class="filters">
+			<div  class="filter-header button" ng-click="showFilters = !showFilters">
+				<h2>Filters</h2>
+				<span class="arrow-down" ng-show="!showFilters"></span>
+				<span class="arrow-up" ng-show="showFilters"></span>
+			</div>
+			<div class="filter-body" ng-show="showFilters">
+				<div data-ng-if="permissions['view-location-insured-and-provenance']">
+					<label>Filter by office location: </label>
+					<select ng-model="$parent.filter.officeLocation"
+							class="button button-3d button-pill" ng-change="filterArtworks(filter)">
+						<option value="">All</option>
+						<option ng-repeat="officelocation in officelocations| orderBy : 'location'"
+								value="{{officelocation.location}}">{{officelocation.location}}</option>
+					</select>
+					<br />
+					<br />
+				</div>
+				<label> Filter by artist: </label>
+				<select ng-model="filter.artist"
+						class="button button-3d button-pill" ng-change="filterArtworks(filter)">
+					<option value="">All</option>
+					<option ng-repeat="artist in artists| orderBy : 'toString()'"
+							value="{{artist}}">{{artist}}</option>
+				</select>
+				<br/>
+				<br/>
+				<input type="text" class="button-pill search-term" ng-model="filter.searchTerm" placeholder="Search here" ng-change="filterArtworks(filter)"/><br/>
+				<div class="filter-group">
+					<label>
+						<input type="checkbox" ng-model="filter.searchArtist" id="search_artist" ng-change="filterArtworks(filter)">Search by artists
+					</label>
+				</div>
+				<div class="filter-group">
+					<label>
+						<input type="checkbox" ng-model="filter.searchLocation" id="search_location" ng-change="filterArtworks(filter)">Search by Location
+					</label>
+				</div>
+			</div>
+		</div>
+		<img ng-show="spinner" ng-src="assets/images/spinner.gif" style="background:none">
+		<div class="flex-container">
+			<div ng-repeat="artwork in controller.artworks| orderBy:'officeLocation'"
+				 style="position: relative; left: 45px;">
 
-          <div id="productos"
-            class="col col-span-3">
-            <div class="container">
-              <a href="#/view3/{{artwork.assetRefNo}}">
-                <img ng-src="{{artwork.imageFile}}" alt="No image" style="width:100px"/>
-              </a>
-              <div><p1>{{artwork.assetRefNo}}.</p1>{{artwork.title}}
-                <span ng-show="artwork.inspected"><i class="fa fa-check-circle"></i></span></div>
-              <div ng-show="artwork.artist">by {{artwork.artist}}</div>
-              <div ng-show="true" ng-class="'' == selectedLocation ? 'all-locations-same' : ''" class="{{artwork.locationBg}} artwork__locationBg {{allArtWorksClass}}"
-                style="display: table-cell; vertical-align: bottom;">{{artwork.officeLocation}}</div>
-            </div>
-          </div>
-        </div><!-- end repeat -->
-    </div>
-  </div>
+				<div id="productos"
+					 class="col col-span-3">
+					<div class="container">
+						<a class="lightbox" href="javascript:void(0)" data-ng-click="openLightBox(artwork)">
+							<img ng-src="{{artwork.thumbnail}}" alt="No image"/>
+						</a>
+						<a href="#/view3/{{artwork.assetRefNo}}">
+							<div>
+								<div>{{artwork.assetRefNo}}.</div>
+								<div>{{artwork.title}}</div>
+								<span ng-show="artwork.inspected">
+									<i class="fa fa-check-circle"></i>
+								</span>
+							</div>
+							<div ng-show="artwork.artist">by {{artwork.artist}}</div>
+							<div 
+								data-ng-if="permissions['view-location-insured-and-provenance']"
+								ng-show="true"
+								ng-class="'' == selectedLocation ? 'all-locations-same' : ''" class="{{artwork.locationBg}} artwork__locationBg {{allArtWorksClass}}"
+								style="display: table-cell; vertical-align: bottom;">{{artwork.officeLocation}}
+							</div>
+						</a>
+					</div>
+				</div>
+			</div><!-- end repeat -->
+		</div>
+		<div class="lightbox-target" id="locations-lightbox" data-ng-click="closeLightBox()">
+			<img id="locations-lightbox-image" alt="No Image" src=""/>
+			<a class="lightbox-close" href="javascript:void(0)"></a>
+		</div>
+	</div>
 </div>
