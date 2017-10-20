@@ -1,3 +1,4 @@
+var https = require('https');
 var express = require('express');
 var async = require('async');
 var officegen = require('officegen');
@@ -12,8 +13,8 @@ var util = require('util');
 var Busboy = require('busboy');
 var busboy = require('connect-busboy');
 var MongoClient = require('mongodb').MongoClient;
-var bodyParser = require('body-parser')
-var Jimp = require('jimp')
+var bodyParser = require('body-parser');
+var Jimp = require('jimp');
 
 require('dotenv').config();
 
@@ -31,6 +32,12 @@ $.prototype.eq = function (placement) {
 module.exports = {
 	normalizeLocation: normalizeLocation
 }
+
+var ssl = {
+	cert: fs.readFileSync('/etc/letsencrypt/live/trineura.cf/fullchain.pem'),
+	key: fs.readFileSync('/etc/letsencrypt/live/trineura.cf/privkey.pem')
+};
+
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(busboy());
 app.set('port', (process.env.PORT || 5000));
@@ -41,9 +48,13 @@ app.engine('html', require('ejs').renderFile);
 app.get('/', function (request, response) {
 	response.render('app/index.html');
 });
-app.listen(app.get('port'), function () {
-	console.log('Node app is running on port', app.get('port'));
-});
+
+var http = require('http');
+http.createServer(function (req, res) {
+    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
+    res.end();
+}).listen(80);
+https.createServer(ssl, app).listen(443);
 
 /**
  * @memberof myApp.index
