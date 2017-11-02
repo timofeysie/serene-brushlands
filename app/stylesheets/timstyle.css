@@ -47,7 +47,7 @@ h1 {
 	position: absolute;
 	top: -20px;
 	/* y position of ball */
-	color: white;
+	color: #666;
 	text-align: center;
 	line-height: 50px;
 	/* text height */
@@ -65,7 +65,7 @@ h1 {
 .hamburger {
 	width: 25px;
 	height: 3px;
-	background: white;
+	background: #666;
 	display: block;
 	position: absolute;
 	top: 50%;

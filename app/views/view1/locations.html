@@ -9,43 +9,46 @@
 				<span class="arrow-up" ng-show="showFilters"></span>
 			</div>
 			<div class="filter-body" ng-show="showFilters">
-				<div data-ng-if="permissions['view-location-insured-and-provenance']">
-					<label>Filter by office location: </label>
-					<select ng-model="$parent.filter.officeLocation"
-							class="button button-3d button-pill" ng-change="filterArtworks(filter)">
-						<option value="">All</option>
-						<option ng-repeat="officelocation in officelocations| orderBy : 'location'"
-								value="{{officelocation.location}}">{{officelocation.location}}</option>
-					</select>
-					<br />
-					<br />
+				<div class="filter-item filter-select-container" data-ng-if="permissions['view-location-insured-and-provenance']">
+					<label class="filter-select-item">Filter by office location: </label>
+					<div class="filter-select-item">
+						<select ng-model="$parent.filter.officeLocation"
+								class="button button-3d button-pill" ng-change="filterArtworks(filter)">
+							<option value="">All</option>
+							<option ng-repeat="officelocation in officelocations| orderBy : 'location'"
+									value="{{officelocation.location}}">{{officelocation.location}}</option>
+						</select>
+					</div>
 				</div>
-				<label> Filter by artist: </label>
-				<select ng-model="filter.artist"
-						class="button button-3d button-pill" ng-change="filterArtworks(filter)">
-					<option value="">All</option>
-					<option ng-repeat="artist in artists| orderBy : 'toString()'"
-							value="{{artist}}">{{artist}}</option>
-				</select>
-				<br/>
-				<br/>
-				<input type="text" class="button-pill search-term" ng-model="filter.searchTerm" placeholder="Search here" ng-change="filterArtworks(filter)"/><br/>
-				<div class="filter-group">
-					<label>
-						<input type="checkbox" ng-model="filter.searchArtist" id="search_artist" ng-change="filterArtworks(filter)">Search by artists
-					</label>
+				<div class="filter-item filter-select-container">
+					<label class="filter-select-item"> Filter by artist: </label>
+					<div class="filter-select-item">
+						<select ng-model="filter.artist"
+								class="button button-3d button-pill" ng-change="filterArtworks(filter)">
+							<option value="">All</option>
+							<option ng-repeat="artist in artists| orderBy : 'toString()'"
+									value="{{artist}}">{{artist}}</option>
+						</select>
+					</div>
 				</div>
-				<div class="filter-group">
-					<label>
-						<input type="checkbox" ng-model="filter.searchLocation" id="search_location" ng-change="filterArtworks(filter)">Search by Location
-					</label>
+				<div class="filter-item">
+					<input type="text" class="button-pill search-term" ng-model="filter.searchTerm" placeholder="Search here" ng-change="filterArtworks(filter)"/><br/>
+					<div class="filter-group">
+						<label>
+							<input type="checkbox" ng-model="filter.searchArtist" id="search_artist" ng-change="filterArtworks(filter)"/>Search by artists
+						</label>
+					</div>
+					<div class="filter-group">
+						<label>
+							<input type="checkbox" ng-model="filter.searchLocation" id="search_location" ng-change="filterArtworks(filter)"/>Search by Location
+						</label>
+					</div>
 				</div>
 			</div>
 		</div>
 		<img ng-show="spinner" ng-src="assets/images/spinner.gif" style="background:none">
 		<div class="flex-container">
-			<div ng-repeat="artwork in controller.artworks| orderBy:'officeLocation'"
-				 style="position: relative; left: 45px;">
+			<div ng-repeat="artwork in controller.artworks| orderBy:'officeLocation'">
 
 				<div id="productos"
 					 class="col col-span-3">
