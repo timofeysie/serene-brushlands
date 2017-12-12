@@ -5,8 +5,10 @@
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: flex-start;
-	align-content: space-around;
+	justify-content: space-evenly;
+	align-items: flex-start;
+	margin-left: 20px;
+	margin-right: 20px;
 }
 
 /* line 15, ../../scss/styles.scss */
@@ -523,10 +525,11 @@ a {
 }
 
 .filters{
+	display:flex;
+	flex-direction: column;
+	justify-content: center;
 	width: 80%;
-	margin-left: auto;
-	margin-right: auto;
-	margin-bottom: 15px;
+	margin:auto;
 }
 
 .filters input[type=checkbox]{
@@ -554,9 +557,9 @@ a {
 
 .filters .filter-header
 {
-	width: 100%;
-	cursor: pointer;
+	padding:0;
 	position: relative;
+	width: 100%
 }
 .filters .filter-header h2
 {
@@ -568,10 +571,33 @@ a {
 	padding-top:10px;
 	background-color: #eee;
 	width:100%;
-	padding-left: 26.5px;
-	padding-right: 26.5px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 }
 
+.filter-item{
+	order: 1;
+	flex-grow: 1;
+	margin-bottom: 10px;
+	max-width: 100%;
+}
+.filter-select-container{
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.filter-select-item{
+	order: 1;
+	flex-grow: 1;
+	max-width: 100%;
+}
+.filter-select-item .button {
+	max-width: 100%;
+}
 .arrow-down {
 	position: absolute;
 	top: 8px;
