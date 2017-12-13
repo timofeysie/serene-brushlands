@@ -20,12 +20,12 @@ angular.module('artApp.view3', ['ngRoute', 'ngFileUpload'])
 
 			$http.get('/get-artwork/' + paintingNo).then(function (res) {
 				var retriveData = res.data;
-				console.log(retriveData);
 				$scope.viewModel.artist = retriveData.artist;
 				$scope.viewModel.title = retriveData.title;
 				$scope.viewModel.size = retriveData.size;
 				$scope.viewModel.imageFileName = retriveData.imageFileName;
 				$scope.viewModel.thumbnail = retriveData.thumbnail;
+				$scope.viewModel.officeLocation = retriveData.officeLocation;
 				$scope.viewModel.nextPaintingNumber = retriveData.next;
 				$scope.viewModel.prevPaintingNumber = retriveData.previous;
 				$scope.viewModel.id = retriveData.assetRefNo;

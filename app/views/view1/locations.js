@@ -14,8 +14,12 @@ angular.module('artApp.locations', ['ngRoute'])
 			$scope.selectedLocation = "";
 			$scope.artists = [];
 			$scope.selectedArtist = "";
+			$scope.filter = {};
 			if ($routeParams.artist) {
-				$scope.selectedArtist = $routeParams.artist;
+				$scope.filter.artist = $routeParams.artist;
+			}
+			if ($routeParams.location) {
+				$scope.filter.officeLocation = $routeParams.location;
 			}
 
 			$scope.openLightBox = function (artwork)
@@ -80,6 +84,7 @@ angular.module('artApp.locations', ['ngRoute'])
 				}
 				viewModel.artworks = newData;
 				$scope.originals = angular.copy(viewModel.artworks);
+				$scope.filterArtworks($scope.filter);
 				$scope.spinner = false;
 				if (!$scope.$$phase) {
 					$scope.$apply(viewModel);
