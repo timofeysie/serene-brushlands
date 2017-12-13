@@ -18,8 +18,7 @@
 				<div ng-if="!mediumWidth && !smallWidth" class="col-md-6 col-md-offset-3">
 					<div id="artworkContainer" class="artworkContainer">
 						<a class="lightbox" href="javascript:void(0)" data-ng-click="openLightBox(viewModel)">
-							<img id="artwork" src="{{viewModel.thumbnail}}"
-								 alt="No image" width="100px;"/>
+							<img id="artwork" ng-src="{{viewModel.thumbnail}}" alt="No image" width="100px;"/>
 						</a>
 						<br/>
 						<h5>{{viewModel.id}} - {{viewModel.title}} <span ng-show="inspectionOn">
