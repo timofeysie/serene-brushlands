@@ -22,15 +22,14 @@
 								 alt="No image" width="100px;"/>
 						</a>
 						<br/>
-						<a href="#/view1"
-						   class="button button-3d button-pill">
-							No. {{viewModel.id}}
-						</a>
-						<h5>{{viewModel.title}} <span ng-show="inspectionOn">
+						<h5>{{viewModel.id}} - {{viewModel.title}} <span ng-show="inspectionOn">
 								<i class="fa fa-check-circle"></i></span></h5>
 						<p><a href="#/view2/{{viewModel.artist}}"
 							  class="button button-3d-action button-pill">
 								{{viewModel.artist}}</a></p>
+						<p>
+							<a href="#/locations/?location={{viewModel.officeLocation}}" class="button button-3d button-pill">{{viewModel.officeLocation}}</a>
+						</p>
 						<p>{{viewModel.size}}</p>
 						<span>Add Additional Images</span>
 						<br/>
@@ -78,15 +77,18 @@
 								 alt="No image" width="100px;"/>
 						</a>
 						<br/>
-						<a href="#/view1"
-						   class="button button-3d button-pill">
-							{{viewModel.id}}. {{viewModel.title}} 
+						<p>
+							<span>{{viewModel.id}} - {{viewModel.title}} </span>
 							<span ng-show="inspectionOn">
-								<i class="fa fa-check-circle"></i></span>
-						</a>
+								<i class="fa fa-check-circle"></i>
+							</span>
+						</p>
 						<p><a href="#/view2/{{viewModel.artist}}"
 							  class="button button-3d-action button-pill">
 								{{viewModel.artist}}</a></p>
+						<p>
+							<a href="#/locations/{{viewModel.officeLocation}}" class="button button-3d button-pill">{{viewModel.officeLocation}}</a>
+						</p>
 						<p>{{viewModel.size}}</p>
 						<div class="additional-image">
 							<span>Add Additional Images</span>

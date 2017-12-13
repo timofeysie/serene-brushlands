@@ -12,7 +12,7 @@
 				<div class="filter-item filter-select-container" data-ng-if="permissions['view-location-insured-and-provenance']">
 					<label class="filter-select-item">Filter by office location: </label>
 					<div class="filter-select-item">
-						<select ng-model="$parent.filter.officeLocation"
+						<select ng-model="filter.officeLocation"
 								class="button button-3d button-pill" ng-change="filterArtworks(filter)">
 							<option value="">All</option>
 							<option ng-repeat="officelocation in officelocations| orderBy : 'location'"
