@@ -26,10 +26,10 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 			$scope.getAASDLink = function (obj)
 			{
 				if (obj.bio.AASDLink) {
-					return "http://www.aasd.com.au/index.cfm/artist/?concat=" + obj.bio.AASDLink;
+					return "https://www.aasd.com.au/index.cfm/artist/?concat=" + obj.bio.AASDLink;
 				} else if (obj.name != "") {
 					var full_name = obj.name.split(" ");
-					return "http://www.aasd.com.au/index.cfm/artist/?concat=" + full_name[1] + full_name[0];
+					return "https://www.aasd.com.au/index.cfm/artist/?concat=" + full_name[1] + full_name[0];
 				} else {
 					return "";
 				}
@@ -76,7 +76,7 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 					$scope.editModel.bio.title = retrivedArtistData.bio.title;
 					$scope.editModel.bio.body = retrivedArtistData.bio.body;
 
-					$http({method: "GET", url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + $scope.viewModel.realAASDLink + "%22&format=json"})
+					$http({method: "GET", url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + $scope.viewModel.realAASDLink + "%22&format=json"})
 						.then(function (response) {
 							$scope.viewModel.AASDLinkLoader = false;
 							if (response.data.query.results)
@@ -85,7 +85,7 @@ angular.module('artApp.view2', ['ngRoute', 'firebase'])
 							}
 						});
 
-					$http({method: "GET", url: "http://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + $scope.viewModel.realWikiLink + "%22&format=json"})
+					$http({method: "GET", url: "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20html%20where%20url%3D%22" + $scope.viewModel.realWikiLink + "%22&format=json"})
 						.then(function (response) {
 							$scope.viewModel.wikiLinkLoader = false;
 							if (response.data.query.results)
