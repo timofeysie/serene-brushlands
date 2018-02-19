@@ -51,8 +51,8 @@ app.get('/', function (request, response) {
 
 var http = require('http');
 http.createServer(function (req, res) {
-    res.writeHead(301, { "Location": "https://" + req.headers['host'] + req.url });
-    res.end();
+	res.writeHead(301, {"Location": "https://" + req.headers['host'] + req.url});
+	res.end();
 }).listen(80);
 https.createServer(ssl, app).listen(443);
 
@@ -401,6 +401,7 @@ app.post('/save-artworks', function (req, res) {
 					then(() => {
 						db.close();
 						res.send({data: "success"});
+						res.end();
 					});
 			}).catch((err) => {
 			console.error(err);
@@ -425,6 +426,7 @@ app.post('/save-artist', function (req, res) {
 
 		collection.update({name: data.name}, data, {upsert: true}, function (err, resuslt) {
 			res.send({data: "sucess"});
+			res.end();
 		});
 		db.close();
 	});
@@ -444,6 +446,7 @@ app.post('/save-image', function (req, res) {
 		var collection = db.collection('images');
 		collection.update({assetRefNo: data.assetRefNo}, data, {upsert: true}, function (err, resuslt) {
 			res.send({data: "sucess"});
+			res.end();
 		});
 		db.close();
 	});
@@ -465,6 +468,7 @@ app.post('/update-artist', function (req, res) {
 		var collection = db.collection('artists');
 		collection.update({name: data.artist}, {$set: {bio: data.bio}}, function (err, items) {
 			res.send({data: "sucess"});
+			res.end();
 		});
 		db.close();
 	});
@@ -483,6 +487,7 @@ app.get('/get-artworks', function (req, res) {
 		var collection = db.collection('artworks');
 		collection.find().sort({assetRefNo: 1}).toArray(function (err, items) {
 			res.send(items);
+			res.end();
 		});
 		db.close();
 	});
@@ -502,6 +507,7 @@ app.get('/get-artwork/:id', function (req, res) {
 		var collection = db.collection('artworks');
 		collection.findOne({assetRefNo: artworkId}, function (err, items) {
 			res.send(items);
+			res.end();
 		});
 		db.close();
 	});
@@ -521,6 +527,7 @@ app.get('/get-image/:id', function (req, res) {
 		var collection = db.collection('images');
 		collection.findOne({assetRefNo: arworkId}, function (err, items) {
 			res.send(items);
+			res.end();
 		});
 		db.close();
 	});
@@ -541,6 +548,7 @@ app.get('/get-artist/:name', function (req, res) {
 		var collection = db.collection('artists');
 		collection.findOne({name: name}, function (err, items) {
 			res.send(items);
+			res.end();
 		});
 		db.close();
 	});
@@ -561,6 +569,7 @@ app.get('/get-meta/:key', function (req, res) {
 		var collection = db.collection('meta');
 		collection.findOne({key: key}, function (err, items) {
 			res.send(items);
+			res.end();
 		});
 		db.close();
 	});
@@ -633,6 +642,7 @@ app.get('/download-backup', function (req, res) {
 							docxFile.generate(file);
 							file.on('close', function () {
 								res.send({data: fileName});
+								res.end();
 							});
 						}
 					});
@@ -660,6 +670,7 @@ app.get('/artworks', function (req, res) {
 		fs.statSync('uploads/uploaded-artworks.json').isFile();
 		var artworksFile = fs.readFileSync('uploads/uploaded-artworks.json').toString();
 		res.send(artworksFile);
+		res.end();
 	} catch (err)
 	{
 		res.status(400).send(err);
@@ -681,6 +692,7 @@ app.get('/artwork', function (req, res) {
 		var obj = artworksJson[i];
 		if (obj.assetRefNo == artworkId) {
 			res.send(JSON.stringify(obj));
+			res.end();
 			break;
 		}
 	}
@@ -771,6 +783,7 @@ app.get('/sample', function (req, res) {
 		}
 	});
 	res.send(resultString);
+	res.end();
 });
 
 function normalizeLocation(location) {
@@ -824,6 +837,7 @@ app.get('/csv', function (req, res) {
 		console.log(obj.length);
 		var resultString = JSON.stringify(obj);
 		res.send(resultString);
+		res.end();
 	});
 });
 
@@ -943,6 +957,7 @@ app.get('/artists', function (req, res) {
 	var artists = curator.getArtists;
 	console.log('artists', artists.length);
 	res.send(artists);
+	res.end();
 });
 
 app.get('/artist', function (req, res) {
@@ -953,6 +968,7 @@ app.get('/artist', function (req, res) {
 	var artist = curator.getArtist();
 	console.log('artist', artist.length);
 	res.send(artist);
+	res.end();
 });
 
 /** Valuation Document.  Previously called Rockend Valuation 13 Jan 2016.html */
@@ -988,6 +1004,7 @@ app.get('/valuation', function (req, res) {
 
 	var resultString = JSON.stringify(items);
 	res.send(resultString);
+	res.end();
 });
 
 app.post('/save-from-firebase', function (req, res) {
@@ -1007,6 +1024,7 @@ app.post('/save-from-firebase', function (req, res) {
 	});
 	busboy.on('finish', function () {
 		res.send();
+		res.end();
 	});
 	return req.pipe(busboy);
 });
@@ -1028,6 +1046,7 @@ app.post('/save-user-permissions', function (req, res) {
 	});
 	busboy.on('finish', function () {
 		res.send();
+		res.end();
 	});
 	return req.pipe(busboy);
 });
@@ -1056,6 +1075,7 @@ app.post('/is-authorized', function (req, res) {
 	});
 	busboy.on('finish', function () {
 		res.send();
+		res.end();
 	});
 	return req.pipe(busboy);
 });
@@ -1088,6 +1108,7 @@ app.get('/env', function (req, res) {
 	res.setHeader('Content-Type', 'application/json');
 	var env = process.env;
 	res.send(env);
+	res.end();
 });
 
 app.get('/auth-roles', function (req, res) {
@@ -1097,4 +1118,5 @@ app.get('/auth-roles', function (req, res) {
 	var file = fs.readFileSync('.permissions.json').toString();
 	var rolesFileJson = JSON.parse(file);
 	res.send(rolesFileJson);
+	res.end();
 });
