@@ -3,37 +3,30 @@
  * @class login.LoginCtrl
  * @description Controller for login.
  */
-angular.module('artApp.login', [
-	'auth0'
+angular.module("artApp.login", [
+    "auth0.lock"
 ])
-	.controller('LoginCtrl', [
-		'$rootScope',
-		'$scope',
-		'$window',
-		'auth',
-		'$location',
-		'store',
-		function ($rootScope, $scope, $window, auth, $location, store) {
-			$scope.auth = auth;
+    .controller("LoginCtrl", [
+        "$rootScope",
+        "$scope",
+        "$window",
+        "lock",
+        "$location",
+        "store",
+        "AuthService",
+        function ($rootScope, $scope, $window, lock, $location, store, AuthService) {
+            $scope.auth = lock;
 
-			$scope.login = function () {
-				auth.signin({}, function (profile, token) {
-					store.set('profile', profile);
-					store.set('token', token);
-					if ($rootScope.redirect) {
-						$window.location = $rootScope.redirect;
-					}
-				}, function (error) {
-					console.log("There was an error logging in", error);
-				});
-			};
+            $scope.login = function () {
+                lock.show();
+            };
 
-			$scope.signout = function () {
-				$scope.auth = null;
-				store.remove('profile');
-				store.remove('token');
-				$location.path('/login');
-				$window.location.reload();
-			}
+            $scope.signout = function () {
+                console.log('test');
+                $scope.auth = null;
+                AuthService.logout();
+//                $location.path("/login");
+            };
 
-		}]);
+        }
+    ]);
