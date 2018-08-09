@@ -4,11 +4,11 @@
  * @description Controller for home.
  */
 angular.module('artApp.home', [
-	'auth0'
+	'auth0.lock'
 ])
-	.controller('HomeCtrl', function HomeController($scope, auth, $http, $location, store) {
+	.controller('HomeCtrl', function HomeController($scope, lock, $http, $location, store) {
 
-		$scope.auth = auth;
+		$scope.lock = lock;
 
 		$scope.callApi = function () {
 			// Just call the API as you'd do using $http
@@ -27,7 +27,7 @@ angular.module('artApp.home', [
 		}
 
 		$scope.logout = function () {
-			auth.signout();
+			lock.signout();
 		}
 
 	});
